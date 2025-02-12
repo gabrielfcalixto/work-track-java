@@ -1,13 +1,13 @@
 package br.com.gfctech.project_manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.gfctech.project_manager.dto.UserDTO;
 import br.com.gfctech.project_manager.service.UserService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -18,24 +18,27 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        return ResponseEntity.ok(userService.findAll());
+    public List<UserDTO> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @PostMapping
-    public ResponseEntity<Void> addUser(@RequestBody UserDTO user) {
-        userService.insert(user);
-        return ResponseEntity.ok().build();
+    public UserDTO addUser(@RequestBody UserDTO userDTO) {  
+        return userService.addUser(userDTO);
     }
 
-    @PutMapping
-    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO user) {
-        return ResponseEntity.ok(userService.update(user));
+    @PutMapping("/{id}")
+    public UserDTO updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {  
+        return userService.updateUser(id, userDTO);
+    }
+
+    @PatchMapping("/{id}/permissions")
+    public UserDTO updatePermissions(@PathVariable Long id, @RequestBody Map<String, String> update) {
+        return userService.updatePermissions(id, update.get("role"));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userService.delete(id);
-        return ResponseEntity.noContent().build();
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
     }
 }

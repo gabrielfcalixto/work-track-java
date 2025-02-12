@@ -17,25 +17,51 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) {
-        if (userRepository.count() == 0) {
-            UserEntity user1 = new UserEntity();
-            user1.setName("Admin");
-            user1.setLogin("admin");
-            user1.setPassword("admin123"); // Idealmente, use um hash para a senha
-            user1.setEmail("admin@gfctech.com");
+public void run(String... args) {
+    UserEntity user1 = new UserEntity();
+    user1.setName("Jose");
+    user1.setLogin("admin");
+    user1.setPassword("admin123");
+    user1.setEmail("admin@gfctech.com");
+    user1.setRole("admin");
 
-            UserEntity user2 = new UserEntity();
-            user2.setName("Gabriel");
-            user2.setLogin("gabriel");
-            user2.setPassword("gabriel123"); // Também deve ser criptografada
-            user2.setEmail("gabriel@gfctech.com");
+    UserEntity user2 = new UserEntity();
+    user2.setName("Gabriel");
+    user2.setLogin("gabriel");
+    user2.setPassword("gabriel123");
+    user2.setEmail("gabriel@gfctech.com");
+    user2.setRole("user");
 
-            userRepository.saveAll(List.of(user1, user2));
+    UserEntity user3 = new UserEntity();
+    user3.setName("Ana");
+    user3.setLogin("ana");
+    user3.setPassword("ana123");
+    user3.setEmail("ana@gfctech.com");
+    user3.setRole("user");
 
-            System.out.println("Usuários padrão criados!");
-        } else {
-            System.out.println("Usuários já existem. Nenhuma ação necessária.");
-        }
-    }
+    UserEntity user4 = new UserEntity();
+    user4.setName("Carlos");
+    user4.setLogin("carlos");
+    user4.setPassword("carlos123");
+    user4.setEmail("carlos@gfctech.com");
+    user4.setRole("user");
+
+    UserEntity user5 = new UserEntity();
+    user5.setName("Mariana");
+    user5.setLogin("mariana");
+    user5.setPassword("mariana123");
+    user5.setEmail("mariana@gfctech.com");
+    user5.setRole("user");
+
+    UserEntity user6 = new UserEntity();
+    user6.setName("Roberto");
+    user6.setLogin("roberto");
+    user6.setPassword("roberto123");
+    user6.setEmail("roberto@gfctech.com");
+    user6.setRole("user");
+
+    userRepository.saveAll(List.of(user1, user2, user3, user4, user5, user6));
+
+    System.out.println("Usuários padrão criados!");
+}
 }
