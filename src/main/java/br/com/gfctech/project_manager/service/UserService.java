@@ -35,9 +35,10 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
 
         existingUser.setName(userDTO.getName());
+        existingUser.setLogin(userDTO.getLogin());
         existingUser.setEmail(userDTO.getEmail());
+        existingUser.setRole(userDTO.getRole());
         // Atualize outros campos conforme necessário
-
         return new UserDTO(userRepository.save(existingUser));
     }
 
