@@ -2,10 +2,8 @@ package br.com.gfctech.project_manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import br.com.gfctech.project_manager.dto.TaskDTO;
 import br.com.gfctech.project_manager.service.TaskService;
-
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +16,12 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping
-    public List<TaskDTO> getAllUsers() {
+    public List<TaskDTO> getAllTasks() {
         return taskService.getAllTasks();
     }
 
     @PostMapping
-    public TaskDTO addUser(@RequestBody TaskDTO taskDTO) {  
+    public TaskDTO addTask(@RequestBody TaskDTO taskDTO) {  
         return taskService.addTask(taskDTO);
     }
 
