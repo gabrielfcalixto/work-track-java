@@ -3,9 +3,12 @@ package br.com.gfctech.project_manager.config;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import br.com.gfctech.project_manager.entity.UserEntity;
+import br.com.gfctech.project_manager.entity.ProjectEntity;
 import br.com.gfctech.project_manager.entity.TaskEntity;
 import br.com.gfctech.project_manager.repository.UserRepository;
 import br.com.gfctech.project_manager.repository.TaskRepository;
+import br.com.gfctech.project_manager.repository.ProjectRepository;
+
 
 import java.util.List;
 
@@ -14,10 +17,12 @@ public class DataInitializer implements CommandLineRunner {
 
     private final UserRepository userRepository;
     private final TaskRepository taskRepository;
+    private final ProjectRepository projectRepository;
 
-    public DataInitializer(UserRepository userRepository, TaskRepository taskRepository) {
+    public DataInitializer(UserRepository userRepository, TaskRepository taskRepository, ProjectRepository projectRepository) {
         this.userRepository = userRepository;
         this.taskRepository = taskRepository;
+        this.projectRepository = projectRepository;
     }
 
     @Override
@@ -161,5 +166,74 @@ public class DataInitializer implements CommandLineRunner {
         // Salvando tarefas
         taskRepository.saveAll(List.of(task1, task2, task3, task4, task5, task6, task7, task8, task9, task10));
         System.out.println("Tarefas padrão criadas!");
+
+
+
+        // Criando projetos
+        ProjectEntity project1 = new ProjectEntity();
+        project1.setName("Implementar autenticação JWT");
+        project1.setDescription("Desenvolver e integrar autenticação segura no sistema.");
+        project1.setHours(12f);
+        project1.setStatus("Concluído");
+
+        ProjectEntity project2 = new ProjectEntity();
+        project2.setName("Criar dashboard de métricas");
+        project2.setDescription("Desenvolver painel para visualizar métricas de uso.");
+        project2.setHours(15f);
+        project2.setStatus("Em andamento");
+
+        ProjectEntity project3 = new ProjectEntity();
+        project3.setName("Implementar CI/CD");
+        project3.setDescription("Configurar pipeline de integração e entrega contínua.");
+        project3.setHours(10f);
+        project3.setStatus("Pendente");
+
+        ProjectEntity project4 = new ProjectEntity();
+        project4.setName("Revisão de arquitetura");
+        project4.setDescription("Avaliar e otimizar a arquitetura do sistema.");
+        project4.setHours(8f);
+        project4.setStatus("Pendente");
+
+        ProjectEntity project5 = new ProjectEntity();
+        project5.setName("Correção de bugs críticos");
+        project5.setDescription("Identificar e corrigir falhas reportadas pelos usuários.");
+        project5.setHours(6f);
+        project5.setStatus("Em andamento");
+
+        ProjectEntity project6 = new ProjectEntity();
+        project6.setName("Otimização de banco de dados");
+        project6.setDescription("Melhorar a performance e escalabilidade do banco.");
+        project6.setHours(9f);
+        project6.setStatus("Concluído");
+
+        ProjectEntity project7 = new ProjectEntity();
+        project7.setName("Criar testes automatizados");
+        project7.setDescription("Implementar testes unitários e de integração.");
+        project7.setHours(14f);
+        project7.setStatus("Em andamento");
+
+        ProjectEntity project8 = new ProjectEntity();
+        project8.setName("Atualizar documentação");
+        project8.setDescription("Revisar e expandir a documentação do sistema.");
+        project8.setHours(5f);
+        project8.setStatus("Pendente");
+
+        ProjectEntity project9 = new ProjectEntity();
+        project9.setName("Desenvolver API pública");
+        project9.setDescription("Criar uma API acessível para integração externa.");
+        project9.setHours(20f);
+        project9.setStatus("Pendente");
+
+        ProjectEntity project10 = new ProjectEntity();
+        project10.setName("Treinamento sobre novas tecnologias");
+        project10.setDescription("Capacitar a equipe em novas ferramentas e frameworks.");
+        project10.setHours(7f);
+        project10.setStatus("Em andamento");
+
+        // Salvando tarefas
+        projectRepository.saveAll(List.of(project1, project2, project3, project4, project5, project6, project7, project8, project9, project10));
+        System.out.println("Projetos padrão criadas!");
+
+      
     }
 }
