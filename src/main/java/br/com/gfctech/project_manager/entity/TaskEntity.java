@@ -34,4 +34,5 @@ public class TaskEntity {
         this.hours = taskDTO.getHours();
         this.status = taskDTO.getStatus();
     }
+    
 }
