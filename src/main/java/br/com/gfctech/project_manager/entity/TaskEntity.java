@@ -26,6 +26,9 @@ public class TaskEntity {
     @Column(nullable = false)
     private String status;
 
+    @Column(nullable = false)
+    private double accumulatedHours;
+
 
     public TaskEntity(TaskDTO taskDTO) {
         this.id = taskDTO.getId();
@@ -33,6 +36,7 @@ public class TaskEntity {
         this.description = taskDTO.getDescription();
         this.hours = taskDTO.getHours();
         this.status = taskDTO.getStatus();
+        this.accumulatedHours = 0;
     }
     
 }

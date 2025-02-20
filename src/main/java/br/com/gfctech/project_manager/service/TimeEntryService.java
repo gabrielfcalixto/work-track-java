@@ -29,7 +29,7 @@ public class TimeEntryService {
         TaskEntity task = taskRepository.findById(timeEntryDTO.getTaskId())
                 .orElseThrow(() -> new RuntimeException("Task not found"));            
         // Corrigindo a busca do usuário 
-        
+
         UserEntity user = userRepository.findById(timeEntryDTO.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -42,6 +42,14 @@ public class TimeEntryService {
         // Calculando o total de horas automaticamente
         timeEntry.calculateTotalHours();
 
-        return timeEntryRepository.save(timeEntry);
+        //atualizando as horas acumuladas
+        double newAccumulatedHours = task.getAccumulatedHours() + timeEntry.getTotalHours();
+        task.setAccumulatedHours(newAccumulatedHours);
+
+        //salvando o lançamento e atualizando tarefa
+        timeEntry = timeEntryRepository.save(timeEntry);
+        taskRepository.save(task);
+
+        return timeEntry;
     }
 }
