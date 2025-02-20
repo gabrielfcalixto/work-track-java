@@ -5,11 +5,14 @@ import org.springframework.stereotype.Component;
 import br.com.gfctech.project_manager.entity.UserEntity;
 import br.com.gfctech.project_manager.entity.ProjectEntity;
 import br.com.gfctech.project_manager.entity.TaskEntity;
+import br.com.gfctech.project_manager.entity.TimeEntryEntity;
 import br.com.gfctech.project_manager.repository.UserRepository;
 import br.com.gfctech.project_manager.repository.TaskRepository;
+import br.com.gfctech.project_manager.repository.TimeEntryRepository;
 import br.com.gfctech.project_manager.repository.ProjectRepository;
 
-
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Component
@@ -18,11 +21,14 @@ public class DataInitializer implements CommandLineRunner {
     private final UserRepository userRepository;
     private final TaskRepository taskRepository;
     private final ProjectRepository projectRepository;
+    private final TimeEntryRepository timeEntryRepository;
 
-    public DataInitializer(UserRepository userRepository, TaskRepository taskRepository, ProjectRepository projectRepository) {
+
+    public DataInitializer(UserRepository userRepository, TaskRepository taskRepository, ProjectRepository projectRepository, TimeEntryRepository timeEntryRepository) {
         this.userRepository = userRepository;
         this.taskRepository = taskRepository;
         this.projectRepository = projectRepository;
+        this.timeEntryRepository = timeEntryRepository;
     }
 
     @Override
@@ -234,6 +240,46 @@ public class DataInitializer implements CommandLineRunner {
         projectRepository.saveAll(List.of(project1, project2, project3, project4, project5, project6, project7, project8, project9, project10));
         System.out.println("Projetos padrão criadas!");
 
-      
+      List<UserEntity> users = userRepository.findAll();
+        List<TaskEntity> tasks = taskRepository.findAll();
+        
+        if (users.isEmpty() || tasks.isEmpty()) {
+            System.out.println("Não há usuários ou tarefas suficientes para criar lançamentos de horas.");
+            return;
+        }
+
+        // ----- Inicialização dos lançamentos de horas (Time Entries) ----- //
+
+        // Lançamento 1: usuário 1 na tarefa 1, das 08:00 às 12:00 do dia atual
+        TimeEntryEntity entry1 = new TimeEntryEntity();
+        entry1.setTaskEntity(tasks.get(0)); // primeira tarefa
+        entry1.setUserEntity(users.get(0)); // primeiro usuário
+        entry1.setEntryDate(LocalDate.now());
+        entry1.setStartTime(LocalTime.of(8, 0));
+        entry1.setEndTime(LocalTime.of(12, 0));
+        entry1.calculateTotalHours();
+
+        // Lançamento 2: usuário 2 na tarefa 2, das 13:00 às 17:30 do dia atual
+        TimeEntryEntity entry2 = new TimeEntryEntity();
+        entry2.setTaskEntity(tasks.size() > 1 ? tasks.get(1) : tasks.get(0)); // segunda tarefa ou a primeira se não existir
+        entry2.setUserEntity(users.size() > 1 ? users.get(1) : users.get(0)); // segundo usuário ou o primeiro se não existir
+        entry2.setEntryDate(LocalDate.now());
+        entry2.setStartTime(LocalTime.of(13, 0));
+        entry2.setEndTime(LocalTime.of(17, 30));
+        entry2.calculateTotalHours();
+
+        // Lançamento 3: usuário 3 na tarefa 3, das 09:30 às 11:30 do dia atual
+        TimeEntryEntity entry3 = new TimeEntryEntity();
+        entry3.setTaskEntity(tasks.size() > 2 ? tasks.get(2) : tasks.get(0)); // terceira tarefa ou a primeira se não existir
+        entry3.setUserEntity(users.size() > 2 ? users.get(2) : users.get(0)); // terceiro usuário ou o primeiro se não existir
+        entry3.setEntryDate(LocalDate.now());
+        entry3.setStartTime(LocalTime.of(9, 30));
+        entry3.setEndTime(LocalTime.of(11, 30));
+        entry3.calculateTotalHours();
+
+        // Salvando os lançamentos
+        timeEntryRepository.saveAll(List.of(entry1, entry2, entry3));
+        System.out.println("Lançamentos de horas padrão criados!");
     }
+
 }

@@ -29,6 +29,7 @@ public class TimeEntryService {
         TaskEntity task = taskRepository.findById(timeEntryDTO.getTaskId())
                 .orElseThrow(() -> new RuntimeException("Task not found"));            
         // Corrigindo a busca do usuário 
+        
         UserEntity user = userRepository.findById(timeEntryDTO.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
