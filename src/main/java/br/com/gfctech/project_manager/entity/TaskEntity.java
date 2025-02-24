@@ -29,6 +29,14 @@ public class TaskEntity {
     @Column(nullable = false)
     private double accumulatedHours;
 
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private ProjectEntity project;
+
+    @ManyToOne
+    @JoinColumn(name = "assigned_user_id")
+    private UserEntity assignedUser;
+
 
     public TaskEntity(TaskDTO taskDTO) {
         this.id = taskDTO.getId();

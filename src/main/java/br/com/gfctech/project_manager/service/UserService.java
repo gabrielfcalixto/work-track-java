@@ -37,7 +37,6 @@ public class UserService {
         existingUser.setName(userDTO.getName());
         existingUser.setLogin(userDTO.getLogin());
         existingUser.setEmail(userDTO.getEmail());
-        existingUser.setRole(userDTO.getRole());
         // Atualize outros campos conforme necessário
         return new UserDTO(userRepository.save(existingUser));
     }
@@ -46,7 +45,6 @@ public class UserService {
     public UserDTO updatePermissions(Long id, String role) {
         UserEntity user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
-        user.setRole(role);
         return new UserDTO(userRepository.save(user));
     }
 

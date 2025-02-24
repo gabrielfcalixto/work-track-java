@@ -18,6 +18,8 @@ public class ProjectDTO {
     private String description;
     private Float hours;
     private String status;
+    private Long managerId; // Vincula o gestor responsável
+
 
     public ProjectDTO(ProjectEntity projectEntity) {
         this.id = projectEntity.getId();
@@ -25,6 +27,8 @@ public class ProjectDTO {
         this.description = projectEntity.getDescription();
         this.hours = projectEntity.getHours();
         this.status = projectEntity.getStatus();
+        this.managerId = projectEntity.getManager() != null ? projectEntity.getManager().getId() : null;
+
     }
 
     

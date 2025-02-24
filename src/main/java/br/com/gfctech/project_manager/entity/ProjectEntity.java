@@ -14,6 +14,9 @@ public class ProjectEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+
+
     @Column(nullable = false)
     private String name;
 
@@ -26,6 +29,9 @@ public class ProjectEntity {
     @Column(nullable = false)
     private String status;
 
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private UserEntity manager;
 
     public ProjectEntity(ProjectDTO projectDTO) {
         this.id = projectDTO.getId();

@@ -13,12 +13,12 @@ public class UserDTO {
     private String password;
     private String email;
     private String role;
+    
 
     public UserDTO(UserEntity user) {
         this.id = user.getId();
         this.name = user.getName();
         this.login = user.getLogin();
         this.email = user.getEmail();
-        this.role = user.getRole();
     }
 }

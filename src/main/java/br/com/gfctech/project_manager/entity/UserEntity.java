@@ -1,4 +1,6 @@
 package br.com.gfctech.project_manager.entity;
+import javax.management.relation.Role;
+
 import br.com.gfctech.project_manager.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,8 +28,8 @@ public class UserEntity {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role; // Ex.: ADMIN, MANAGER, USER
 
     public UserEntity(UserDTO userDTO) {
         this.id = userDTO.getId();
@@ -35,6 +37,10 @@ public class UserEntity {
         this.login = userDTO.getLogin();
         this.password = userDTO.getPassword();
         this.email = userDTO.getEmail();
-        this.role = userDTO.getRole();
     }
+
+    public enum Role {
+        ADMIN, MANAGER, USER;
+    }
+    
 }
