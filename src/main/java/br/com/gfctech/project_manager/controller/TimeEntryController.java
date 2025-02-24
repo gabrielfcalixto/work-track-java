@@ -1,6 +1,9 @@
 package br.com.gfctech.project_manager.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.gfctech.project_manager.dto.TimeEntryDTO;
@@ -19,4 +22,11 @@ public class TimeEntryController {
     public TimeEntryEntity createTimeEntry(@RequestBody TimeEntryDTO timeEntryDTO) {
         return timeEntryService.saveTimeEntry(timeEntryDTO);
     }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<TimeEntryDTO>> getUserTimeEntries(@PathVariable Long userId) {
+    List<TimeEntryDTO> entries = timeEntryService.getTimeEntriesByUserId(userId);
+    return ResponseEntity.ok(entries);
+}
+
 }

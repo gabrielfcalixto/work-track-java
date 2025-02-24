@@ -1,8 +1,10 @@
 package br.com.gfctech.project_manager.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import br.com.gfctech.project_manager.dto.TimeEntryDTO;
 import br.com.gfctech.project_manager.entity.TaskEntity;
 import br.com.gfctech.project_manager.entity.TimeEntryEntity;
@@ -52,4 +54,15 @@ public class TimeEntryService {
 
         return timeEntry;
     }
+
+     // Método para buscar os lançamentos de um usuário
+    public List<TimeEntryDTO> getTimeEntriesByUserId(Long userId) {
+        // Consulta as entidades de lançamentos do usuário no repositório
+        List<TimeEntryEntity> entries = timeEntryRepository.findByUserEntityId(userId);
+        // Converte cada entidade para DTO
+        return entries.stream()
+                      .map(TimeEntryDTO::new)
+                      .collect(Collectors.toList());
+    }
 }
+

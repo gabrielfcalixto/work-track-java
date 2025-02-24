@@ -35,6 +35,9 @@ public class TimeEntryEntity {
     private UserEntity userEntity;
 
     @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
     private LocalDate entryDate;
 
     @Column(nullable = false)

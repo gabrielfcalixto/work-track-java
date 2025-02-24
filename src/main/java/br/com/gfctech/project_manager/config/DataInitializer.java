@@ -254,6 +254,7 @@ public class DataInitializer implements CommandLineRunner {
         TimeEntryEntity entry1 = new TimeEntryEntity();
         entry1.setTaskEntity(tasks.get(0)); // primeira tarefa
         entry1.setUserEntity(users.get(0)); // primeiro usuário
+        entry1.setDescription("Desenvolvimento da API RESTful");
         entry1.setEntryDate(LocalDate.now());
         entry1.setStartTime(LocalTime.of(8, 0));
         entry1.setEndTime(LocalTime.of(12, 0));
@@ -263,6 +264,7 @@ public class DataInitializer implements CommandLineRunner {
         TimeEntryEntity entry2 = new TimeEntryEntity();
         entry2.setTaskEntity(tasks.size() > 1 ? tasks.get(1) : tasks.get(0)); // segunda tarefa ou a primeira se não existir
         entry2.setUserEntity(users.size() > 1 ? users.get(1) : users.get(0)); // segundo usuário ou o primeiro se não existir
+        entry2.setDescription("Criação de interfaces responsivas");
         entry2.setEntryDate(LocalDate.now());
         entry2.setStartTime(LocalTime.of(13, 0));
         entry2.setEndTime(LocalTime.of(17, 30));
@@ -272,6 +274,7 @@ public class DataInitializer implements CommandLineRunner {
         TimeEntryEntity entry3 = new TimeEntryEntity();
         entry3.setTaskEntity(tasks.size() > 2 ? tasks.get(2) : tasks.get(0)); // terceira tarefa ou a primeira se não existir
         entry3.setUserEntity(users.size() > 2 ? users.get(2) : users.get(0)); // terceiro usuário ou o primeiro se não existir
+        entry3.setDescription("Desenvolvimento de testes unitários");
         entry3.setEntryDate(LocalDate.now());
         entry3.setStartTime(LocalTime.of(9, 30));
         entry3.setEndTime(LocalTime.of(11, 30));

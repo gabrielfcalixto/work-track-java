@@ -20,6 +20,7 @@ public class TimeEntryDTO {
 
     private Long taskId;
     private Long userId;  
+    private String description;
     private LocalDate entryDate;
     private LocalTime startTime;
     private LocalTime endTime;
@@ -27,6 +28,7 @@ public class TimeEntryDTO {
      public TimeEntryDTO(TimeEntryEntity timeEntry) {
         this.taskId = timeEntry.getTaskEntity().getId();
         this.userId = timeEntry.getUserEntity().getId();  
+        this.description = timeEntry.getDescription();  
         this.entryDate = timeEntry.getEntryDate();
         this.startTime = timeEntry.getStartTime();
         this.endTime = timeEntry.getEndTime();
