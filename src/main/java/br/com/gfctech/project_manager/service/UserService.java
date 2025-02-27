@@ -54,4 +54,11 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
         userRepository.delete(user);
     }
+    public UserDTO getUserById(Long id) {
+        return userRepository.findById(id)
+            .map(UserDTO::new) // Usa o construtor corrigido
+            .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+    }
+    
+    
 }
