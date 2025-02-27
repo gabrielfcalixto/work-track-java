@@ -26,7 +26,7 @@ public class TaskEntity {
     @Column(nullable = false)
     private String status;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private double accumulatedHours;
 
     @ManyToOne
@@ -44,7 +44,6 @@ public class TaskEntity {
         this.description = taskDTO.getDescription();
         this.hours = taskDTO.getHours();
         this.status = taskDTO.getStatus();
-        this.accumulatedHours = 0;
     }
     
 }

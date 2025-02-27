@@ -25,8 +25,9 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     private String login;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String password;
+    
 
     @Column(nullable = false)
     private String email;
@@ -39,18 +40,16 @@ public class UserEntity {
 	@Column(nullable = false)
 	private TipoSituacaoUsuario situacao;
 	
-
-    @Column
     private LocalDate joinDate;
 
  	//construtor
 	public UserEntity(UserDTO user) {
 		BeanUtils.copyProperties(user, this);
+        if(this.joinDate == null) {
+            this.joinDate = LocalDate.now();
+        }
 	}
-
-   
-	
-
+    
     public Long getId() {
         return id;
     }

@@ -29,7 +29,7 @@ public class VerificationUserEntity {
 	private Instant dateExpiration;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_USER", referencedColumnName = "ID")
+	@JoinColumn(name = "USER_ID", referencedColumnName = "ID")
 	private UserEntity user;
 	   
 }

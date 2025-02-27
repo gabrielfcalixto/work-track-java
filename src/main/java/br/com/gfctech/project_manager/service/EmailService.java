@@ -16,22 +16,24 @@ public class EmailService {
 	private String sender;
 	
 	public String enviarEmailTexto(String recipient, String subject, String message) {
-		 
-		
 		try {
 			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 			simpleMailMessage.setFrom(sender);
 			simpleMailMessage.setTo(recipient);
 			simpleMailMessage.setSubject(subject);
 			simpleMailMessage.setText(message);
+			
 			javaMailSender.send(simpleMailMessage);
-			
-			return "Email enviado";
-			
-			
-		}catch(Exception e) {
-			return "Erro ao tentar enviar email " + e.getLocalizedMessage();
- 		}
+	
+			// Verifique se o e-mail foi enviado corretamente.
+			return "Email enviado para " + recipient;
+	
+		} catch (Exception e) {
+			// Registre o erro completo para mais informações sobre o erro.
+			e.printStackTrace();
+			return "Erro ao tentar enviar email: " + e.getMessage();
+		}
 	}
+	
 
 }

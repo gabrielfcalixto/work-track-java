@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.gfctech.project_manager.dto.AuthenticationDTO;
 import br.com.gfctech.project_manager.dto.UserDTO;
@@ -29,8 +30,13 @@ public class AuthController {
 	public ResponseEntity<?> login(@RequestBody AuthenticationDTO authDto) {
 		return ResponseEntity.ok(authService.login(authDto));
 		
-		
 	}
+
+	 @PostMapping("/definir-senha")
+    public ResponseEntity<String> definirSenha(@RequestParam String token, @RequestParam String newPassword) {
+        String mensagem = userService.definirSenha(token, newPassword);
+        return ResponseEntity.ok(mensagem);
+    }
 	@PostMapping(value = "/addUser")
 	public void addUser(@RequestBody UserDTO addUser){
 		userService.addUser(addUser);
