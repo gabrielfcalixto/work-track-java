@@ -42,6 +42,13 @@ public class UserEntity {
 	
     private LocalDate joinDate;
 
+    
+
+    // Enum de Role dentro da entidade
+    public enum Role {
+        ADMIN, MANAGER, USER, ;
+    }
+
  	//construtor
 	public UserEntity(UserDTO user) {
 		BeanUtils.copyProperties(user, this);
@@ -114,13 +121,6 @@ public class UserEntity {
 
     public void setSituacao(TipoSituacaoUsuario situacao) {
         this.situacao = situacao;
-    }
-
-
-
-    // Enum de Role dentro da entidade
-    public enum Role {
-        ADMIN, MANAGER, USER, ;
     }
 
     @Override

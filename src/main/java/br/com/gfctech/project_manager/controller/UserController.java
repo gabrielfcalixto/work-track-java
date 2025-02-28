@@ -1,6 +1,7 @@
 package br.com.gfctech.project_manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.gfctech.project_manager.dto.UserDTO;
@@ -17,10 +18,27 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public List<UserDTO> getAllUsers() {
-        return userService.getAllUsers();
+    // @GetMapping
+    // public List<UserDTO> getAllUsers() {
+    //     return userService.getAllUsers();
+    // }
+
+    @PostMapping("/addUser")
+    public void addUser(@RequestBody UserDTO addUser) {
+        userService.addUser(addUser);
     }
+
+    @PostMapping("/definir-senha")
+    public ResponseEntity<String> definirSenha(@RequestParam String token, @RequestParam String newPassword) {
+        String mensagem = userService.definirSenha(token, newPassword);
+        return ResponseEntity.ok(mensagem);
+    }
+
+    @GetMapping("/verificarCadastro/{uuid}")
+    public String verificarCadastro(@PathVariable String uuid) {
+        return userService.verificarCadastro(uuid);
+    }
+
 
     @GetMapping("/{id}")
     public UserDTO getUserById(@PathVariable Long id) {
@@ -28,10 +46,6 @@ public class UserController {
     }
     
 
-    @PostMapping
-    public UserDTO addUser(@RequestBody UserDTO userDTO) {  
-        return userService.addUser(userDTO);
-    }
 
     @PutMapping("/{id}")
     public UserDTO updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {  

@@ -18,71 +18,85 @@ import br.com.gfctech.project_manager.entity.enums.TipoSituacaoUsuario;
 import br.com.gfctech.project_manager.repository.UserRepository;
 import br.com.gfctech.project_manager.repository.VerificationUserRepository;
 
-@Service
-public class UserService {
-
-    @Autowired  
-    private UserRepository userRepository;
-
-	@Autowired
-	private VerificationUserRepository verificationUserRepository;
+	@Service
+	public class UserService {
 	
-	@Autowired(required = true)
-	private PasswordEncoder passwordEncoder;
+		@Autowired
+		private UserRepository userRepository;
 	
-	@Autowired
-	private EmailService emailService;
-
-    @Transactional(readOnly = true)
-    public List<UserDTO> getAllUsers() {
-        return userRepository.findAll().stream().map(UserDTO::new).collect(Collectors.toList());
-    }
-
-	@Transactional
-	public UserDTO addUser(UserDTO userDTO) {
-		// Verificar se o e-mail já está registrado
-		// if (userRepository.existsByEmail(userDTO.getEmail())) {
-		// 	throw new RuntimeException("E-mail já está em uso");
-		// }
-
-		UserEntity userEntity = new UserEntity(userDTO);
-		userEntity.setPassword(null); // Sem senha inicialmente
-		userEntity.setSituacao(TipoSituacaoUsuario.PENDENTE);
-		userRepository.save(userEntity);
-
-		// Criar token para definição de senha
-		VerificationUserEntity verification = new VerificationUserEntity();
-		verification.setUser(userEntity);
-		verification.setUuid(UUID.randomUUID());
-		verification.setDateExpiration(Instant.now().plusMillis(900000)); // 15 minutos de validade
-		verificationUserRepository.save(verification);
-
-		// Enviar e-mail para o usuário definir a senha
-		String link = "http://localhost:4200/definir-senha?token=" + verification.getUuid();
-		emailService.enviarEmailTexto(
-				userDTO.getEmail(),
-				"Defina sua senha",
-				"Clique no link abaixo para definir sua senha:\n" + link);
-
-		return new UserDTO(userEntity);
-	}
-
-
-	@Transactional
-	public String definirSenha(String token, String newPassword) {
-		VerificationUserEntity verification = verificationUserRepository.findByUuid(UUID.fromString(token))
-				.orElseThrow(() -> new RuntimeException("Token inválido ou expirado"));
-
-		UserEntity user = verification.getUser();
-		user.setPassword(passwordEncoder.encode(newPassword)); // 🔹 Criptografa a senha
-		user.setSituacao(TipoSituacaoUsuario.ATIVO); // Ativa o usuário
-		userRepository.save(user);
-
-		verificationUserRepository.delete(verification); // Remove o token usado
-
-		return "Senha definida com sucesso!";
-	}
-
+		@Autowired
+		private VerificationUserRepository verificationUserRepository;
+	
+		@Autowired
+		private EmailService emailService;
+	
+		@Autowired
+		private PasswordEncoder passwordEncoder;
+	
+		public void addUser(UserDTO addUser) {
+			// Cria a entidade do usuário
+			UserEntity user = new UserEntity();
+			user.setName(addUser.getName());
+			user.setLogin(addUser.getLogin());
+			user.setEmail(addUser.getEmail());
+			user.setSituacao(TipoSituacaoUsuario.PENDENTE); // Define o status como PENDENTE
+	
+			// Salva o usuário no banco de dados
+			userRepository.save(user);
+	
+			// Gera um token de verificação (UUID)
+			VerificationUserEntity verificationUser = new VerificationUserEntity();
+			verificationUser.setUuid(UUID.randomUUID());
+			verificationUser.setDateExpiration(Instant.now().plusSeconds(86400)); // Expira em 24 horas
+			verificationUser.setUser(user);
+	
+			// Salva o token no banco de dados
+			verificationUserRepository.save(verificationUser);
+	
+			// Envia o e-mail com o link de ativação
+			String assunto = "Ative sua conta";
+			String mensagem = "Clique no link abaixo para definir sua senha:\n"
+							+ "http://seusistema.com/auth/definir-senha?token=" + verificationUser.getUuid();
+	
+			emailService.enviarEmailTexto(user.getEmail(), assunto, mensagem);
+		}
+	
+		public String definirSenha(String token, String newPassword) {
+			// Busca o token no banco de dados
+			VerificationUserEntity verificationUser = verificationUserRepository.findByUuid(UUID.fromString(token))
+					.orElseThrow(() -> new RuntimeException("Token inválido ou expirado"));
+	
+			// Verifica se o token expirou
+			if (verificationUser.getDateExpiration().isBefore(Instant.now())) {
+				throw new RuntimeException("Token expirado");
+			}
+	
+			// Busca o usuário associado ao token
+			UserEntity user = verificationUser.getUser();
+	
+			// Criptografa a nova senha
+			user.setPassword(passwordEncoder.encode(newPassword));
+	
+			// Altera o status do usuário para ATIVO
+			user.setSituacao(TipoSituacaoUsuario.ATIVO);
+	
+			// Salva o usuário atualizado
+			userRepository.save(user);
+	
+			// Remove o token de verificação (opcional)
+			verificationUserRepository.delete(verificationUser);
+	
+			return "Senha definida com sucesso!";
+		}
+	
+		public String verificarCadastro(String uuid) {
+			// Busca o token no banco de dados
+			VerificationUserEntity verificationUser = verificationUserRepository.findByUuid(UUID.fromString(uuid))
+					.orElseThrow(() -> new RuntimeException("Token inválido"));
+	
+			// Retorna uma mensagem de sucesso
+			return "Token válido. Agora você pode definir sua senha.";
+		}
 	
     @Transactional
     public UserDTO updateUser(Long id, UserDTO userDTO) {
@@ -116,26 +130,6 @@ public class UserService {
     }
     
 		
-	public String verificarCadastro(String uuid) {
-		Optional<VerificationUserEntity> verificationUserOpt = verificationUserRepository.findByUuid(UUID.fromString(uuid));
-		
-		if (verificationUserOpt.isPresent()) {
-			VerificationUserEntity verificationUser = verificationUserOpt.get();
-			
-			if (verificationUser.getDateExpiration().compareTo(Instant.now()) >= 0) {
-				UserEntity user = verificationUser.getUser();
-				user.setSituacao(TipoSituacaoUsuario.ATIVO);
-				userRepository.save(user);
-				return "Usuário Verificado";
-			} else {
-				verificationUserRepository.delete(verificationUser);
-				return "Tempo de verificação expirado";
-			}
-		} else {
-			return "Usuário não verificado";
-		}
-	}
-	
 
 	public UserDTO alterar(UserDTO user) {
 		UserEntity userEntity = new UserEntity(user);
@@ -151,3 +145,4 @@ public class UserService {
 		return new UserDTO(userRepository.findById(id).get());
 	}
 }
+
