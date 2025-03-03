@@ -47,9 +47,12 @@ public class AuthFilterToken extends OncePerRequestFilter{
 	
 	private String getToken(HttpServletRequest request) {
 		String headerToken = request.getHeader("Authorization");
-		if(StringUtils.hasText(headerToken) && headerToken.startsWith("Bearer")) {
-			return headerToken.replace("Bearer ","");
+		if (StringUtils.hasText(headerToken) && headerToken.startsWith("Bearer ")) {
+			String token = headerToken.replace("Bearer ", "");
+			System.out.println("Token extraído: " + token); // Log para depuração
+			return token;
 		}
+		System.out.println("Token não encontrado ou malformado"); // Log para depuração
 		return null;
 	}
 
