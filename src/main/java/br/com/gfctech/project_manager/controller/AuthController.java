@@ -6,24 +6,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.gfctech.project_manager.dto.AcessDTO;
 import br.com.gfctech.project_manager.dto.AuthenticationDTO;
 import br.com.gfctech.project_manager.dto.UserDTO;
 import br.com.gfctech.project_manager.secury.jwt.JwtUtils;
-import br.com.gfctech.project_manager.service.AuthService;
 import br.com.gfctech.project_manager.service.UserDetailsImpl;
 import br.com.gfctech.project_manager.service.UserService;
-import org.springframework.security.core.Authentication;
-
 
 @RestController
 @RequestMapping("/auth")
@@ -39,28 +30,21 @@ public class AuthController {
     @Autowired
     private JwtUtils jwtUtils;
 
-
-
-
-    @PostMapping("/login") // Corrigido o endpoint para evitar duplicação "/auth/auth/login"
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationDTO authDto) {
         try {
-            // Autentica o usuário
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authDto.getLogin(), authDto.getPassword())
             );
-    
-            // Gera o token JWT
+
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
             String token = jwtUtils.generateTokenFromUserDetailsImpl(userDetails);
-    
-            // Retorna o token na resposta
+
             return ResponseEntity.ok(new AcessDTO(token));
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
         }
     }
-    
 
     @PostMapping("/addUser")
     public void addUser(@RequestBody UserDTO addUser) {
