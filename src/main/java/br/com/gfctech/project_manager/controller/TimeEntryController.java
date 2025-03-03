@@ -12,7 +12,7 @@ import br.com.gfctech.project_manager.service.TimeEntryService;
 
 @RestController
 @RequestMapping("/time-entries")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200") // Permite requisições do frontend
 public class TimeEntryController {
 
     @Autowired

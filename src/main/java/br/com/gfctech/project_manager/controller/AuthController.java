@@ -1,5 +1,6 @@
 package br.com.gfctech.project_manager.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import br.com.gfctech.project_manager.dto.AcessDTO;
 import br.com.gfctech.project_manager.dto.AuthenticationDTO;
 import br.com.gfctech.project_manager.dto.UserDTO;
+import br.com.gfctech.project_manager.entity.UserEntity.Role;
 import br.com.gfctech.project_manager.secury.jwt.JwtUtils;
 import br.com.gfctech.project_manager.service.UserDetailsImpl;
 import br.com.gfctech.project_manager.service.UserService;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200") // Permite requisições do frontend
 public class AuthController {
 
     @Autowired
@@ -47,8 +49,8 @@ public class AuthController {
     }
 
     @PostMapping("/addUser")
-    public void addUser(@RequestBody UserDTO addUser) {
-        userService.addUser(addUser);
+    public void addUser(@RequestBody UserDTO addUser, Role role) {
+        userService.addUser(addUser, role);
     }
 
     @PostMapping("/definir-senha")

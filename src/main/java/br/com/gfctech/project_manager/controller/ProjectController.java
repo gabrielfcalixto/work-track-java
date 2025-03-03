@@ -9,7 +9,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/project")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200") // Permite requisições do frontend
 public class ProjectController {
 
     @Autowired

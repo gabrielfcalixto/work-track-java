@@ -9,7 +9,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/task")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200") // Permite requisições do frontend
 public class TaskController {
 
     @Autowired

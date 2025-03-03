@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.gfctech.project_manager.dto.UserDTO;
+import br.com.gfctech.project_manager.entity.UserEntity.Role;
 import br.com.gfctech.project_manager.service.UserService;
 
 import java.util.List;
@@ -12,20 +13,20 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/user")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200") // Permite requisições do frontend
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    // @GetMapping
-    // public List<UserDTO> getAllUsers() {
-    //     return userService.getAllUsers();
-    // }
+    @GetMapping
+    public List<UserDTO> getAllUsers() {
+        return userService.getAllUsers();
+    }
 
     @PostMapping("/addUser")
-    public void addUser(@RequestBody UserDTO addUser) {
-        userService.addUser(addUser);
+    public void addUser(@RequestBody UserDTO addUser, Role role) {
+        userService.addUser(addUser, role);
     }
 
     @PostMapping("/definir-senha")
