@@ -3,9 +3,7 @@ package br.com.gfctech.project_manager.dto;
 public class AcessDTO {
 	
 	private String token;
-	//TODO implementar retornar usuario e liberacoes(authorities)
 	
-
 	public String getToken() {
 		return token;
 	}
@@ -19,8 +17,5 @@ public class AcessDTO {
 		this.token = token;
 	}
 	
-	
 		
-	
-
 }
