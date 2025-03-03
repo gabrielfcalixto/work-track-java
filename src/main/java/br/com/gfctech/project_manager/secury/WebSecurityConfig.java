@@ -37,18 +37,19 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-            .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/user/**").authenticated()
-                .anyRequest().authenticated());
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.cors().and().csrf().disable()
+			.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+			.authorizeHttpRequests(auth -> auth
+				.requestMatchers("/auth/**").permitAll() // Permite acesso público aos endpoints de autenticação
+				.requestMatchers("/user/addUser").hasRole("ADMIN") // Restringe o acesso a ADMIN
+				.requestMatchers("/user/**").authenticated() // Exige autenticação para outros endpoints de usuário
+				.anyRequest().authenticated()); // Exige autenticação para qualquer outro endpoint
 
-        http.addFilterBefore(authFilterToken, UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(authFilterToken, UsernamePasswordAuthenticationFilter.class);
 
-        return http.build();
-    }
+		return http.build();
+	}
 	
 }

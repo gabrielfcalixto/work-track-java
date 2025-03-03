@@ -48,19 +48,19 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/addUser")
-    public void addUser(@RequestBody UserDTO addUser, Role role) {
-        userService.addUser(addUser, role);
-    }
+    // @PostMapping("/addUser")
+    // public void addUser(@RequestBody UserDTO addUser, Role role) {
+    //     userService.addUser(addUser, role);
+    // }
 
-    @PostMapping("/definir-senha")
-    public ResponseEntity<String> definirSenha(@RequestParam String token, @RequestParam String newPassword) {
-        String mensagem = userService.definirSenha(token, newPassword);
-        return ResponseEntity.ok(mensagem);
-    }
+    // @PostMapping("/definir-senha")
+    // public ResponseEntity<String> definirSenha(@RequestParam String token, @RequestParam String newPassword) {
+    //     String mensagem = userService.definirSenha(token, newPassword);
+    //     return ResponseEntity.ok(mensagem);
+    // }
 
-    @GetMapping("/verificarCadastro/{uuid}")
-    public String verificarCadastro(@PathVariable String uuid) {
-        return userService.verificarCadastro(uuid);
-    }
+    // @GetMapping("/verificarCadastro/{uuid}")
+    // public String verificarCadastro(@PathVariable String uuid) {
+    //     return userService.verificarCadastro(uuid);
+    // }
 }

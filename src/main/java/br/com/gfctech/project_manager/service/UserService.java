@@ -2,7 +2,6 @@ package br.com.gfctech.project_manager.service;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -33,13 +32,20 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+	
+	public List<UserDTO> getAllUsers() {
+		List<UserEntity> users = userRepository.findAll(); // Obtém todos os usuários do repositório
+		return users.stream() // Cria um fluxo de usuários
+					.map(user -> new UserDTO(user)) // Mapeia cada usuário para um UserDTO
+					.collect(Collectors.toList()); // Coleta os DTOs em uma lista
+	}
+
     // Método para criar um usuário (somente admin pode criar usuários)
     public void addUser(UserDTO addUser, Role role) {
         // Verifica se o papel do usuário é ADMIN antes de permitir a criação
         if (!role.equals(Role.ADMIN)) {
             throw new RuntimeException("Apenas administradores podem criar novos usuários.");
         }
-
         // Cria a entidade do usuário
         UserEntity user = new UserEntity();
         user.setName(addUser.getName());
@@ -147,17 +153,7 @@ public class UserService {
 		UserEntity user = userRepository.findById(id).get();
 		userRepository.delete(user);
 	}
-	
-	public UserDTO buscarPorId(Long id) {
-		return new UserDTO(userRepository.findById(id).get());
-	}
 
-	public List<UserDTO> getAllUsers() {
-		List<UserEntity> users = userRepository.findAll(); // Obtém todos os usuários do repositório
-		return users.stream() // Cria um fluxo de usuários
-					.map(user -> new UserDTO(user)) // Mapeia cada usuário para um UserDTO
-					.collect(Collectors.toList()); // Coleta os DTOs em uma lista
-	}
 	
 }
 
