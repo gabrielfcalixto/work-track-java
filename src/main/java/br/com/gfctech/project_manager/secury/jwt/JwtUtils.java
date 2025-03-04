@@ -25,6 +25,7 @@ public class JwtUtils {
 	
 	public String generateTokenFromUserDetailsImpl(UserDetailsImpl userDetail) {
 		return Jwts.builder().setSubject(userDetail.getUsername())
+				.claim("id", userDetail.getId()) // 👈 Adicionando o ID do usuário no token
 				.setIssuedAt(new Date())
 				.setExpiration(new Date(new Date().getTime() + jwtExpirationMs))
 				.signWith(getSigninKey(), SignatureAlgorithm.HS512).compact();
@@ -40,6 +41,8 @@ public class JwtUtils {
 		return Jwts.parser().setSigningKey(getSigninKey()).build()
 				.parseClaimsJws(token).getBody().getSubject();
 	}
+
+
 	
 	public boolean validateJwtToken (String authToken) {
 		try {

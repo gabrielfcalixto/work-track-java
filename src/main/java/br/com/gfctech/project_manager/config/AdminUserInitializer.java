@@ -44,6 +44,25 @@ public class AdminUserInitializer implements CommandLineRunner {
             System.out.println("Usuário admin já existe.");
         }
 
+            // Verifica se já existe um usuário padrão "user"
+        if (userRepository.findByLogin("user").isEmpty()) {
+            // Cria o usuário padrão "user"
+            UserEntity defaultUser = new UserEntity();
+            defaultUser.setName("Usuário Padrão");
+            defaultUser.setLogin("user");
+            defaultUser.setEmail("user@example.com");
+            defaultUser.setPassword(passwordEncoder.encode("user123")); // Senha padrão
+            defaultUser.setRole(Role.USER);
+            defaultUser.setJoinDate(LocalDate.now()); // Define a data de cadastro
+
+            // Salva o usuário padrão "user" no banco de dados
+            userRepository.save(defaultUser);
+
+            System.out.println("Usuário padrão 'user' criado com sucesso!");
+        } else {
+            System.out.println("Usuário padrão 'user' já existe.");
+        }
+
         // Script SQL para inserir dados iniciais
         String sql = """
             -- Inserir usuários com o e-mail 'gabrielfeifer18@gmail.com'
