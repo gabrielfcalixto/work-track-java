@@ -6,7 +6,6 @@ import java.util.Objects;
 import org.springframework.beans.BeanUtils;
 
 import br.com.gfctech.project_manager.dto.UserDTO;
-import br.com.gfctech.project_manager.entity.enums.TipoSituacaoUsuario;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,10 +34,6 @@ public class UserEntity {
     @Column(nullable = false)
     private Role role;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TipoSituacaoUsuario situacao;
-
     @Column(nullable = false)
     private LocalDate joinDate;
 
@@ -46,7 +41,6 @@ public class UserEntity {
     public enum Role {
         ADMIN, MANAGER, USER
     }
-
     // Construtor
     public UserEntity(UserDTO user) {
         BeanUtils.copyProperties(user, this);

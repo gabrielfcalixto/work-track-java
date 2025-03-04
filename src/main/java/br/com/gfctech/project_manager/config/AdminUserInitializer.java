@@ -47,12 +47,12 @@ public class AdminUserInitializer implements CommandLineRunner {
         // Script SQL para inserir dados iniciais
         String sql = """
             -- Inserir usuários com o e-mail 'gabrielfeifer18@gmail.com'
-            INSERT INTO gfc_user (name, login, email, password, situacao, role, join_date)
+            INSERT INTO gfc_user (name, login, email, password, role, join_date)
             VALUES 
-                ('Admin User', 'admine3', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'PENDENTE', 'ADMIN', NOW()),
-                ('Gestor User', 'gestor', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'PENDENTE', 'USER', NOW()),
-                ('User1', 'user1', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'PENDENTE', 'ADMIN', NOW()),
-                ('User2', 'user2', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'PENDENTE', 'ADMIN', NOW());
+                ('Admin User', 'admine3', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW()),
+                ('Gestor User', 'gestor', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'USER', NOW()),
+                ('User1', 'user1', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW()),
+                ('User2', 'user2', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW());
 
             -- Inserir verificação de usuário com UUID (gerando manualmente os UUIDs para os exemplos)
             INSERT INTO gfc_user_verification (user_id, uuid, date_expiration)
