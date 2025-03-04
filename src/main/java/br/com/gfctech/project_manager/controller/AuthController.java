@@ -13,14 +13,10 @@ import br.com.gfctech.project_manager.dto.AcessDTO;
 import br.com.gfctech.project_manager.dto.AuthenticationDTO;
 import br.com.gfctech.project_manager.secury.jwt.JwtUtils;
 import br.com.gfctech.project_manager.service.UserDetailsImpl;
-import br.com.gfctech.project_manager.service.UserService;
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "http://localhost:4200") // Permite requisições do frontend
 public class AuthController {
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private AuthenticationManager authenticationManager;

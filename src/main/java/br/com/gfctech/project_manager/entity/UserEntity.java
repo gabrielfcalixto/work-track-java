@@ -14,7 +14,7 @@ import lombok.*;
 @Table(name = "GFC_USER")
 @NoArgsConstructor
 public class UserEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,36 +27,33 @@ public class UserEntity {
 
     @Column(nullable = true)
     private String password;
-    
 
     @Column(nullable = false)
     private String email;
 
-    @Enumerated(EnumType.STRING) // Armazena a role como texto no banco
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role; 
+    private Role role;
 
     @Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private TipoSituacaoUsuario situacao;
-	
-    private LocalDate joinDate;
+    @Column(nullable = false)
+    private TipoSituacaoUsuario situacao;
 
-    
+    @Column(nullable = false)
+    private LocalDate joinDate;
 
     // Enum de Role dentro da entidade
     public enum Role {
-        ADMIN, MANAGER, USER, ;
+        ADMIN, MANAGER, USER
     }
 
- 	//construtor
-	public UserEntity(UserDTO user) {
-		BeanUtils.copyProperties(user, this);
-        if(this.joinDate == null) {
-            this.joinDate = LocalDate.now();
-        }
-	}
-    
+    // Construtor
+    public UserEntity(UserDTO user) {
+        BeanUtils.copyProperties(user, this);
+        this.joinDate = LocalDate.now(); // Garante que joinDate seja definido
+    }
+
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -112,35 +109,19 @@ public class UserEntity {
     public void setJoinDate(LocalDate joinDate) {
         this.joinDate = joinDate;
     }
-    
-    public TipoSituacaoUsuario getSituacao() {
-        return situacao;
-    }
 
-
-
-    public void setSituacao(TipoSituacaoUsuario situacao) {
-        this.situacao = situacao;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-    @Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserEntity other = (UserEntity) obj;
-		return Objects.equals(id, other.id);
-	}
-
-
-
-
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        UserEntity other = (UserEntity) obj;
+        return Objects.equals(id, other.id);
+    }
 }
