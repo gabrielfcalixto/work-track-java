@@ -3,6 +3,7 @@ package br.com.gfctech.project_manager.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.gfctech.project_manager.dto.ChangePasswordRequest;
 import br.com.gfctech.project_manager.dto.UserDTO;
@@ -62,5 +63,36 @@ public class UserController {
             response.put("error", e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
+    }
+
+    @PostMapping("/upload-profile-picture/{id}")
+    public ResponseEntity<String> uploadProfilePicture(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest().body("O arquivo não pode estar vazio.");
+        }
+        if (!file.getContentType().startsWith("image/")) {
+            return ResponseEntity.badRequest().body("Apenas arquivos de imagem são permitidos.");
+        }
+    
+        try {
+            String message = userService.uploadProfilePicture(id, file);
+            return ResponseEntity.ok(message);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/profile-picture/{id}")
+    public ResponseEntity<byte[]> getProfilePicture(@PathVariable Long id) {
+        byte[] profilePicture = userService.getProfilePicture(id);
+
+        if (profilePicture == null) {
+            return ResponseEntity.status(404).body(null); // Retorna 404 se não houver imagem
+        }
+
+        // Retorna os bytes da imagem com o cabeçalho correto para exibição
+        return ResponseEntity.ok()
+                .header("Content-Type", "image/jpeg")  // Ou outro tipo conforme necessário
+                .body(profilePicture);
     }
 }

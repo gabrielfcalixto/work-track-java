@@ -1,11 +1,14 @@
 package br.com.gfctech.project_manager.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
 import br.com.gfctech.project_manager.dto.UserDTO;
 import br.com.gfctech.project_manager.entity.UserEntity;
 import br.com.gfctech.project_manager.entity.UserEntity.Role;
@@ -116,5 +119,42 @@ public class UserService {
         emailService.enviarEmailTexto(user.getEmail(), assunto, mensagem);
     }
 
+
+    @Transactional
+    public String uploadProfilePicture(Long id, MultipartFile file) {
+        try {
+            // Encontra o usuário pelo ID
+            UserEntity user = userRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+            // Converte o arquivo para um array de bytes
+            byte[] profilePicture = file.getBytes();
+            user.setProfilePicture(profilePicture);
+
+            // Salva o usuário com a nova foto de perfil
+            userRepository.save(user);
+
+            return "Foto de perfil atualizada com sucesso!";
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao salvar a imagem no banco de dados.", e);
+        }
+    }
+
+    // Método para recuperar a foto de perfil
+    public byte[] getProfilePicture(Long userId) {
+        // Recupera o usuário do banco de dados
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        byte[] profilePicture = user.getProfilePicture();
+
+        if (profilePicture == null || profilePicture.length == 0) {
+            return null; // Retorna null se não houver imagem
+        }
+
+        return profilePicture;
+    }
 }
+
+
 

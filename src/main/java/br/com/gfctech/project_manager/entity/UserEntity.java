@@ -37,6 +37,9 @@ public class UserEntity {
     @Column(nullable = false)
     private LocalDate joinDate = LocalDate.now();
 
+    @Lob
+    private byte[] profilePicture;  // Campo para armazenar a imagem
+
     // Enum de Role dentro da entidade
     public enum Role {
         ADMIN, MANAGER, USER
@@ -99,6 +102,14 @@ public class UserEntity {
         this.joinDate = joinDate;
     }
 
+
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
     @Override
     public int hashCode() {
         return Objects.hash(id);
