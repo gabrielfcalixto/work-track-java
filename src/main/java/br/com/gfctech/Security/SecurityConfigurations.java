@@ -1,6 +1,5 @@
 package br.com.gfctech.Security;
 
-import java.beans.BeanProperty;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
