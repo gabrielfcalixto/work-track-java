@@ -35,16 +35,11 @@ public class UserEntity {
     private Role role;
 
     @Column(nullable = false)
-    private LocalDate joinDate;
+    private LocalDate joinDate = LocalDate.now();
 
     // Enum de Role dentro da entidade
     public enum Role {
         ADMIN, MANAGER, USER
-    }
-    // Construtor
-    public UserEntity(UserDTO user) {
-        BeanUtils.copyProperties(user, this);
-        this.joinDate = LocalDate.now(); // Garante que joinDate seja definido
     }
 
     // Getters e Setters
