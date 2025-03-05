@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import br.com.gfctech.project_manager.dto.ChangePasswordRequest;
 import br.com.gfctech.project_manager.dto.UserDTO;
 import br.com.gfctech.project_manager.service.UserService;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +34,9 @@ public class UserController {
     public UserDTO getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
-    
+
     @PutMapping("/{id}")
-    public UserDTO updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {  
+    public UserDTO updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
         return userService.updateUser(id, userDTO);
     }
 
@@ -42,20 +44,23 @@ public class UserController {
     public UserDTO updatePermissions(@PathVariable Long id, @RequestBody Map<String, String> update) {
         return userService.updatePermissions(id, update.get("role"));
     }
+
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
 
     @PutMapping("/{id}/change-password")
-    public ResponseEntity<String> changePassword(@PathVariable Long id,
-                                                 @RequestBody ChangePasswordRequest changePasswordRequest) {
+    public ResponseEntity<Map<String, String>> changePassword(@PathVariable Long id,
+                                                               @RequestBody ChangePasswordRequest changePasswordRequest) {
+        Map<String, String> response = new HashMap<>();
         try {
             userService.changePassword(id, changePasswordRequest.getOldPassword(), changePasswordRequest.getNewPassword());
-            return ResponseEntity.ok("Senha alterada com sucesso!");
+            response.put("message", "Senha alterada com sucesso!");
+            return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
         }
     }
-    
 }
