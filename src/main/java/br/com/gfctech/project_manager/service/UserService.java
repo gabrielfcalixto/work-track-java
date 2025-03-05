@@ -84,5 +84,37 @@ public class UserService {
             .map(UserDTO::new) // Usa o construtor corrigido
             .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
+
+    @Transactional
+    public void changePassword(Long userId, String oldPassword, String newPassword) {
+        // Recupera o usuário pelo ID
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + userId));
+        
+        // Verifica se a senha antiga fornecida está correta
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            throw new RuntimeException("A senha antiga fornecida está incorreta.");
+        }
+
+        // Verifica se a nova senha é diferente da atual
+        if (oldPassword.equals(newPassword)) {
+            throw new RuntimeException("A nova senha deve ser diferente da senha antiga.");
+        }
+
+        // Codifica a nova senha
+        user.setPassword(passwordEncoder.encode(newPassword));
+
+        // Salva o usuário com a nova senha
+        userRepository.save(user);
+
+        // Envia e-mail de confirmação (opcional)
+        String assunto = "Senha alterada com sucesso";
+        String mensagem = "Olá " + user.getName() + ",\n\n"
+                + "Sua senha foi alterada com sucesso.\n\n"
+                + "Se você não solicitou essa alteração, entre em contato conosco imediatamente.";
+
+        emailService.enviarEmailTexto(user.getEmail(), assunto, mensagem);
+    }
+
 }
 

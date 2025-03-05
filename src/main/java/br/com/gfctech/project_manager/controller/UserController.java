@@ -1,7 +1,10 @@
 package br.com.gfctech.project_manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import br.com.gfctech.project_manager.dto.ChangePasswordRequest;
 import br.com.gfctech.project_manager.dto.UserDTO;
 import br.com.gfctech.project_manager.service.UserService;
 import java.util.List;
@@ -43,4 +46,16 @@ public class UserController {
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
+
+    @PutMapping("/{id}/change-password")
+    public ResponseEntity<String> changePassword(@PathVariable Long id,
+                                                 @RequestBody ChangePasswordRequest changePasswordRequest) {
+        try {
+            userService.changePassword(id, changePasswordRequest.getOldPassword(), changePasswordRequest.getNewPassword());
+            return ResponseEntity.ok("Senha alterada com sucesso!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    
 }
