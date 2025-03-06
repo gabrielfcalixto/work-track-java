@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+logs/project-manager.log
+logs/project-manager.log.2025-03-05.0.gz
