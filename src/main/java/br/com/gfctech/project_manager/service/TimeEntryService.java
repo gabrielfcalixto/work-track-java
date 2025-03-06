@@ -41,13 +41,6 @@ public class TimeEntryService {
         timeEntry.setStartTime(timeEntryDTO.getStartTime());
         timeEntry.setEndTime(timeEntryDTO.getEndTime());
 
-        // Calculando o total de horas automaticamente
-        timeEntry.calculateTotalHours();
-
-        //atualizando as horas acumuladas
-        double newAccumulatedHours = task.getAccumulatedHours() + timeEntry.getTotalHours();
-        task.setAccumulatedHours(newAccumulatedHours);
-
         //salvando o lançamento e atualizando tarefa
         timeEntry = timeEntryRepository.save(timeEntry);
         taskRepository.save(task);

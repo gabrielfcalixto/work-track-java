@@ -55,7 +55,7 @@ public class TaskEntity {
         this.description = taskDTO.getDescription();
         this.estimatedHours = taskDTO.getEstimatedHours();
         this.status = taskDTO.getStatus();
-        this.project = new ProjectEntity(taskDTO.getProject());
+        this.project = new ProjectEntity(taskDTO.getProjectDTO());
     }
 
     // Método para calcular total de horas automaticamente

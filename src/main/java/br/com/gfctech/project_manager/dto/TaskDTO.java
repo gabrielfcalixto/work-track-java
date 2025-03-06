@@ -17,7 +17,7 @@ public class TaskDTO {
     private Double estimatedHours; // Alterado de Float para Double
     private String status;
     private Double totalHours; // Adicionado para refletir o total de horas calculado
-    private ProjectDTO project;
+    private ProjectDTO projectDTO;
     private Set<UserDTO> assignedUsers; // Corrigido para refletir múltiplos usuários
 
     public TaskDTO(TaskEntity taskEntity) {
@@ -30,7 +30,7 @@ public class TaskDTO {
 
         // Mapeia o projeto
         if (taskEntity.getProject() != null) {
-            this.project = new ProjectDTO(taskEntity.getProject());
+            this.projectDTO = new ProjectDTO(taskEntity.getProject());
         }
 
         // Mapeia os usuários associados à tarefa

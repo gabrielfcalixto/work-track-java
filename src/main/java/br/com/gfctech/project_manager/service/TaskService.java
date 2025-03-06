@@ -34,7 +34,7 @@ public class TaskService {
 
         existingTask.setName(taskDTO.getName());
         existingTask.setDescription(taskDTO.getDescription());
-        existingTask.setHours(taskDTO.getHours());
+        existingTask.setEstimatedHours(taskDTO.getEstimatedHours());
         existingTask.setStatus(taskDTO.getStatus());
         return new TaskDTO(taskRepository.save(existingTask));
     }
