@@ -9,9 +9,12 @@ import br.com.gfctech.project_manager.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "GFC_USER")
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity {
 
     @Id
@@ -42,62 +45,19 @@ public class UserEntity {
         ADMIN, MANAGER, USER
     }
 
-    // Getters e Setters
-    public Long getId() {
-        return id;
+    public UserEntity(UserDTO userDTO) {
+        if (userDTO != null) {
+            this.id = userDTO.getId();
+            this.name = userDTO.getName();
+            this.login = userDTO.getLogin();
+            this.password = userDTO.getPassword();
+            this.email = userDTO.getEmail();
+            this.role = (userDTO.getRole() != null) ? Role.valueOf(userDTO.getRole()) : null;
+            this.joinDate = (userDTO.getJoinDate() != null) ? userDTO.getJoinDate() : LocalDate.now();
+        }
     }
+    
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public LocalDate getJoinDate() {
-        return joinDate;
-    }
-
-    public void setJoinDate(LocalDate joinDate) {
-        this.joinDate = joinDate;
-    }
 
     @Override
     public int hashCode() {

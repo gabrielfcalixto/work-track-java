@@ -81,19 +81,31 @@ public class AdminUserInitializer implements CommandLineRunner {
                 (3, 'f9a0db58-e8ad-4563-93d7-d7ae57a9c6fa', CURRENT_TIMESTAMP + INTERVAL '15 minutes'),
                 (4, 'cd29be39-1799-4317-8d7d-e258d9f3b32c', CURRENT_TIMESTAMP + INTERVAL '15 minutes');
 
-            -- Inserir projetos
+           -- Inserir projetos corretamente
             INSERT INTO gfc_projects (name, description, hours, status)
             VALUES 
                 ('Project 1', 'Description of Project 1', 20, 'pendente'),
-                ('Project 2', 'Description of Project 2', 20, 'pendente');
+                ('Project 2', 'Description of Project 2', 20, 'pendente'),
+                ('Project 3', 'Description of Project 3', 20, 'pendente'),
+                ('Project 4', 'Description of Project 4', 20, 'pendente');
 
-            -- Inserir tasks e vincular a usuários e projetos
-            INSERT INTO gfc_task (name, description, hours, status, project_id, assigned_user_id)
+
+            -- Inserir tasks e vincular a projetos
+            INSERT INTO gfc_task (name, description, estimated_hours, status, total_hours, project_id)
             VALUES 
-                ('Task 1 for Project 1', 'Description of Task 1 for Project 1', 50, 'PENDENTE', 1, 1),
-                ('Task 2 for Project 1', 'Description of Task 2 for Project 1', 50, 'PENDENTE', 1, 2),
-                ('Task 1 for Project 2', 'Description of Task 1 for Project 2', 50, 'PENDENTE', 2, 3),
-                ('Task 2 for Project 2', 'Description of Task 2 for Project 2', 50, 'PENDENTE', 2, 4);
+                ('Task 1 for Project 1', 'Description of Task 1 for Project 1', 50, 'PENDENTE', 0.0, 1),
+                ('Task 2 for Project 1', 'Description of Task 2 for Project 1', 50, 'PENDENTE', 0.0, 1),
+                ('Task 1 for Project 2', 'Description of Task 1 for Project 2', 50, 'PENDENTE', 0.0, 2),
+                ('Task 2 for Project 2', 'Description of Task 2 for Project 2', 50, 'PENDENTE', 0.0, 2);
+
+            -- Associar usuários às tasks (many-to-many)
+            INSERT INTO gfc_task_user (task_id, user_id)
+            VALUES 
+                (1, 1),
+                (2, 2),
+                (3, 3),
+                (4, 4);
+
 
             -- Inserir registros de tempo
             INSERT INTO gfc_timeentry (user_id, task_id, description, entry_date, start_time, end_time, total_hours)
@@ -101,6 +113,7 @@ public class AdminUserInitializer implements CommandLineRunner {
                 (1, 1, 'Desenvolvimento da API RESTful', CURRENT_DATE, '08:00', '12:00', 4),
                 (2, 2, 'Criação de interfaces responsivas', CURRENT_DATE, '13:00', '17:30', 4.5),
                 (3, 3, 'Desenvolvimento de testes unitários', CURRENT_DATE, '09:30', '11:30', 2);
+
             """;
 
         // Executa o script SQL
