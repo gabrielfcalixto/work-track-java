@@ -40,7 +40,7 @@ public class UserController {
         return userService.updateUser(id, userDTO);
     }
 
-    @PatchMapping("/{id}/permissions")
+    @PatchMapping("/permissions/{id}")
     public UserDTO updatePermissions(@PathVariable Long id, @RequestBody Map<String, String> update) {
         return userService.updatePermissions(id, update.get("role"));
     }
