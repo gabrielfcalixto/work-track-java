@@ -3,6 +3,7 @@ package br.com.gfctech.project_manager.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import br.com.gfctech.project_manager.dto.TaskDTO;
+import br.com.gfctech.project_manager.enums.TaskStatus;
 import br.com.gfctech.project_manager.service.TaskService;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,12 @@ public class TaskController {
         return taskService.getAllTasks();
     }
 
-    @PostMapping
+    @GetMapping("/{id}")
+    public TaskDTO getTaskById(@PathVariable Long id) {
+        return taskService.getTaskById(id);
+    }
+
+    @PostMapping("/add")
     public TaskDTO addTask(@RequestBody TaskDTO taskDTO) {  
         return taskService.addTask(taskDTO);
     }
@@ -30,9 +36,15 @@ public class TaskController {
         return taskService.updateTask(id, taskDTO);
     }
 
-    @PatchMapping("/{id}/status")
+   @PatchMapping("/update-status/{id}")
     public TaskDTO updateStatus(@PathVariable Long id, @RequestBody Map<String, String> update) {
-        return taskService.updateStatus(id, update.get("status"));
+        TaskStatus newStatus;
+        try {
+            newStatus = TaskStatus.valueOf(update.get("status").toUpperCase()); // Converte para maiúsculas para garantir a correspondência correta
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Status inválido: " + update.get("status"));
+        }
+        return taskService.updateTaskStatus(id, newStatus);
     }
 
     @DeleteMapping("/{id}")

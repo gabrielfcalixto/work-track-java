@@ -2,6 +2,8 @@ package br.com.gfctech.project_manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import br.com.gfctech.project_manager.dto.ClientDTO;
 import br.com.gfctech.project_manager.dto.ProjectDTO;
 import br.com.gfctech.project_manager.service.ProjectService;
 import java.util.List;
@@ -20,7 +22,13 @@ public class ProjectController {
         return projectService.getAllProjects();
     }
 
-    @PostMapping
+    @GetMapping("/{id}")
+    public ProjectDTO getProjectById(@PathVariable Long id) {
+        return projectService.getProjectById(id);
+    }
+
+
+    @PostMapping("/add")
     public ProjectDTO addProject(@RequestBody ProjectDTO projectDTO) {  
         return projectService.addProject(projectDTO);
     }
@@ -30,7 +38,7 @@ public class ProjectController {
         return projectService.updateProject(id, projectDTO);
     }
 
-    @PatchMapping("/{id}/status")
+    @PatchMapping("/update-status/{id}")
     public ProjectDTO updateStatus(@PathVariable Long id, @RequestBody Map<String, String> update) {
         return projectService.updateStatus(id, update.get("status"));
     }

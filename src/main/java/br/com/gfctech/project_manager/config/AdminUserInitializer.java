@@ -1,7 +1,6 @@
 package br.com.gfctech.project_manager.config;
 
 import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -44,7 +43,7 @@ public class AdminUserInitializer implements CommandLineRunner {
             System.out.println("Usuário admin já existe.");
         }
 
-            // Verifica se já existe um usuário padrão "user"
+        // Verifica se já existe um usuário padrão "user"
         if (userRepository.findByLogin("user").isEmpty()) {
             // Cria o usuário padrão "user"
             UserEntity defaultUser = new UserEntity();
@@ -73,30 +72,30 @@ public class AdminUserInitializer implements CommandLineRunner {
                 ('User1', 'user1', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW()),
                 ('User2', 'user2', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW());
 
-            -- Inserir verificação de usuário com UUID (gerando manualmente os UUIDs para os exemplos)
-            INSERT INTO gfc_user_verification (user_id, uuid, date_expiration)
-            VALUES 
-                (1, 'e1b5fa0f-1f93-47b7-b1e2-24e01d16a6a9', CURRENT_TIMESTAMP + INTERVAL '15 minutes'),
-                (2, '7f1e9d1d-d7a4-4c5c-b999-9e1c8d38f49b', CURRENT_TIMESTAMP + INTERVAL '15 minutes'),
-                (3, 'f9a0db58-e8ad-4563-93d7-d7ae57a9c6fa', CURRENT_TIMESTAMP + INTERVAL '15 minutes'),
-                (4, 'cd29be39-1799-4317-8d7d-e258d9f3b32c', CURRENT_TIMESTAMP + INTERVAL '15 minutes');
-
-           -- Inserir projetos corretamente
-            INSERT INTO gfc_projects (name, description, hours, status)
-            VALUES 
-                ('Project 1', 'Description of Project 1', 20, 'pendente'),
-                ('Project 2', 'Description of Project 2', 20, 'pendente'),
-                ('Project 3', 'Description of Project 3', 20, 'pendente'),
-                ('Project 4', 'Description of Project 4', 20, 'pendente');
+           -- Inserir clientes
+                INSERT INTO GFC_CLIENTS (name, cnpj, razao_social, cpf, email, phone, address)
+            VALUES
+                ('Cliente 1', '26.608.044/0001-92', 'Ian e Miguel Doces & Salgados ME', '001.449.037-10', 'cliente1@example.com', '1234567890', 'Rua A, 123'),
+                ('Cliente 2', '26.608.044/0001-93', 'Ian e Miguel Doces & Salgados', '001.449.037-12', 'cliente2@example.com', '0987654321', 'Avenida B, 456'),
+                ('Cliente 3','26.608.044/0001-94', 'Ian e Miguel Doces & Salgados', '001.449.037-13', 'cliente3@example.com', '1122334455', 'Praça C, 789');
 
 
-            -- Inserir tasks e vincular a projetos
-            INSERT INTO gfc_task (name, description, estimated_hours, status, total_hours, project_id)
+
+            -- Inserir projetos corretamente, agora com manager_id e client_id
+            INSERT INTO gfc_projects (name, description, hours, status,  manager_id, client_id, start_date, deadline)
             VALUES 
-                ('Task 1 for Project 1', 'Description of Task 1 for Project 1', 50, 'PENDENTE', 0.0, 1),
-                ('Task 2 for Project 1', 'Description of Task 2 for Project 1', 50, 'PENDENTE', 0.0, 1),
-                ('Task 1 for Project 2', 'Description of Task 1 for Project 2', 50, 'PENDENTE', 0.0, 2),
-                ('Task 2 for Project 2', 'Description of Task 2 for Project 2', 50, 'PENDENTE', 0.0, 2);
+                ('Project 1', 'Description of Project 1', 20, 'NOT_STARTED', 1, 1, CURRENT_DATE, CURRENT_DATE),
+                ('Project 2', 'Description of Project 2', 20, 'NOT_STARTED', 2, 2, CURRENT_DATE, CURRENT_DATE),
+                ('Project 3', 'Description of Project 3', 20, 'NOT_STARTED', 1, 2, CURRENT_DATE, CURRENT_DATE),
+                ('Project 4', 'Description of Project 4', 20, 'NOT_STARTED', 2, 1, CURRENT_DATE, CURRENT_DATE);
+
+            -- Inserir tasks corretamente e vincular à projetos
+            INSERT INTO gfc_task (name, description, estimated_hours, status, total_hours, project_id, priority, start_date, deadline)
+            VALUES 
+                ('Task 1 for Project 1', 'Description of Task 1 for Project 1', 50, 'NOT_STARTED', 0.0, 1, 'LOW', CURRENT_DATE, CURRENT_DATE),
+                ('Task 2 for Project 1', 'Description of Task 2 for Project 1', 50, 'NOT_STARTED', 0.0, 1, 'MEDIUM', CURRENT_DATE, CURRENT_DATE),
+                ('Task 1 for Project 2', 'Description of Task 1 for Project 2', 50, 'NOT_STARTED', 0.0, 2, 'HIGH', CURRENT_DATE, CURRENT_DATE),
+                ('Task 2 for Project 2', 'Description of Task 2 for Project 2', 50, 'NOT_STARTED', 0.0, 2, 'MEDIUM', CURRENT_DATE, CURRENT_DATE);
 
             -- Associar usuários às tasks (many-to-many)
             INSERT INTO gfc_task_user (task_id, user_id)
@@ -106,14 +105,12 @@ public class AdminUserInitializer implements CommandLineRunner {
                 (3, 3),
                 (4, 4);
 
-
             -- Inserir registros de tempo
             INSERT INTO gfc_timeentry (user_id, task_id, description, entry_date, start_time, end_time, total_hours)
             VALUES 
                 (1, 1, 'Desenvolvimento da API RESTful', CURRENT_DATE, '08:00', '12:00', 4),
                 (2, 2, 'Criação de interfaces responsivas', CURRENT_DATE, '13:00', '17:30', 4.5),
                 (3, 3, 'Desenvolvimento de testes unitários', CURRENT_DATE, '09:30', '11:30', 2);
-
             """;
 
         // Executa o script SQL

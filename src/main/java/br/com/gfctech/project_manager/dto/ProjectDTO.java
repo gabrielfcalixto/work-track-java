@@ -1,25 +1,27 @@
 package br.com.gfctech.project_manager.dto;
+
 import br.com.gfctech.project_manager.entity.ProjectEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import br.com.gfctech.project_manager.enums.ProjectStatus;
+import lombok.*;
+import java.time.LocalDate;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class ProjectDTO {
     private Long id;
     private String name;
     private String description;
     private Float hours;
-    private String status;
-    private Long managerId; // Vincula o gestor responsável
-
+    private ProjectStatus status;
+    private Long managerId;
+    private Long clientId;
+    private Set<Long> teamMemberIds;
+    private LocalDate startDate;
+    private LocalDate deadline;
 
     public ProjectDTO(ProjectEntity projectEntity) {
         this.id = projectEntity.getId();
@@ -28,8 +30,11 @@ public class ProjectDTO {
         this.hours = projectEntity.getHours();
         this.status = projectEntity.getStatus();
         this.managerId = projectEntity.getManager() != null ? projectEntity.getManager().getId() : null;
-
+        this.clientId = projectEntity.getClient() != null ? projectEntity.getClient().getId() : null;
+        this.teamMemberIds = projectEntity.getTeamMembers() != null 
+                ? projectEntity.getTeamMembers().stream().map(member -> member.getId()).collect(Collectors.toSet()) 
+                : null;
+        this.startDate = projectEntity.getStartDate();
+        this.deadline = projectEntity.getDeadline();
     }
-
-    
 }

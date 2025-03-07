@@ -1,9 +1,12 @@
 package br.com.gfctech.project_manager.entity;
 
 import br.com.gfctech.project_manager.dto.TaskDTO;
+import br.com.gfctech.project_manager.enums.TaskPriority;
+import br.com.gfctech.project_manager.enums.TaskStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,19 +28,23 @@ public class TaskEntity {
     private String description;
 
     @Column(nullable = false)
-    private Double estimatedHours; // Definido quando a tarefa é criada
+    private Double estimatedHours; // Horas planejadas
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TaskStatus status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TaskPriority priority; // Nova prioridade da tarefa
 
     @Column(nullable = false)
-    private String status;
-
-    @Column(nullable = false)
-    private Double totalHours = 0.0; // Calculado com base nas horas lançadas
+    private Double totalHours = 0.0; // Horas registradas
 
     @ManyToOne
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "project_id", nullable = false)
     private ProjectEntity project;
 
-    // Relação ManyToMany para associar vários usuários à mesma tarefa
     @ManyToMany
     @JoinTable(
         name = "GFC_TASK_USER",
@@ -49,16 +56,26 @@ public class TaskEntity {
     @OneToMany(mappedBy = "taskEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<TimeEntryEntity> timeEntries = new HashSet<>();
 
-    public TaskEntity(TaskDTO taskDTO) {
+    @Column(nullable = false)
+    private LocalDate startDate;
+
+    @Column(nullable = false)
+    private LocalDate deadline;
+
+    public TaskEntity(TaskDTO taskDTO, ProjectEntity project, Set<UserEntity> users) {
         this.id = taskDTO.getId();
         this.name = taskDTO.getName();
         this.description = taskDTO.getDescription();
         this.estimatedHours = taskDTO.getEstimatedHours();
         this.status = taskDTO.getStatus();
-        this.project = new ProjectEntity(taskDTO.getProjectDTO());
+        this.priority = taskDTO.getPriority();
+        this.startDate = taskDTO.getStartDate();
+        this.deadline = taskDTO.getDeadline();
+        this.project = project;
+        this.assignedUsers = users;
+        this.totalHours = calculateTotalHours();
     }
 
-    // Método para calcular total de horas automaticamente
     public Double calculateTotalHours() {
         return timeEntries.stream()
                           .mapToDouble(TimeEntryEntity::getHoursLogged)

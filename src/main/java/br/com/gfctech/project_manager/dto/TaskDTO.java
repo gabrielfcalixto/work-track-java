@@ -1,8 +1,12 @@
 package br.com.gfctech.project_manager.dto;
 
 import br.com.gfctech.project_manager.entity.TaskEntity;
+import br.com.gfctech.project_manager.entity.UserEntity;
+import br.com.gfctech.project_manager.enums.TaskPriority;
+import br.com.gfctech.project_manager.enums.TaskStatus;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,30 +18,28 @@ public class TaskDTO {
     private Long id;
     private String name;
     private String description;
-    private Double estimatedHours; // Alterado de Float para Double
-    private String status;
-    private Double totalHours; // Adicionado para refletir o total de horas calculado
-    private ProjectDTO projectDTO;
-    private Set<UserDTO> assignedUsers; // Corrigido para refletir múltiplos usuários
+    private Double estimatedHours;
+    private TaskStatus status;
+    private TaskPriority priority;
+    private Double totalHours;
+    private Long projectId;
+    private Set<Long> assignedUserIds;
+    private LocalDate startDate;
+    private LocalDate deadline;
 
     public TaskDTO(TaskEntity taskEntity) {
         this.id = taskEntity.getId();
         this.name = taskEntity.getName();
         this.description = taskEntity.getDescription();
-        this.estimatedHours = taskEntity.getEstimatedHours(); // Nome correto
+        this.estimatedHours = taskEntity.getEstimatedHours();
         this.status = taskEntity.getStatus();
-        this.totalHours = taskEntity.calculateTotalHours(); // Calcula o total de horas lançadas
-
-        // Mapeia o projeto
-        if (taskEntity.getProject() != null) {
-            this.projectDTO = new ProjectDTO(taskEntity.getProject());
-        }
-
-        // Mapeia os usuários associados à tarefa
-        if (taskEntity.getAssignedUsers() != null) {
-            this.assignedUsers = taskEntity.getAssignedUsers().stream()
-                                           .map(UserDTO::new)
-                                           .collect(Collectors.toSet());
-        }
+        this.priority = taskEntity.getPriority();
+        this.totalHours = taskEntity.calculateTotalHours();
+        this.projectId = taskEntity.getProject().getId();
+        this.assignedUserIds = taskEntity.getAssignedUsers().stream()
+                                         .map(UserEntity::getId)
+                                         .collect(Collectors.toSet());
+        this.startDate = taskEntity.getStartDate();
+        this.deadline = taskEntity.getDeadline();
     }
 }

@@ -1,56 +1,163 @@
 package br.com.gfctech.project_manager.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import br.com.gfctech.project_manager.dto.TaskDTO;
+import br.com.gfctech.project_manager.entity.ProjectEntity;
+import br.com.gfctech.project_manager.entity.TaskEntity;
+import br.com.gfctech.project_manager.entity.UserEntity;
+import br.com.gfctech.project_manager.enums.ProjectStatus;
+import br.com.gfctech.project_manager.enums.TaskStatus;
+import br.com.gfctech.project_manager.repository.ProjectRepository;
+import br.com.gfctech.project_manager.repository.TaskRepository;
+import br.com.gfctech.project_manager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import br.com.gfctech.project_manager.dto.TaskDTO;
-import br.com.gfctech.project_manager.entity.TaskEntity;
-import br.com.gfctech.project_manager.repository.TaskRepository;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
 
-    @Autowired  
+    @Autowired
     private TaskRepository taskRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional(readOnly = true)
     public List<TaskDTO> getAllTasks() {
-        return taskRepository.findAll().stream().map(TaskDTO::new).collect(Collectors.toList());
+        return taskRepository.findAll().stream()
+                .map(TaskDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public TaskDTO getTaskById(Long id) {
+        return taskRepository.findById(id)
+                .map(TaskDTO::new)
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + id));
     }
 
     @Transactional
     public TaskDTO addTask(TaskDTO taskDTO) {
-        TaskEntity taskEntity = new TaskEntity(taskDTO);
+        ProjectEntity project = projectRepository.findById(taskDTO.getProjectId())
+                .orElseThrow(() -> new RuntimeException("Projeto não encontrado com ID: " + taskDTO.getProjectId()));
+
+        Set<UserEntity> users = userRepository.findAllById(taskDTO.getAssignedUserIds()).stream()
+                .collect(Collectors.toSet());
+
+        TaskEntity taskEntity = new TaskEntity(taskDTO, project, users);
         taskRepository.save(taskEntity);
         return new TaskDTO(taskEntity);
     }
 
     @Transactional
     public TaskDTO updateTask(Long id, TaskDTO taskDTO) {
-        TaskEntity existingTask = taskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Task not found with ID: " + id));
-
-        existingTask.setName(taskDTO.getName());
-        existingTask.setDescription(taskDTO.getDescription());
-        existingTask.setEstimatedHours(taskDTO.getEstimatedHours());
-        existingTask.setStatus(taskDTO.getStatus());
-        return new TaskDTO(taskRepository.save(existingTask));
-    }
-
-    @Transactional
-    public TaskDTO updateStatus(Long id, String status) {
         TaskEntity task = taskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Task not found with ID: " + id));
-        task.setStatus(status);
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + id));
+
+        task.setName(taskDTO.getName());
+        task.setDescription(taskDTO.getDescription());
+        task.setEstimatedHours(taskDTO.getEstimatedHours());
+        task.setStatus(taskDTO.getStatus());
+        task.setPriority(taskDTO.getPriority());
+        task.setStartDate(taskDTO.getStartDate());
+        task.setDeadline(taskDTO.getDeadline());
+
+        Set<UserEntity> users = userRepository.findAllById(taskDTO.getAssignedUserIds()).stream()
+                .collect(Collectors.toSet());
+        task.setAssignedUsers(users);
+
         return new TaskDTO(taskRepository.save(task));
     }
 
     @Transactional
-    public void deleteTask(Long id) {
-        TaskEntity task = taskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Task not found with ID: " + id));
+    public TaskDTO updateTaskStatus(Long taskId, TaskStatus newStatus) {
+        TaskEntity task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + taskId));
+
+        if (task.getStatus() == TaskStatus.COMPLETED && newStatus != TaskStatus.COMPLETED) {
+            throw new IllegalStateException("Não é possível reabrir uma tarefa já concluída.");
+        }
+
+        task.setStatus(newStatus);
+        taskRepository.save(task);
+
+        updateProjectStatusIfNecessary(task.getProject());
+
+        return new TaskDTO(task);
+    }
+
+    @Transactional
+    public TaskDTO assignTaskToUser(Long taskId, Long userId) {
+        TaskEntity task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + taskId));
+
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + userId));
+
+        task.getAssignedUsers().add(user);
+        taskRepository.save(task);
+
+        return new TaskDTO(task);
+    }
+
+    @Transactional
+    public TaskDTO unassignUserFromTask(Long taskId, Long userId) {
+        TaskEntity task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + taskId));
+
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + userId));
+
+        task.getAssignedUsers().remove(user);
+        taskRepository.save(task);
+
+        return new TaskDTO(task);
+    }
+
+    @Transactional
+    public void recalculateTotalHours(Long taskId) {
+        TaskEntity task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + taskId));
+
+        Double totalHours = task.calculateTotalHours();
+        task.setTotalHours(totalHours);
+        taskRepository.save(task);
+    }
+
+    @Transactional
+    private void updateProjectStatusIfNecessary(ProjectEntity project) {
+        if (project == null) return;
+    
+        List<TaskEntity> tasks;
+        synchronized (project.getTasks()) { // Bloqueia o acesso à lista de tarefas
+            tasks = List.copyOf(project.getTasks()); // Cria uma cópia segura
+        }
+    
+        boolean allCompleted = tasks.stream()
+                .allMatch(task -> task.getStatus() == TaskStatus.COMPLETED);
+    
+        if (allCompleted && project.getStatus() != ProjectStatus.COMPLETED) {
+            project.setStatus(ProjectStatus.COMPLETED);
+            projectRepository.save(project);
+        }
+    }
+
+    @Transactional
+    public void deleteTask(Long taskId) {
+        TaskEntity task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + taskId));
+
+        if (task.getStatus() != TaskStatus.NOT_STARTED) {
+            throw new IllegalStateException("Não é possível excluir uma tarefa que já foi iniciada.");
+        }
+
         taskRepository.delete(task);
     }
 }
