@@ -1,5 +1,6 @@
 package br.com.gfctech.project_manager.dto;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -17,23 +18,27 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TimeEntryDTO {
 
-    private Long id;  // Adicionando ID para refletir a entidade
+    private Long id;
     private Long taskId;
     private Long userId;  
     private String description;
     private LocalDate entryDate;
     private LocalTime startTime;
     private LocalTime endTime;
-    private Double hoursLogged;  // Campo calculado das horas trabalhadas
+    private Double hoursLogged;
 
     public TimeEntryDTO(TimeEntryEntity timeEntry) {
-        this.id = timeEntry.getId();  // Capturando o ID da entidade
-        this.taskId = timeEntry.getTaskEntity().getId();
-        this.userId = timeEntry.getUserEntity().getId();  
-        this.description = timeEntry.getDescription();  
+        if (timeEntry == null) {
+            throw new IllegalArgumentException("TimeEntryEntity não pode ser nulo");
+        }
+
+        this.id = timeEntry.getId();
+        this.taskId = (timeEntry.getTaskEntity() != null) ? timeEntry.getTaskEntity().getId() : null;
+        this.userId = (timeEntry.getUserEntity() != null) ? timeEntry.getUserEntity().getId() : null;
+        this.description = timeEntry.getDescription();
         this.entryDate = timeEntry.getEntryDate();
         this.startTime = timeEntry.getStartTime();
         this.endTime = timeEntry.getEndTime();
-        this.hoursLogged = timeEntry.getHoursLogged(); // Calculando as horas
+        this.hoursLogged = timeEntry.getHoursLogged(); // Usa o método da entidade para calcular
     }
 }

@@ -38,8 +38,21 @@ public class TimeEntryEntity {
     @Column(nullable = false)
     private LocalTime endTime;
 
+    @Column(nullable = true)
+    private Double totalHours;
+
     // Método para calcular horas trabalhadas
     public Double getHoursLogged() {
+        if (startTime == null || endTime == null) {
+            return 0.0;
+        }
         return (double) Duration.between(startTime, endTime).toMinutes() / 60;
+    }
+
+    // Método para calcular e salvar totalHours antes de persistir ou atualizar
+    @PrePersist
+    @PreUpdate
+    public void calculateTotalHours() {
+        this.totalHours = getHoursLogged();
     }
 }

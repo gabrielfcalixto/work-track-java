@@ -23,6 +23,7 @@ public class TimeEntryController {
         return timeEntryService.saveTimeEntry(timeEntryDTO);
     }
 
+    
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<TimeEntryDTO>> getUserTimeEntries(@PathVariable Long userId) {
     List<TimeEntryDTO> entries = timeEntryService.getTimeEntriesByUserId(userId);

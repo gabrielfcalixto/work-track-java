@@ -26,11 +26,15 @@ public class TimeEntryService {
     private TaskRepository taskRepository;
 
     public TimeEntryEntity saveTimeEntry(TimeEntryDTO timeEntryDTO) {
+        // Validação de horários
+        if (timeEntryDTO.getStartTime().isAfter(timeEntryDTO.getEndTime())) {
+            throw new IllegalArgumentException("O horário de início deve ser anterior ao horário de término.");
+        }
+
         TimeEntryEntity timeEntry = new TimeEntryEntity();
         
         TaskEntity task = taskRepository.findById(timeEntryDTO.getTaskId())
                 .orElseThrow(() -> new RuntimeException("Task not found"));            
-        // Corrigindo a busca do usuário 
 
         UserEntity user = userRepository.findById(timeEntryDTO.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -40,22 +44,23 @@ public class TimeEntryService {
         timeEntry.setEntryDate(timeEntryDTO.getEntryDate());
         timeEntry.setStartTime(timeEntryDTO.getStartTime());
         timeEntry.setEndTime(timeEntryDTO.getEndTime());
+        timeEntry.setDescription(timeEntryDTO.getDescription());
 
-        //salvando o lançamento e atualizando tarefa
+        // Salva o lançamento
         timeEntry = timeEntryRepository.save(timeEntry);
+
+        // Atualiza as horas totais da tarefa
+        task.setTotalHours(task.getTotalHours() + timeEntry.getHoursLogged());
         taskRepository.save(task);
 
         return timeEntry;
     }
 
-     // Método para buscar os lançamentos de um usuário
+    // Método para buscar os lançamentos de um usuário
     public List<TimeEntryDTO> getTimeEntriesByUserId(Long userId) {
-        // Consulta as entidades de lançamentos do usuário no repositório
         List<TimeEntryEntity> entries = timeEntryRepository.findByUserEntityId(userId);
-        // Converte cada entidade para DTO
         return entries.stream()
                       .map(TimeEntryDTO::new)
                       .collect(Collectors.toList());
     }
 }
-
