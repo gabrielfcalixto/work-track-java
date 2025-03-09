@@ -28,9 +28,9 @@ public class AdminUserInitializer implements CommandLineRunner {
         if (userRepository.findByLogin("admin").isEmpty()) {
             // Cria o usuário admin padrão
             UserEntity adminUser = new UserEntity();
-            adminUser.setName("Administrador");
+            adminUser.setName("Gabriel Calixto");
             adminUser.setLogin("admin");
-            adminUser.setEmail("admin@example.com");
+            adminUser.setEmail("gabrielfeiferc@gmail.com");
             adminUser.setPassword(passwordEncoder.encode("admin123")); // Senha padrão
             adminUser.setRole(Role.ADMIN);
             adminUser.setJoinDate(LocalDate.now()); // Define a data de cadastro
@@ -67,10 +67,10 @@ public class AdminUserInitializer implements CommandLineRunner {
             -- Inserir usuários com o e-mail 'gabrielfeifer18@gmail.com'
             INSERT INTO gfc_user (name, login, email, password, role, join_date)
             VALUES 
-                ('Admin User', 'admine3', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW()),
+                ('Admin User', 'admine3', 'gabrielfeifer10@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW()),
                 ('Gestor User', 'gestor', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'USER', NOW()),
-                ('User1', 'user1', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW()),
-                ('User2', 'user2', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW());
+                ('User1', 'user1', 'gabrielfeifer21@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW()),
+                ('User2', 'user2', 'gabrielcalixto0w@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW());
 
            -- Inserir clientes
                 INSERT INTO GFC_CLIENTS (name, cnpj, razao_social, cpf, email, phone, address)

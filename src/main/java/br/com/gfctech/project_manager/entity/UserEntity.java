@@ -30,7 +30,7 @@ public class UserEntity {
     @Column(nullable = true)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Enumerated(EnumType.STRING)

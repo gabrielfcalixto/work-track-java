@@ -116,5 +116,29 @@ public class UserService {
         emailService.enviarEmailTexto(user.getEmail(), assunto, mensagem);
     }
 
-}
+    @Transactional
+    public void resetPasswordByEmail(String email) {
+        UserEntity user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o e-mail: " + email));
 
+        String novaSenha = RandomStringUtils.randomAlphanumeric(8);
+        String senhaCriptografada = passwordEncoder.encode(novaSenha);
+        user.setPassword(senhaCriptografada);
+        userRepository.save(user);
+
+        String assunto = "Recuperação de Senha - HardProject";
+        String mensagem = "Olá " + user.getName() + ",\n\n"
+                + "Você solicitou a recuperação de senha. Aqui está sua nova senha de acesso ao sistema:\n\n"
+                + "Nova senha: " + novaSenha + "\n\n"
+                + "Recomendamos que você altere essa senha após o próximo login.";
+
+        try {
+            emailService.enviarEmailTexto(user.getEmail(), assunto, mensagem);
+        } catch (Exception e) {
+            // Apenas registra o erro, sem quebrar o fluxo
+            System.err.println("Erro ao enviar e-mail: " + e.getMessage());
+        }
+    }
+
+
+}
