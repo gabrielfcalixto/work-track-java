@@ -35,6 +35,8 @@ public class ClientEntity {
     @Column
     private String address;
 
+    
+
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<ProjectEntity> projects;
 }

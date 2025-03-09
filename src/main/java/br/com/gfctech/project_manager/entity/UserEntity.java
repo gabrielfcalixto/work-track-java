@@ -1,6 +1,7 @@
 package br.com.gfctech.project_manager.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import org.springframework.beans.BeanUtils;
@@ -39,6 +40,14 @@ public class UserEntity {
 
     @Column(nullable = false)
     private LocalDate joinDate = LocalDate.now();
+
+    // codigo para redefinir senha
+    @Column(name = "reset_password_code")
+    private String resetPasswordCode;
+
+    @Column(name = "code_expiration_date")
+    private LocalDateTime codeExpirationDate;
+
 
     // Enum de Role dentro da entidade
     public enum Role {

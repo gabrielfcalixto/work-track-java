@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.gfctech.project_manager.dto.ChangePasswordRequest;
 import br.com.gfctech.project_manager.dto.UserDTO;
+import br.com.gfctech.project_manager.entity.UserEntity;
+import br.com.gfctech.project_manager.exceptions.UsuarioNaoEncontradoException;
+import br.com.gfctech.project_manager.repository.UserRepository;
 import br.com.gfctech.project_manager.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +22,8 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:4200") // Permite requisições do frontend
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private UserService userService;    
+
 
     @GetMapping
     public List<UserDTO> getAllUsers() {
@@ -64,13 +69,6 @@ public class UserController {
         }
     }
 
-    @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestParam String email) {
-        try {
-            userService.resetPasswordByEmail(email);
-            return ResponseEntity.ok("Nova senha enviada para o e-mail informado.");
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
 }
+
+
