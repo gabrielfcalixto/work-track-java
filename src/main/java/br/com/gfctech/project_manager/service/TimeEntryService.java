@@ -25,35 +25,25 @@ public class TimeEntryService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public TimeEntryEntity saveTimeEntry(TimeEntryDTO timeEntryDTO) {
+    public TimeEntryDTO saveTimeEntry(TimeEntryDTO timeEntryDTO) {
         // Validação de horários
         if (timeEntryDTO.getStartTime().isAfter(timeEntryDTO.getEndTime())) {
             throw new IllegalArgumentException("O horário de início deve ser anterior ao horário de término.");
         }
-
-        TimeEntryEntity timeEntry = new TimeEntryEntity();
-        
-        TaskEntity task = taskRepository.findById(timeEntryDTO.getTaskId())
-                .orElseThrow(() -> new RuntimeException("Task not found"));            
-
-        UserEntity user = userRepository.findById(timeEntryDTO.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        timeEntry.setTaskEntity(task);
-        timeEntry.setUserEntity(user);  
-        timeEntry.setEntryDate(timeEntryDTO.getEntryDate());
-        timeEntry.setStartTime(timeEntryDTO.getStartTime());
-        timeEntry.setEndTime(timeEntryDTO.getEndTime());
-        timeEntry.setDescription(timeEntryDTO.getDescription());
-
+    
+        // Converte o DTO para Entity
+        TimeEntryEntity timeEntry = toEntity(timeEntryDTO);
+    
         // Salva o lançamento
         timeEntry = timeEntryRepository.save(timeEntry);
-
+    
         // Atualiza as horas totais da tarefa
+        TaskEntity task = timeEntry.getTaskEntity();
         task.setTotalHours(task.getTotalHours() + timeEntry.getHoursLogged());
         taskRepository.save(task);
-
-        return timeEntry;
+    
+        // Retorna o DTO convertido
+        return new TimeEntryDTO(timeEntry);
     }
 
     // Método para buscar os lançamentos de um usuário
@@ -63,4 +53,27 @@ public class TimeEntryService {
                       .map(TimeEntryDTO::new)
                       .collect(Collectors.toList());
     }
+
+    public TimeEntryEntity toEntity(TimeEntryDTO timeEntryDTO) {
+        TimeEntryEntity timeEntry = new TimeEntryEntity();
+        timeEntry.setId(timeEntryDTO.getId());
+        timeEntry.setEntryDate(timeEntryDTO.getEntryDate());
+        timeEntry.setStartTime(timeEntryDTO.getStartTime());
+        timeEntry.setEndTime(timeEntryDTO.getEndTime());
+        timeEntry.setDescription(timeEntryDTO.getDescription());
+
+        // Busca a tarefa e o usuário no banco de dados
+        TaskEntity task = taskRepository.findById(timeEntryDTO.getTaskId())
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada"));
+        UserEntity user = userRepository.findById(timeEntryDTO.getUserId())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        timeEntry.setTaskEntity(task);
+        timeEntry.setUserEntity(user);
+
+        return timeEntry;
+    }
+
+
+
 }

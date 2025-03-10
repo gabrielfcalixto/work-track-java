@@ -160,4 +160,11 @@ public class TaskService {
 
         taskRepository.delete(task);
     }
+
+    public List<TaskDTO> getTasksByUserId(Long userId) {
+        List<TaskEntity> tasks = taskRepository.findByUserId(userId);
+        return tasks.stream()
+                    .map(TaskDTO::new) // Usa o construtor de TaskDTO que recebe TaskEntity
+                    .collect(Collectors.toList());
+    }
 }

@@ -7,6 +7,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import br.com.gfctech.project_manager.dto.TimeEntryDTO;
+
 @Entity
 @Table(name = "GFC_TIME_ENTRY")
 @Data
@@ -46,13 +48,15 @@ public class TimeEntryEntity {
         if (startTime == null || endTime == null) {
             return 0.0;
         }
-        return (double) Duration.between(startTime, endTime).toMinutes() / 60;
+        Duration duration = Duration.between(startTime, endTime);
+        return duration.toMinutes() / 60.0; // Converte minutos para horas
     }
+        // Método para calcular e salvar totalHours antes de persistir ou atualizar
+        @PrePersist
+        @PreUpdate
+        public void calculateTotalHours() {
+            this.totalHours = getHoursLogged();
+        }
 
-    // Método para calcular e salvar totalHours antes de persistir ou atualizar
-    @PrePersist
-    @PreUpdate
-    public void calculateTotalHours() {
-        this.totalHours = getHoursLogged();
-    }
+        
 }

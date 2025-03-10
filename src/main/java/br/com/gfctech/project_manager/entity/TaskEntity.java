@@ -52,7 +52,7 @@ public class TaskEntity {
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<UserEntity> assignedUsers = new HashSet<>();
-
+    
     @OneToMany(mappedBy = "taskEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<TimeEntryEntity> timeEntries = new HashSet<>();
 

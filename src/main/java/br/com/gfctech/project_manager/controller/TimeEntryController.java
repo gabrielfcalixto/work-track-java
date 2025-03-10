@@ -18,8 +18,8 @@ public class TimeEntryController {
     @Autowired
     private TimeEntryService timeEntryService;
 
-    @PostMapping
-    public TimeEntryEntity createTimeEntry(@RequestBody TimeEntryDTO timeEntryDTO) {
+    @PostMapping("/add")
+    public TimeEntryDTO createTimeEntry(@RequestBody TimeEntryDTO timeEntryDTO) {
         return timeEntryService.saveTimeEntry(timeEntryDTO);
     }
 

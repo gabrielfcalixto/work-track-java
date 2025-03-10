@@ -1,18 +1,11 @@
 package br.com.gfctech.project_manager.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.gfctech.project_manager.dto.ChangePasswordRequest;
 import br.com.gfctech.project_manager.dto.UserDTO;
-import br.com.gfctech.project_manager.entity.UserEntity;
-import br.com.gfctech.project_manager.exceptions.UsuarioNaoEncontradoException;
-import br.com.gfctech.project_manager.repository.UserRepository;
 import br.com.gfctech.project_manager.service.UserService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

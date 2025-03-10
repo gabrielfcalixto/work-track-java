@@ -1,8 +1,10 @@
 package br.com.gfctech.project_manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import br.com.gfctech.project_manager.dto.TaskDTO;
+import br.com.gfctech.project_manager.entity.TaskEntity;
 import br.com.gfctech.project_manager.enums.TaskStatus;
 import br.com.gfctech.project_manager.service.TaskService;
 import java.util.List;
@@ -24,6 +26,12 @@ public class TaskController {
     @GetMapping("/{id}")
     public TaskDTO getTaskById(@PathVariable Long id) {
         return taskService.getTaskById(id);
+    }
+
+    @GetMapping("/usertask/{userId}")
+    public ResponseEntity<List<TaskDTO>> getTasksByUserId(@PathVariable Long userId) {
+        List<TaskDTO> tasks = taskService.getTasksByUserId(userId);
+        return ResponseEntity.ok(tasks);
     }
 
     @PostMapping("/add")
@@ -51,4 +59,6 @@ public class TaskController {
     public void deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);
     }
+
+    
 }
