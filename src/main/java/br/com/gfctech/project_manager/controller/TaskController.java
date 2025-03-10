@@ -33,7 +33,6 @@ public class TaskController {
         List<TaskDTO> tasks = taskService.getTasksByUserId(userId);
         return ResponseEntity.ok(tasks);
     }
-
     @PostMapping("/add")
     public TaskDTO addTask(@RequestBody TaskDTO taskDTO) {  
         return taskService.addTask(taskDTO);

@@ -6534,3 +6534,804 @@ java.lang.Error: Unresolved compilation problem:
 2025-03-10T18:08:39.352-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
 2025-03-10T18:08:39.353-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Writing [TimeEntryDTO(id=2, taskId=1, userId=1, description=Implementação da funcionalidade555, entryDate=202 (truncated)...]
 2025-03-10T18:08:39.354-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-03-10T18:09:32.783-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-4] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:09:32.784-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-5] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:09:32.787-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/time-entries/user/1", parameters={}
+2025-03-10T18:09:32.788-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to br.com.gfctech.project_manager.controller.TimeEntryController#getUserTimeEntries(Long)
+2025-03-10T18:09:32.792-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/task/usertask/1", parameters={}
+2025-03-10T18:09:32.793-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to br.com.gfctech.project_manager.controller.TaskController#getTasksByUserId(Long)
+2025-03-10T18:09:32.796-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-4] org.hibernate.SQL                        : select tee1_0.id,tee1_0.description,tee1_0.end_time,tee1_0.entry_date,tee1_0.start_time,tee1_0.task_id,tee1_0.total_hours,tee1_0.user_id from gfc_time_entry tee1_0 left join gfc_user ue1_0 on ue1_0.id=tee1_0.user_id where ue1_0.id=?
+2025-03-10T18:09:32.803-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-5] org.hibernate.SQL                        : select te1_0.id,te1_0.deadline,te1_0.description,te1_0.estimated_hours,te1_0.name,te1_0.priority,te1_0.project_id,te1_0.start_date,te1_0.status,te1_0.total_hours from gfc_task te1_0 join gfc_task_user au1_0 on te1_0.id=au1_0.task_id where au1_0.user_id=?
+2025-03-10T18:09:32.803-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-4] org.hibernate.SQL                        : select te1_0.id,te1_0.deadline,te1_0.description,te1_0.estimated_hours,te1_0.name,te1_0.priority,te1_0.project_id,p1_0.id,p1_0.client_id,c1_0.id,c1_0.address,c1_0.cnpj,c1_0.cpf,c1_0.email,c1_0.name,c1_0.phone,c1_0.razao_social,p1_0.deadline,p1_0.description,p1_0.hours,p1_0.manager_id,m1_0.id,m1_0.code_expiration_date,m1_0.email,m1_0.join_date,m1_0.login,m1_0.name,m1_0.password,m1_0.reset_password_code,m1_0.role,p1_0.name,p1_0.start_date,p1_0.status,te1_0.start_date,te1_0.status,te1_0.total_hours from gfc_task te1_0 join gfc_projects p1_0 on p1_0.id=te1_0.project_id join gfc_clients c1_0 on c1_0.id=p1_0.client_id join gfc_user m1_0 on m1_0.id=p1_0.manager_id where te1_0.id=?
+2025-03-10T18:09:32.809-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-5] org.hibernate.SQL                        : select pe1_0.id,pe1_0.client_id,c1_0.id,c1_0.address,c1_0.cnpj,c1_0.cpf,c1_0.email,c1_0.name,c1_0.phone,c1_0.razao_social,pe1_0.deadline,pe1_0.description,pe1_0.hours,pe1_0.manager_id,m1_0.id,m1_0.code_expiration_date,m1_0.email,m1_0.join_date,m1_0.login,m1_0.name,m1_0.password,m1_0.reset_password_code,m1_0.role,pe1_0.name,pe1_0.start_date,pe1_0.status from gfc_projects pe1_0 join gfc_clients c1_0 on c1_0.id=pe1_0.client_id join gfc_user m1_0 on m1_0.id=pe1_0.manager_id where pe1_0.id=?
+2025-03-10T18:09:32.814-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-03-10T18:09:32.821-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[TimeEntryDTO(id=1, taskId=1, userId=1, description=Implementação da funcionalidade X, entryDate=202 (truncated)...]
+2025-03-10T18:09:32.840-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-03-10T18:09:32.853-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-5] org.hibernate.SQL                        : select te1_0.task_id,te1_0.id,te1_0.description,te1_0.end_time,te1_0.entry_date,te1_0.start_time,te1_0.total_hours,ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_time_entry te1_0 left join gfc_user ue1_0 on ue1_0.id=te1_0.user_id where te1_0.task_id=?
+2025-03-10T18:09:32.862-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-5] org.hibernate.SQL                        : select tm1_0.project_id,tm1_1.id,tm1_1.code_expiration_date,tm1_1.email,tm1_1.join_date,tm1_1.login,tm1_1.name,tm1_1.password,tm1_1.reset_password_code,tm1_1.role from project_team tm1_0 join gfc_user tm1_1 on tm1_1.id=tm1_0.user_id where tm1_0.project_id=?
+2025-03-10T18:09:32.866-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-5] org.hibernate.SQL                        : select au1_0.task_id,au1_1.id,au1_1.code_expiration_date,au1_1.email,au1_1.join_date,au1_1.login,au1_1.name,au1_1.password,au1_1.reset_password_code,au1_1.role from gfc_task_user au1_0 join gfc_user au1_1 on au1_1.id=au1_0.user_id where au1_0.task_id=?
+2025-03-10T18:09:32.869-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-5] org.hibernate.SQL                        : select te1_0.task_id,te1_0.id,te1_0.description,te1_0.end_time,te1_0.entry_date,te1_0.start_time,te1_0.total_hours,ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_time_entry te1_0 left join gfc_user ue1_0 on ue1_0.id=te1_0.user_id where te1_0.task_id=?
+2025-03-10T18:09:32.878-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Failed to complete request: java.util.ConcurrentModificationException
+2025-03-10T18:09:32.880-03:00 ERROR 37912 --- [project-manager] [http-nio-8080-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.util.ConcurrentModificationException] with root cause
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1095) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:1049) ~[na:na]
+	at java.base/java.util.AbstractCollection.addAll(AbstractCollection.java:337) ~[na:na]
+	at org.hibernate.collection.spi.PersistentSet.injectLoadedState(PersistentSet.java:311) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.internal.LoadingCollectionEntryImpl.finishLoading(LoadingCollectionEntryImpl.java:78) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesSourceProcessingStateStandardImpl.finishLoadingCollections(JdbcValuesSourceProcessingStateStandardImpl.java:171) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesSourceProcessingStateStandardImpl.finishUp(JdbcValuesSourceProcessingStateStandardImpl.java:142) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:205) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:35) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:224) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:102) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.executeQuery(JdbcSelectExecutor.java:91) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:165) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:142) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:132) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.loader.ast.internal.CollectionLoaderSingleKey.load(CollectionLoaderSingleKey.java:120) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.persister.collection.AbstractCollectionPersister.initialize(AbstractCollectionPersister.java:748) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.event.internal.DefaultInitializeCollectionEventListener.onInitializeCollection(DefaultInitializeCollectionEventListener.java:69) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.internal.SessionImpl.initializeCollection(SessionImpl.java:1724) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.lambda$initialize$3(AbstractPersistentCollection.java:616) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:265) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.initialize(AbstractPersistentCollection.java:614) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.read(AbstractPersistentCollection.java:138) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.PersistentSet.iterator(PersistentSet.java:166) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at java.base/java.util.Spliterators$IteratorSpliterator.estimateSize(Spliterators.java:1959) ~[na:na]
+	at java.base/java.util.Spliterator.getExactSizeIfKnown(Spliterator.java:414) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:508) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.DoublePipeline.collect(DoublePipeline.java:541) ~[na:na]
+	at java.base/java.util.stream.DoublePipeline.sum(DoublePipeline.java:450) ~[na:na]
+	at br.com.gfctech.project_manager.entity.TaskEntity.calculateTotalHours(TaskEntity.java:82) ~[classes/:na]
+	at br.com.gfctech.project_manager.dto.TaskDTO.<init>(TaskDTO.java:37) ~[classes/:na]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682) ~[na:na]
+	at br.com.gfctech.project_manager.service.TaskService.getTasksByUserId(TaskService.java:168) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-6.2.2.jar:6.2.2]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:723) ~[spring-aop-6.2.2.jar:6.2.2]
+	at br.com.gfctech.project_manager.service.TaskService$$SpringCGLIB$$0.getTasksByUserId(<generated>) ~[classes/:na]
+	at br.com.gfctech.project_manager.controller.TaskController.getTasksByUserId(TaskController.java:33) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:257) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1088) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:978) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.34.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.34.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at br.com.gfctech.project_manager.secury.jwt.AuthFilterToken.doFilterInternal(AuthFilterToken.java:45) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238) ~[spring-security-config-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2025-03-10T18:10:30.119-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:10:30.123-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : POST "/auth/login", parameters={}
+2025-03-10T18:10:30.124-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to br.com.gfctech.project_manager.controller.AuthController#login(AuthenticationDTO)
+2025-03-10T18:10:30.128-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [br.com.gfctech.project_manager.dto.AuthenticationDTO@68b7b2a2]
+2025-03-10T18:10:30.194-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:10:30.273-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-03-10T18:10:30.274-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [br.com.gfctech.project_manager.dto.AcessDTO@7596de83]
+2025-03-10T18:10:30.275-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-03-10T18:10:30.300-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-9] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:10:30.301-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-10] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:10:30.309-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/time-entries/user/1", parameters={}
+2025-03-10T18:10:30.309-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/task/usertask/1", parameters={}
+2025-03-10T18:10:30.311-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to br.com.gfctech.project_manager.controller.TaskController#getTasksByUserId(Long)
+2025-03-10T18:10:30.311-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to br.com.gfctech.project_manager.controller.TimeEntryController#getUserTimeEntries(Long)
+2025-03-10T18:10:30.314-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-10] org.hibernate.SQL                        : select te1_0.id,te1_0.deadline,te1_0.description,te1_0.estimated_hours,te1_0.name,te1_0.priority,te1_0.project_id,te1_0.start_date,te1_0.status,te1_0.total_hours from gfc_task te1_0 join gfc_task_user au1_0 on te1_0.id=au1_0.task_id where au1_0.user_id=?
+2025-03-10T18:10:30.314-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-9] org.hibernate.SQL                        : select tee1_0.id,tee1_0.description,tee1_0.end_time,tee1_0.entry_date,tee1_0.start_time,tee1_0.task_id,tee1_0.total_hours,tee1_0.user_id from gfc_time_entry tee1_0 left join gfc_user ue1_0 on ue1_0.id=tee1_0.user_id where ue1_0.id=?
+2025-03-10T18:10:30.317-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-9] org.hibernate.SQL                        : select te1_0.id,te1_0.deadline,te1_0.description,te1_0.estimated_hours,te1_0.name,te1_0.priority,te1_0.project_id,p1_0.id,p1_0.client_id,c1_0.id,c1_0.address,c1_0.cnpj,c1_0.cpf,c1_0.email,c1_0.name,c1_0.phone,c1_0.razao_social,p1_0.deadline,p1_0.description,p1_0.hours,p1_0.manager_id,m1_0.id,m1_0.code_expiration_date,m1_0.email,m1_0.join_date,m1_0.login,m1_0.name,m1_0.password,m1_0.reset_password_code,m1_0.role,p1_0.name,p1_0.start_date,p1_0.status,te1_0.start_date,te1_0.status,te1_0.total_hours from gfc_task te1_0 join gfc_projects p1_0 on p1_0.id=te1_0.project_id join gfc_clients c1_0 on c1_0.id=p1_0.client_id join gfc_user m1_0 on m1_0.id=p1_0.manager_id where te1_0.id=?
+2025-03-10T18:10:30.317-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-10] org.hibernate.SQL                        : select pe1_0.id,pe1_0.client_id,c1_0.id,c1_0.address,c1_0.cnpj,c1_0.cpf,c1_0.email,c1_0.name,c1_0.phone,c1_0.razao_social,pe1_0.deadline,pe1_0.description,pe1_0.hours,pe1_0.manager_id,m1_0.id,m1_0.code_expiration_date,m1_0.email,m1_0.join_date,m1_0.login,m1_0.name,m1_0.password,m1_0.reset_password_code,m1_0.role,pe1_0.name,pe1_0.start_date,pe1_0.status from gfc_projects pe1_0 join gfc_clients c1_0 on c1_0.id=pe1_0.client_id join gfc_user m1_0 on m1_0.id=pe1_0.manager_id where pe1_0.id=?
+2025-03-10T18:10:30.322-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-10] org.hibernate.SQL                        : select te1_0.task_id,te1_0.id,te1_0.description,te1_0.end_time,te1_0.entry_date,te1_0.start_time,te1_0.total_hours,ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_time_entry te1_0 left join gfc_user ue1_0 on ue1_0.id=te1_0.user_id where te1_0.task_id=?
+2025-03-10T18:10:30.322-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-03-10T18:10:30.325-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[TimeEntryDTO(id=1, taskId=1, userId=1, description=Implementação da funcionalidade X, entryDate=202 (truncated)...]
+2025-03-10T18:10:30.327-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-03-10T18:10:30.327-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-10] org.hibernate.SQL                        : select tm1_0.project_id,tm1_1.id,tm1_1.code_expiration_date,tm1_1.email,tm1_1.join_date,tm1_1.login,tm1_1.name,tm1_1.password,tm1_1.reset_password_code,tm1_1.role from project_team tm1_0 join gfc_user tm1_1 on tm1_1.id=tm1_0.user_id where tm1_0.project_id=?
+2025-03-10T18:10:30.330-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-10] org.hibernate.SQL                        : select au1_0.task_id,au1_1.id,au1_1.code_expiration_date,au1_1.email,au1_1.join_date,au1_1.login,au1_1.name,au1_1.password,au1_1.reset_password_code,au1_1.role from gfc_task_user au1_0 join gfc_user au1_1 on au1_1.id=au1_0.user_id where au1_0.task_id=?
+2025-03-10T18:10:30.335-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-10] org.hibernate.SQL                        : select te1_0.task_id,te1_0.id,te1_0.description,te1_0.end_time,te1_0.entry_date,te1_0.start_time,te1_0.total_hours,ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_time_entry te1_0 left join gfc_user ue1_0 on ue1_0.id=te1_0.user_id where te1_0.task_id=?
+2025-03-10T18:10:30.340-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Failed to complete request: java.util.ConcurrentModificationException
+2025-03-10T18:10:30.342-03:00 ERROR 37912 --- [project-manager] [http-nio-8080-exec-10] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.util.ConcurrentModificationException] with root cause
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1095) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:1049) ~[na:na]
+	at java.base/java.util.AbstractCollection.addAll(AbstractCollection.java:337) ~[na:na]
+	at org.hibernate.collection.spi.PersistentSet.injectLoadedState(PersistentSet.java:311) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.internal.LoadingCollectionEntryImpl.finishLoading(LoadingCollectionEntryImpl.java:78) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesSourceProcessingStateStandardImpl.finishLoadingCollections(JdbcValuesSourceProcessingStateStandardImpl.java:171) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesSourceProcessingStateStandardImpl.finishUp(JdbcValuesSourceProcessingStateStandardImpl.java:142) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:205) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:35) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:224) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:102) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.executeQuery(JdbcSelectExecutor.java:91) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:165) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:142) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:132) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.loader.ast.internal.CollectionLoaderSingleKey.load(CollectionLoaderSingleKey.java:120) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.persister.collection.AbstractCollectionPersister.initialize(AbstractCollectionPersister.java:748) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.event.internal.DefaultInitializeCollectionEventListener.onInitializeCollection(DefaultInitializeCollectionEventListener.java:69) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.internal.SessionImpl.initializeCollection(SessionImpl.java:1724) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.lambda$initialize$3(AbstractPersistentCollection.java:616) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:265) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.initialize(AbstractPersistentCollection.java:614) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.read(AbstractPersistentCollection.java:138) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.PersistentSet.iterator(PersistentSet.java:166) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at java.base/java.util.Spliterators$IteratorSpliterator.estimateSize(Spliterators.java:1959) ~[na:na]
+	at java.base/java.util.Spliterator.getExactSizeIfKnown(Spliterator.java:414) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:508) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.DoublePipeline.collect(DoublePipeline.java:541) ~[na:na]
+	at java.base/java.util.stream.DoublePipeline.sum(DoublePipeline.java:450) ~[na:na]
+	at br.com.gfctech.project_manager.entity.TaskEntity.calculateTotalHours(TaskEntity.java:82) ~[classes/:na]
+	at br.com.gfctech.project_manager.dto.TaskDTO.<init>(TaskDTO.java:37) ~[classes/:na]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682) ~[na:na]
+	at br.com.gfctech.project_manager.service.TaskService.getTasksByUserId(TaskService.java:168) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-6.2.2.jar:6.2.2]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:723) ~[spring-aop-6.2.2.jar:6.2.2]
+	at br.com.gfctech.project_manager.service.TaskService$$SpringCGLIB$$0.getTasksByUserId(<generated>) ~[classes/:na]
+	at br.com.gfctech.project_manager.controller.TaskController.getTasksByUserId(TaskController.java:33) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:257) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1088) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:978) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.34.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.34.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at br.com.gfctech.project_manager.secury.jwt.AuthFilterToken.doFilterInternal(AuthFilterToken.java:45) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238) ~[spring-security-config-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2025-03-10T18:11:28.307-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-1] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:11:28.311-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/time-entries/user/1", parameters={}
+2025-03-10T18:11:28.313-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to br.com.gfctech.project_manager.controller.TimeEntryController#getUserTimeEntries(Long)
+2025-03-10T18:11:28.316-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-1] org.hibernate.SQL                        : select tee1_0.id,tee1_0.description,tee1_0.end_time,tee1_0.entry_date,tee1_0.start_time,tee1_0.task_id,tee1_0.total_hours,tee1_0.user_id from gfc_time_entry tee1_0 left join gfc_user ue1_0 on ue1_0.id=tee1_0.user_id where ue1_0.id=?
+2025-03-10T18:11:28.319-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-1] org.hibernate.SQL                        : select te1_0.id,te1_0.deadline,te1_0.description,te1_0.estimated_hours,te1_0.name,te1_0.priority,te1_0.project_id,p1_0.id,p1_0.client_id,c1_0.id,c1_0.address,c1_0.cnpj,c1_0.cpf,c1_0.email,c1_0.name,c1_0.phone,c1_0.razao_social,p1_0.deadline,p1_0.description,p1_0.hours,p1_0.manager_id,m1_0.id,m1_0.code_expiration_date,m1_0.email,m1_0.join_date,m1_0.login,m1_0.name,m1_0.password,m1_0.reset_password_code,m1_0.role,p1_0.name,p1_0.start_date,p1_0.status,te1_0.start_date,te1_0.status,te1_0.total_hours from gfc_task te1_0 join gfc_projects p1_0 on p1_0.id=te1_0.project_id join gfc_clients c1_0 on c1_0.id=p1_0.client_id join gfc_user m1_0 on m1_0.id=p1_0.manager_id where te1_0.id=?
+2025-03-10T18:11:28.324-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-03-10T18:11:28.325-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[TimeEntryDTO(id=1, taskId=1, userId=1, description=Implementação da funcionalidade X, entryDate=202 (truncated)...]
+2025-03-10T18:11:28.327-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-03-10T18:12:29.066-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-3] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:12:29.069-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/task/usertask/1", parameters={}
+2025-03-10T18:12:29.070-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to br.com.gfctech.project_manager.controller.TaskController#getTasksByUserId(Long)
+2025-03-10T18:12:29.071-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-3] org.hibernate.SQL                        : select te1_0.id,te1_0.deadline,te1_0.description,te1_0.estimated_hours,te1_0.name,te1_0.priority,te1_0.project_id,te1_0.start_date,te1_0.status,te1_0.total_hours from gfc_task te1_0 join gfc_task_user au1_0 on te1_0.id=au1_0.task_id where au1_0.user_id=?
+2025-03-10T18:12:29.073-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-3] org.hibernate.SQL                        : select pe1_0.id,pe1_0.client_id,c1_0.id,c1_0.address,c1_0.cnpj,c1_0.cpf,c1_0.email,c1_0.name,c1_0.phone,c1_0.razao_social,pe1_0.deadline,pe1_0.description,pe1_0.hours,pe1_0.manager_id,m1_0.id,m1_0.code_expiration_date,m1_0.email,m1_0.join_date,m1_0.login,m1_0.name,m1_0.password,m1_0.reset_password_code,m1_0.role,pe1_0.name,pe1_0.start_date,pe1_0.status from gfc_projects pe1_0 join gfc_clients c1_0 on c1_0.id=pe1_0.client_id join gfc_user m1_0 on m1_0.id=pe1_0.manager_id where pe1_0.id=?
+2025-03-10T18:12:29.076-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-3] org.hibernate.SQL                        : select te1_0.task_id,te1_0.id,te1_0.description,te1_0.end_time,te1_0.entry_date,te1_0.start_time,te1_0.total_hours,ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_time_entry te1_0 left join gfc_user ue1_0 on ue1_0.id=te1_0.user_id where te1_0.task_id=?
+2025-03-10T18:12:29.079-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-3] org.hibernate.SQL                        : select tm1_0.project_id,tm1_1.id,tm1_1.code_expiration_date,tm1_1.email,tm1_1.join_date,tm1_1.login,tm1_1.name,tm1_1.password,tm1_1.reset_password_code,tm1_1.role from project_team tm1_0 join gfc_user tm1_1 on tm1_1.id=tm1_0.user_id where tm1_0.project_id=?
+2025-03-10T18:12:29.083-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-3] org.hibernate.SQL                        : select au1_0.task_id,au1_1.id,au1_1.code_expiration_date,au1_1.email,au1_1.join_date,au1_1.login,au1_1.name,au1_1.password,au1_1.reset_password_code,au1_1.role from gfc_task_user au1_0 join gfc_user au1_1 on au1_1.id=au1_0.user_id where au1_0.task_id=?
+2025-03-10T18:12:29.084-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-3] org.hibernate.SQL                        : select te1_0.task_id,te1_0.id,te1_0.description,te1_0.end_time,te1_0.entry_date,te1_0.start_time,te1_0.total_hours,ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_time_entry te1_0 left join gfc_user ue1_0 on ue1_0.id=te1_0.user_id where te1_0.task_id=?
+2025-03-10T18:12:29.086-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Failed to complete request: java.util.ConcurrentModificationException
+2025-03-10T18:12:29.087-03:00 ERROR 37912 --- [project-manager] [http-nio-8080-exec-3] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.util.ConcurrentModificationException] with root cause
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1095) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:1049) ~[na:na]
+	at java.base/java.util.AbstractCollection.addAll(AbstractCollection.java:337) ~[na:na]
+	at org.hibernate.collection.spi.PersistentSet.injectLoadedState(PersistentSet.java:311) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.internal.LoadingCollectionEntryImpl.finishLoading(LoadingCollectionEntryImpl.java:78) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesSourceProcessingStateStandardImpl.finishLoadingCollections(JdbcValuesSourceProcessingStateStandardImpl.java:171) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesSourceProcessingStateStandardImpl.finishUp(JdbcValuesSourceProcessingStateStandardImpl.java:142) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:205) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:35) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:224) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:102) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.executeQuery(JdbcSelectExecutor.java:91) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:165) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:142) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:132) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.loader.ast.internal.CollectionLoaderSingleKey.load(CollectionLoaderSingleKey.java:120) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.persister.collection.AbstractCollectionPersister.initialize(AbstractCollectionPersister.java:748) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.event.internal.DefaultInitializeCollectionEventListener.onInitializeCollection(DefaultInitializeCollectionEventListener.java:69) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.internal.SessionImpl.initializeCollection(SessionImpl.java:1724) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.lambda$initialize$3(AbstractPersistentCollection.java:616) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:265) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.initialize(AbstractPersistentCollection.java:614) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.read(AbstractPersistentCollection.java:138) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.PersistentSet.iterator(PersistentSet.java:166) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at java.base/java.util.Spliterators$IteratorSpliterator.estimateSize(Spliterators.java:1959) ~[na:na]
+	at java.base/java.util.Spliterator.getExactSizeIfKnown(Spliterator.java:414) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:508) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.DoublePipeline.collect(DoublePipeline.java:541) ~[na:na]
+	at java.base/java.util.stream.DoublePipeline.sum(DoublePipeline.java:450) ~[na:na]
+	at br.com.gfctech.project_manager.entity.TaskEntity.calculateTotalHours(TaskEntity.java:82) ~[classes/:na]
+	at br.com.gfctech.project_manager.dto.TaskDTO.<init>(TaskDTO.java:37) ~[classes/:na]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682) ~[na:na]
+	at br.com.gfctech.project_manager.service.TaskService.getTasksByUserId(TaskService.java:168) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-6.2.2.jar:6.2.2]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:723) ~[spring-aop-6.2.2.jar:6.2.2]
+	at br.com.gfctech.project_manager.service.TaskService$$SpringCGLIB$$0.getTasksByUserId(<generated>) ~[classes/:na]
+	at br.com.gfctech.project_manager.controller.TaskController.getTasksByUserId(TaskController.java:33) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:257) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1088) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:978) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.34.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.34.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at br.com.gfctech.project_manager.secury.jwt.AuthFilterToken.doFilterInternal(AuthFilterToken.java:45) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238) ~[spring-security-config-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2025-03-10T18:13:29.410-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:13:29.413-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/task/usertask/1", parameters={}
+2025-03-10T18:13:29.414-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to br.com.gfctech.project_manager.controller.TaskController#getTasksByUserId(Long)
+2025-03-10T18:13:29.415-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] org.hibernate.SQL                        : select te1_0.id,te1_0.deadline,te1_0.description,te1_0.estimated_hours,te1_0.name,te1_0.priority,te1_0.project_id,te1_0.start_date,te1_0.status,te1_0.total_hours from gfc_task te1_0 join gfc_task_user au1_0 on te1_0.id=au1_0.task_id where au1_0.user_id=?
+2025-03-10T18:13:29.417-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] org.hibernate.SQL                        : select pe1_0.id,pe1_0.client_id,c1_0.id,c1_0.address,c1_0.cnpj,c1_0.cpf,c1_0.email,c1_0.name,c1_0.phone,c1_0.razao_social,pe1_0.deadline,pe1_0.description,pe1_0.hours,pe1_0.manager_id,m1_0.id,m1_0.code_expiration_date,m1_0.email,m1_0.join_date,m1_0.login,m1_0.name,m1_0.password,m1_0.reset_password_code,m1_0.role,pe1_0.name,pe1_0.start_date,pe1_0.status from gfc_projects pe1_0 join gfc_clients c1_0 on c1_0.id=pe1_0.client_id join gfc_user m1_0 on m1_0.id=pe1_0.manager_id where pe1_0.id=?
+2025-03-10T18:13:29.420-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] org.hibernate.SQL                        : select te1_0.task_id,te1_0.id,te1_0.description,te1_0.end_time,te1_0.entry_date,te1_0.start_time,te1_0.total_hours,ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_time_entry te1_0 left join gfc_user ue1_0 on ue1_0.id=te1_0.user_id where te1_0.task_id=?
+2025-03-10T18:13:29.422-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] org.hibernate.SQL                        : select tm1_0.project_id,tm1_1.id,tm1_1.code_expiration_date,tm1_1.email,tm1_1.join_date,tm1_1.login,tm1_1.name,tm1_1.password,tm1_1.reset_password_code,tm1_1.role from project_team tm1_0 join gfc_user tm1_1 on tm1_1.id=tm1_0.user_id where tm1_0.project_id=?
+2025-03-10T18:13:29.424-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] org.hibernate.SQL                        : select au1_0.task_id,au1_1.id,au1_1.code_expiration_date,au1_1.email,au1_1.join_date,au1_1.login,au1_1.name,au1_1.password,au1_1.reset_password_code,au1_1.role from gfc_task_user au1_0 join gfc_user au1_1 on au1_1.id=au1_0.user_id where au1_0.task_id=?
+2025-03-10T18:13:29.425-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] org.hibernate.SQL                        : select te1_0.task_id,te1_0.id,te1_0.description,te1_0.end_time,te1_0.entry_date,te1_0.start_time,te1_0.total_hours,ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_time_entry te1_0 left join gfc_user ue1_0 on ue1_0.id=te1_0.user_id where te1_0.task_id=?
+2025-03-10T18:13:29.427-03:00 DEBUG 37912 --- [project-manager] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Failed to complete request: java.util.ConcurrentModificationException
+2025-03-10T18:13:29.428-03:00 ERROR 37912 --- [project-manager] [http-nio-8080-exec-8] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.util.ConcurrentModificationException] with root cause
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1095) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:1049) ~[na:na]
+	at java.base/java.util.AbstractCollection.addAll(AbstractCollection.java:337) ~[na:na]
+	at org.hibernate.collection.spi.PersistentSet.injectLoadedState(PersistentSet.java:311) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.internal.LoadingCollectionEntryImpl.finishLoading(LoadingCollectionEntryImpl.java:78) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesSourceProcessingStateStandardImpl.finishLoadingCollections(JdbcValuesSourceProcessingStateStandardImpl.java:171) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesSourceProcessingStateStandardImpl.finishUp(JdbcValuesSourceProcessingStateStandardImpl.java:142) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:205) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:35) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:224) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:102) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.executeQuery(JdbcSelectExecutor.java:91) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:165) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:142) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:132) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.loader.ast.internal.CollectionLoaderSingleKey.load(CollectionLoaderSingleKey.java:120) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.persister.collection.AbstractCollectionPersister.initialize(AbstractCollectionPersister.java:748) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.event.internal.DefaultInitializeCollectionEventListener.onInitializeCollection(DefaultInitializeCollectionEventListener.java:69) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.internal.SessionImpl.initializeCollection(SessionImpl.java:1724) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.lambda$initialize$3(AbstractPersistentCollection.java:616) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:265) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.initialize(AbstractPersistentCollection.java:614) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.read(AbstractPersistentCollection.java:138) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at org.hibernate.collection.spi.PersistentSet.iterator(PersistentSet.java:166) ~[hibernate-core-6.6.5.Final.jar:6.6.5.Final]
+	at java.base/java.util.Spliterators$IteratorSpliterator.estimateSize(Spliterators.java:1959) ~[na:na]
+	at java.base/java.util.Spliterator.getExactSizeIfKnown(Spliterator.java:414) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:508) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.DoublePipeline.collect(DoublePipeline.java:541) ~[na:na]
+	at java.base/java.util.stream.DoublePipeline.sum(DoublePipeline.java:450) ~[na:na]
+	at br.com.gfctech.project_manager.entity.TaskEntity.calculateTotalHours(TaskEntity.java:82) ~[classes/:na]
+	at br.com.gfctech.project_manager.dto.TaskDTO.<init>(TaskDTO.java:37) ~[classes/:na]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682) ~[na:na]
+	at br.com.gfctech.project_manager.service.TaskService.getTasksByUserId(TaskService.java:168) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-6.2.2.jar:6.2.2]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:723) ~[spring-aop-6.2.2.jar:6.2.2]
+	at br.com.gfctech.project_manager.service.TaskService$$SpringCGLIB$$0.getTasksByUserId(<generated>) ~[classes/:na]
+	at br.com.gfctech.project_manager.controller.TaskController.getTasksByUserId(TaskController.java:33) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:257) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1088) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:978) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.34.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.34.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at br.com.gfctech.project_manager.secury.jwt.AuthFilterToken.doFilterInternal(AuthFilterToken.java:45) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243) ~[spring-webmvc-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238) ~[spring-security-config-6.4.2.jar:6.4.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.2.jar:6.2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.34.jar:10.1.34]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2025-03-10T18:21:40.232-03:00  INFO 51452 --- [project-manager] [main] b.c.g.p.ProjectManagerApplication        : Starting ProjectManagerApplication using Java 21.0.5 with PID 51452 (C:\Users\gfcde\Downloads\project-manager\project-manager\target\classes started by gfcde in C:\Users\gfcde\Downloads\project-manager\project-manager)
+2025-03-10T18:21:40.238-03:00  INFO 51452 --- [project-manager] [main] b.c.g.p.ProjectManagerApplication        : No active profile set, falling back to 1 default profile: "default"
+2025-03-10T18:21:41.036-03:00  INFO 51452 --- [project-manager] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-10T18:21:41.146-03:00  INFO 51452 --- [project-manager] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 93 ms. Found 6 JPA repository interfaces.
+2025-03-10T18:21:42.081-03:00  INFO 51452 --- [project-manager] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-10T18:21:42.100-03:00  INFO 51452 --- [project-manager] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-10T18:21:42.101-03:00  INFO 51452 --- [project-manager] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-10T18:21:42.163-03:00  INFO 51452 --- [project-manager] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-10T18:21:42.164-03:00  INFO 51452 --- [project-manager] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1869 ms
+2025-03-10T18:21:42.450-03:00  INFO 51452 --- [project-manager] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-10T18:21:42.544-03:00  INFO 51452 --- [project-manager] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-10T18:21:42.581-03:00  INFO 51452 --- [project-manager] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-10T18:21:42.846-03:00  INFO 51452 --- [project-manager] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-10T18:21:42.879-03:00  INFO 51452 --- [project-manager] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-10T18:21:43.065-03:00  INFO 51452 --- [project-manager] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@bb12f41
+2025-03-10T18:21:43.067-03:00  INFO 51452 --- [project-manager] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-10T18:21:43.104-03:00  WARN 51452 --- [project-manager] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-10T18:21:43.130-03:00  INFO 51452 --- [project-manager] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-10T18:21:44.101-03:00  INFO 51452 --- [project-manager] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-10T18:21:44.117-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : set client_min_messages = WARNING
+2025-03-10T18:21:44.119-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_projects drop constraint if exists FKqql8s5ocup1p0cxqx5h9ysm4w
+2025-03-10T18:21:44.122-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_projects drop constraint if exists FKr3ktwydaynneaxhcstse0bo6v
+2025-03-10T18:21:44.124-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_task drop constraint if exists FKae0m4m83jao2o4ass2gx0hr8m
+2025-03-10T18:21:44.126-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_task_user drop constraint if exists FKniqrr5e9a3lsd9eoiipgar3ko
+2025-03-10T18:21:44.127-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_task_user drop constraint if exists FKc73b41ppg1r7j7olefmwwvmrw
+2025-03-10T18:21:44.128-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_time_entry drop constraint if exists FKsom2e3amyyyuc9njp4rb7gy5h
+2025-03-10T18:21:44.130-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_time_entry drop constraint if exists FKkt3wtlvbasar47lf66dk9g4dy
+2025-03-10T18:21:44.131-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_user_verification drop constraint if exists FKjghgv6gdww14cekdfspovhiwd
+2025-03-10T18:21:44.132-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists project_team drop constraint if exists FKneo1xup6li9qgv1cbwpamak3a
+2025-03-10T18:21:44.133-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists project_team drop constraint if exists FK6unn1aihx508a3epiatkfsqmd
+2025-03-10T18:21:44.134-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : drop table if exists gfc_clients cascade
+2025-03-10T18:21:44.141-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : drop table if exists gfc_projects cascade
+2025-03-10T18:21:44.145-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : drop table if exists gfc_task cascade
+2025-03-10T18:21:44.149-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : drop table if exists gfc_task_user cascade
+2025-03-10T18:21:44.151-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : drop table if exists gfc_time_entry cascade
+2025-03-10T18:21:44.154-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : drop table if exists gfc_user cascade
+2025-03-10T18:21:44.160-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : drop table if exists gfc_user_verification cascade
+2025-03-10T18:21:44.163-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : drop table if exists project_team cascade
+2025-03-10T18:21:44.169-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : create table gfc_clients (id bigint generated by default as identity, address varchar(255), cnpj varchar(255) unique, cpf varchar(255) not null unique, email varchar(255) not null, name varchar(255) not null, phone varchar(255) not null, razao_social varchar(255), primary key (id))
+2025-03-10T18:21:44.183-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : create table gfc_projects (deadline date not null, hours float4 not null, start_date date not null, client_id bigint not null, id bigint generated by default as identity, manager_id bigint not null, description varchar(255) not null, name varchar(255) not null, status varchar(255) not null check (status in ('NOT_STARTED','IN_PROGRESS','COMPLETED','ON_HOLD','CANCELED')), primary key (id))
+2025-03-10T18:21:44.189-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : create table gfc_task (deadline date not null, estimated_hours float(53) not null, start_date date not null, total_hours float(53) not null, id bigint generated by default as identity, project_id bigint not null, description varchar(255) not null, name varchar(255) not null, priority varchar(255) not null check (priority in ('LOW','MEDIUM','HIGH')), status varchar(255) not null check (status in ('NOT_STARTED','IN_PROGRESS','COMPLETED','ON_HOLD','CANCELED')), primary key (id))
+2025-03-10T18:21:44.196-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : create table gfc_task_user (task_id bigint not null, user_id bigint not null, primary key (task_id, user_id))
+2025-03-10T18:21:44.201-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : create table gfc_time_entry (end_time time(6) not null, entry_date date not null, start_time time(6) not null, total_hours float(53), id bigint generated by default as identity, task_id bigint, user_id bigint, description varchar(255) not null, primary key (id))
+2025-03-10T18:21:44.205-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : create table gfc_user (join_date date not null, code_expiration_date timestamp(6), id bigint generated by default as identity, email varchar(255) not null unique, login varchar(255) not null unique, name varchar(255) not null, password varchar(255), reset_password_code varchar(255), role varchar(255) not null check (role in ('ADMIN','MANAGER','USER')), primary key (id))
+2025-03-10T18:21:44.213-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : create table gfc_user_verification (date_expiration timestamp(6) with time zone, id bigint generated by default as identity, user_id bigint, uuid uuid, primary key (id))
+2025-03-10T18:21:44.217-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : create table project_team (project_id bigint not null, user_id bigint not null, primary key (project_id, user_id))
+2025-03-10T18:21:44.221-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_projects add constraint FKqql8s5ocup1p0cxqx5h9ysm4w foreign key (client_id) references gfc_clients
+2025-03-10T18:21:44.226-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_projects add constraint FKr3ktwydaynneaxhcstse0bo6v foreign key (manager_id) references gfc_user
+2025-03-10T18:21:44.229-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_task add constraint FKae0m4m83jao2o4ass2gx0hr8m foreign key (project_id) references gfc_projects
+2025-03-10T18:21:44.231-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_task_user add constraint FKniqrr5e9a3lsd9eoiipgar3ko foreign key (user_id) references gfc_user
+2025-03-10T18:21:44.233-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_task_user add constraint FKc73b41ppg1r7j7olefmwwvmrw foreign key (task_id) references gfc_task
+2025-03-10T18:21:44.235-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_time_entry add constraint FKsom2e3amyyyuc9njp4rb7gy5h foreign key (task_id) references gfc_task
+2025-03-10T18:21:44.237-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_time_entry add constraint FKkt3wtlvbasar47lf66dk9g4dy foreign key (user_id) references gfc_user
+2025-03-10T18:21:44.239-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists gfc_user_verification add constraint FKjghgv6gdww14cekdfspovhiwd foreign key (user_id) references gfc_user
+2025-03-10T18:21:44.241-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists project_team add constraint FKneo1xup6li9qgv1cbwpamak3a foreign key (user_id) references gfc_user
+2025-03-10T18:21:44.243-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : alter table if exists project_team add constraint FK6unn1aihx508a3epiatkfsqmd foreign key (project_id) references gfc_projects
+2025-03-10T18:21:44.248-03:00  INFO 51452 --- [project-manager] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-10T18:21:44.575-03:00  INFO 51452 --- [project-manager] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailServiceImpl
+2025-03-10T18:21:44.749-03:00  INFO 51452 --- [project-manager] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-10T18:21:45.413-03:00  WARN 51452 --- [project-manager] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-10T18:21:45.571-03:00 DEBUG 51452 --- [project-manager] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 32 mappings in 'requestMappingHandlerMapping'
+2025-03-10T18:21:45.731-03:00 DEBUG 51452 --- [project-manager] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-03-10T18:21:45.908-03:00 DEBUG 51452 --- [project-manager] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-03-10T18:21:46.004-03:00 DEBUG 51452 --- [project-manager] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-03-10T18:21:46.221-03:00  INFO 51452 --- [project-manager] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-10T18:21:46.230-03:00  INFO 51452 --- [project-manager] [main] b.c.g.p.ProjectManagerApplication        : Started ProjectManagerApplication in 6.458 seconds (process running for 6.762)
+2025-03-10T18:21:46.336-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:21:46.443-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : insert into gfc_user (code_expiration_date,email,join_date,login,name,password,reset_password_code,role) values (?,?,?,?,?,?,?,?)
+2025-03-10T18:21:46.461-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:21:46.514-03:00 DEBUG 51452 --- [project-manager] [main] org.hibernate.SQL                        : insert into gfc_user (code_expiration_date,email,join_date,login,name,password,reset_password_code,role) values (?,?,?,?,?,?,?,?)
+2025-03-10T18:22:02.002-03:00  INFO 51452 --- [project-manager] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-10T18:22:02.002-03:00  INFO 51452 --- [project-manager] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-10T18:22:02.003-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2025-03-10T18:22:02.003-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2025-03-10T18:22:02.003-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2025-03-10T18:22:02.004-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@256a25a8
+2025-03-10T18:22:02.005-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@34989ceb
+2025-03-10T18:22:02.006-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-03-10T18:22:02.006-03:00  INFO 51452 --- [project-manager] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2025-03-10T18:22:02.110-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:22:02.117-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/task/usertask/1", parameters={}
+2025-03-10T18:22:02.119-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to br.com.gfctech.project_manager.controller.TaskController#getTasksByUserId(Long)
+2025-03-10T18:22:02.146-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] org.hibernate.SQL                        : select te1_0.id,te1_0.deadline,te1_0.description,te1_0.estimated_hours,te1_0.name,te1_0.priority,te1_0.project_id,te1_0.start_date,te1_0.status,te1_0.total_hours from gfc_task te1_0 join gfc_task_user au1_0 on te1_0.id=au1_0.task_id where au1_0.user_id=?
+2025-03-10T18:22:02.162-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] org.hibernate.SQL                        : select pe1_0.id,pe1_0.client_id,c1_0.id,c1_0.address,c1_0.cnpj,c1_0.cpf,c1_0.email,c1_0.name,c1_0.phone,c1_0.razao_social,pe1_0.deadline,pe1_0.description,pe1_0.hours,pe1_0.manager_id,m1_0.id,m1_0.code_expiration_date,m1_0.email,m1_0.join_date,m1_0.login,m1_0.name,m1_0.password,m1_0.reset_password_code,m1_0.role,pe1_0.name,pe1_0.start_date,pe1_0.status from gfc_projects pe1_0 join gfc_clients c1_0 on c1_0.id=pe1_0.client_id join gfc_user m1_0 on m1_0.id=pe1_0.manager_id where pe1_0.id=?
+2025-03-10T18:22:02.172-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] org.hibernate.SQL                        : select te1_0.task_id,te1_0.id,te1_0.description,te1_0.end_time,te1_0.entry_date,te1_0.start_time,te1_0.total_hours,ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_time_entry te1_0 left join gfc_user ue1_0 on ue1_0.id=te1_0.user_id where te1_0.task_id=?
+2025-03-10T18:22:02.177-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] org.hibernate.SQL                        : select au1_0.task_id,au1_1.id,au1_1.code_expiration_date,au1_1.email,au1_1.join_date,au1_1.login,au1_1.name,au1_1.password,au1_1.reset_password_code,au1_1.role from gfc_task_user au1_0 join gfc_user au1_1 on au1_1.id=au1_0.user_id where au1_0.task_id=?
+2025-03-10T18:22:02.195-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-03-10T18:22:02.197-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[br.com.gfctech.project_manager.dto.TaskDTO@2185caa6]]
+2025-03-10T18:22:02.229-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-03-10T18:22:21.117-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-4] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:22:21.121-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/time-entries/user/1", parameters={}
+2025-03-10T18:22:21.122-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to br.com.gfctech.project_manager.controller.TimeEntryController#getUserTimeEntries(Long)
+2025-03-10T18:22:21.122-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-5] org.hibernate.SQL                        : select ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_user ue1_0 where ue1_0.login=?
+2025-03-10T18:22:21.126-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/task/usertask/1", parameters={}
+2025-03-10T18:22:21.127-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to br.com.gfctech.project_manager.controller.TaskController#getTasksByUserId(Long)
+2025-03-10T18:22:21.128-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-4] org.hibernate.SQL                        : select tee1_0.id,tee1_0.description,tee1_0.end_time,tee1_0.entry_date,tee1_0.start_time,tee1_0.task_id,tee1_0.total_hours,tee1_0.user_id from gfc_time_entry tee1_0 left join gfc_user ue1_0 on ue1_0.id=tee1_0.user_id where ue1_0.id=?
+2025-03-10T18:22:21.129-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-5] org.hibernate.SQL                        : select te1_0.id,te1_0.deadline,te1_0.description,te1_0.estimated_hours,te1_0.name,te1_0.priority,te1_0.project_id,te1_0.start_date,te1_0.status,te1_0.total_hours from gfc_task te1_0 join gfc_task_user au1_0 on te1_0.id=au1_0.task_id where au1_0.user_id=?
+2025-03-10T18:22:21.131-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-03-10T18:22:21.132-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[]]
+2025-03-10T18:22:21.134-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-03-10T18:22:21.136-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-5] org.hibernate.SQL                        : select pe1_0.id,pe1_0.client_id,c1_0.id,c1_0.address,c1_0.cnpj,c1_0.cpf,c1_0.email,c1_0.name,c1_0.phone,c1_0.razao_social,pe1_0.deadline,pe1_0.description,pe1_0.hours,pe1_0.manager_id,m1_0.id,m1_0.code_expiration_date,m1_0.email,m1_0.join_date,m1_0.login,m1_0.name,m1_0.password,m1_0.reset_password_code,m1_0.role,pe1_0.name,pe1_0.start_date,pe1_0.status from gfc_projects pe1_0 join gfc_clients c1_0 on c1_0.id=pe1_0.client_id join gfc_user m1_0 on m1_0.id=pe1_0.manager_id where pe1_0.id=?
+2025-03-10T18:22:21.144-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-5] org.hibernate.SQL                        : select te1_0.task_id,te1_0.id,te1_0.description,te1_0.end_time,te1_0.entry_date,te1_0.start_time,te1_0.total_hours,ue1_0.id,ue1_0.code_expiration_date,ue1_0.email,ue1_0.join_date,ue1_0.login,ue1_0.name,ue1_0.password,ue1_0.reset_password_code,ue1_0.role from gfc_time_entry te1_0 left join gfc_user ue1_0 on ue1_0.id=te1_0.user_id where te1_0.task_id=?
+2025-03-10T18:22:21.148-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-5] org.hibernate.SQL                        : select au1_0.task_id,au1_1.id,au1_1.code_expiration_date,au1_1.email,au1_1.join_date,au1_1.login,au1_1.name,au1_1.password,au1_1.reset_password_code,au1_1.role from gfc_task_user au1_0 join gfc_user au1_1 on au1_1.id=au1_0.user_id where au1_0.task_id=?
+2025-03-10T18:22:21.151-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-03-10T18:22:21.152-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[br.com.gfctech.project_manager.dto.TaskDTO@373b64f4]]
+2025-03-10T18:22:21.154-03:00 DEBUG 51452 --- [project-manager] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK

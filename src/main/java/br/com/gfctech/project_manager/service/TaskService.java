@@ -164,7 +164,7 @@ public class TaskService {
     public List<TaskDTO> getTasksByUserId(Long userId) {
         List<TaskEntity> tasks = taskRepository.findByUserId(userId);
         return tasks.stream()
-                    .map(TaskDTO::new) // Usa o construtor de TaskDTO que recebe TaskEntity
+                    .map(TaskDTO::new) // Converte para DTO
                     .collect(Collectors.toList());
     }
 }
