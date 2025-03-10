@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.gfctech.project_manager.entity.TimeEntryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +25,11 @@ public class TimeEntryDTO {
     private Long userId;  
     private String description;
     private LocalDate entryDate;
+
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime startTime;
+
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime endTime;
     private Double hoursLogged;
 
