@@ -45,7 +45,6 @@ public class AdminUserInitializer implements CommandLineRunner {
 
         // Verifica se já existe um usuário padrão "user"
         if (userRepository.findByLogin("user").isEmpty()) {
-            // Cria o usuário padrão "user"
             UserEntity defaultUser = new UserEntity();
             defaultUser.setName("Usuário Padrão");
             defaultUser.setLogin("user");

@@ -57,7 +57,7 @@ public class AuthController {
         String email = request.get("email");
         try {
             userService.generatePasswordResetCode(email);
-            return ResponseEntity.ok("Código de reset gerado e enviado para o e-mail.");
+            return ResponseEntity.ok().build();
         } catch (UsuarioNaoEncontradoException e) {
             return ResponseEntity.badRequest().body("Erro: " + e.getMessage());
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class AuthController {
             String newPassword = request.getNewPassword();
 
             userService.resetPassword(email, code, newPassword);
-            return ResponseEntity.ok("Senha redefinida com sucesso.");
+            return ResponseEntity.ok().build();
         } catch (UsuarioNaoEncontradoException e) {
             return ResponseEntity.badRequest().body("Erro: " + e.getMessage());
         } catch (IllegalArgumentException e) {

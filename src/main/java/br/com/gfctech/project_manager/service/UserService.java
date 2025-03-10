@@ -118,41 +118,16 @@ public class UserService {
         emailService.enviarEmailTexto(user.getEmail(), assunto, mensagem);
     }
 
-    // @Transactional
-    // public void resetPasswordByEmail(String email) {
-    //     UserEntity user = userRepository.findByEmail(email)
-    //             .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o e-mail: " + email));
-
-    //     String novaSenha = RandomStringUtils.randomAlphanumeric(8);
-    //     String senhaCriptografada = passwordEncoder.encode(novaSenha);
-    //     user.setPassword(senhaCriptografada);
-    //     userRepository.save(user);
-
-    //     String assunto = "Recuperação de Senha - HardProject";
-    //     String mensagem = "Olá " + user.getName() + ",\n\n"
-    //             + "Você solicitou a recuperação de senha. Aqui está sua nova senha de acesso ao sistema:\n\n"
-    //             + "Nova senha: " + novaSenha + "\n\n"
-    //             + "Recomendamos que você altere essa senha após o próximo login.";
-
-    //     try {
-    //         emailService.enviarEmailTexto(user.getEmail(), assunto, mensagem);
-    //     } catch (Exception e) {
-    //         // Apenas registra o erro, sem quebrar o fluxo
-    //         System.err.println("Erro ao enviar e-mail: " + e.getMessage());
-    //     }
-    // }
-
-
     @Transactional
     public void generatePasswordResetCode(String email) {
         // Verifica se o usuário existe
         UserEntity user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado com o e-mail: " + email));
 
-        // Gera um código numérico de 6 dígitos
+        //código numérico de 6 dígitos
         String resetCode = RandomStringUtils.randomNumeric(6);
 
-        // Define a data de expiração do código (ex: 15 minutos)
+        //expiração do código 15 minutos
         LocalDateTime expirationDate = LocalDateTime.now().plusMinutes(15);
 
         // Salva o código e a data de expiração no banco
@@ -160,7 +135,6 @@ public class UserService {
         user.setCodeExpirationDate(expirationDate);
         userRepository.save(user);
 
-        // Envia o código para o e-mail
         String assunto = "Recuperação de Senha - HardProject";
         String mensagem = "Olá " + user.getName() + ",\n\n"
                 + "Você solicitou a recuperação de senha. Aqui está o seu código de verificação:\n\n"
