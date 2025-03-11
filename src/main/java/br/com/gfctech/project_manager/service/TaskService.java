@@ -140,8 +140,10 @@ public class TaskService {
     private void updateProjectStatusIfNecessary(ProjectEntity project) {
         if (project == null) return;
 
-        List<TaskEntity> tasks = new ArrayList<>(project.getTasks()); // Evita modificar durante a iteração
-
+        List<TaskEntity> tasks = project.getTasks() != null 
+        ? new ArrayList<>(project.getTasks()) 
+        : new ArrayList<>();
+    
         boolean allCompleted = tasks.stream()
                 .allMatch(task -> task.getStatus() == TaskStatus.COMPLETED);
 

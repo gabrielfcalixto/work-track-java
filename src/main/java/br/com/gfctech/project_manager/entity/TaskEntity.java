@@ -9,7 +9,6 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 @Entity
 @Table(name = "GFC_TASK")
@@ -29,7 +28,7 @@ public class TaskEntity {
     private String description;
 
     @Column(nullable = false)
-    private Double estimatedHours; // Horas planejadas
+    private Double estimatedHours; 
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -37,11 +36,10 @@ public class TaskEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TaskPriority priority; // Nova prioridade da tarefa
+    private TaskPriority priority; 
 
     @Column(nullable = false)
-    private Double totalHours = 0.0; // Horas registradas
-
+    private Double totalHours = 0.0; 
     @ManyToOne
     @JoinColumn(name = "project_id", nullable = false)
     private ProjectEntity project;
