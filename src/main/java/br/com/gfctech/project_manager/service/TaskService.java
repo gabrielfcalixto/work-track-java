@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -92,20 +93,24 @@ public class TaskService {
 
         return new TaskDTO(task);
     }
-
     @Transactional
     public TaskDTO assignTaskToUser(Long taskId, Long userId) {
         TaskEntity task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + taskId));
-
+    
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + userId));
-
-        task.getAssignedUsers().add(user);
+    
+        // Certifique-se de carregar a coleção primeiro, antes de modificar
+        Set<UserEntity> assignedUsers = task.getAssignedUsers();
+        assignedUsers.add(user); // Atribuindo usuário de forma segura
+    
         taskRepository.save(task);
-
+    
         return new TaskDTO(task);
     }
+    
+    
 
     @Transactional
     public TaskDTO unassignUserFromTask(Long taskId, Long userId) {
@@ -134,20 +139,18 @@ public class TaskService {
     @Transactional
     private void updateProjectStatusIfNecessary(ProjectEntity project) {
         if (project == null) return;
-    
-        List<TaskEntity> tasks;
-        synchronized (project.getTasks()) { // Bloqueia o acesso à lista de tarefas
-            tasks = List.copyOf(project.getTasks()); // Cria uma cópia segura
-        }
-    
+
+        List<TaskEntity> tasks = new ArrayList<>(project.getTasks()); // Evita modificar durante a iteração
+
         boolean allCompleted = tasks.stream()
                 .allMatch(task -> task.getStatus() == TaskStatus.COMPLETED);
-    
+
         if (allCompleted && project.getStatus() != ProjectStatus.COMPLETED) {
             project.setStatus(ProjectStatus.COMPLETED);
             projectRepository.save(project);
         }
     }
+
 
     @Transactional
     public void deleteTask(Long taskId) {

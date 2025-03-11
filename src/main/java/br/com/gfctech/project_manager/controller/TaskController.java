@@ -7,6 +7,8 @@ import br.com.gfctech.project_manager.dto.TaskDTO;
 import br.com.gfctech.project_manager.entity.TaskEntity;
 import br.com.gfctech.project_manager.enums.TaskStatus;
 import br.com.gfctech.project_manager.service.TaskService;
+import br.com.gfctech.project_manager.service.UserService;
+
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +19,12 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
+
+    
+        // Construtor para injeção de dependência
+    public TaskController(TaskService taskService) {
+            this.taskService = taskService;
+        }
 
     @GetMapping
     public List<TaskDTO> getAllTasks() {

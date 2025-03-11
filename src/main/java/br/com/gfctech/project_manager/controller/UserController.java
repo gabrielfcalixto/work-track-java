@@ -17,6 +17,10 @@ public class UserController {
 
     private UserService userService;    
 
+        // Construtor para injeção de dependência
+        public UserController(UserService userService) {
+            this.userService = userService;
+        }
 
     @GetMapping
     public List<UserDTO> getAllUsers() {
