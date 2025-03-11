@@ -49,6 +49,9 @@ public class UserEntity {
     private List<TimeEntryEntity> timeEntries;
     
 
+    @Column(name = "ultimo_login")
+    private LocalDateTime ultimoLogin;
+    
     // codigo para redefinir senha
     @Column(name = "reset_password_code")
     private String resetPasswordCode;

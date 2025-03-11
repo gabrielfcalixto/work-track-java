@@ -18,15 +18,19 @@ public class UserDetailsImpl implements UserDetails {
     private String email;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
+    private UserEntity user;
+
 
     public UserDetailsImpl(Long id, String name, String login, String password, String email,
-                           Collection<? extends GrantedAuthority> authorities) {
+                           Collection<? extends GrantedAuthority> authorities, UserEntity user) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.password = password;
         this.email = email;
         this.authorities = authorities;
+        this.user = user;
+
     }
 
     public static UserDetailsImpl build(UserEntity user) {
@@ -39,7 +43,8 @@ public class UserDetailsImpl implements UserDetails {
             user.getLogin(),
             user.getPassword(),
             user.getEmail(), 
-            authorities);
+            authorities,
+            user);
     }
 
     @Override
@@ -79,5 +84,8 @@ public class UserDetailsImpl implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+    public UserEntity getUser() {
+        return user;
     }
 }

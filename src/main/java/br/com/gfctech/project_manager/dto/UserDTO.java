@@ -1,6 +1,7 @@
 package br.com.gfctech.project_manager.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import br.com.gfctech.project_manager.entity.UserEntity;
 import lombok.Data;
