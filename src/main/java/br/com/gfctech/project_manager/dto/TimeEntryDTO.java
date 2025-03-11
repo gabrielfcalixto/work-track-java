@@ -40,7 +40,7 @@ public class TimeEntryDTO {
 
         this.id = timeEntry.getId();
         this.taskId = (timeEntry.getTaskEntity() != null) ? timeEntry.getTaskEntity().getId() : null;
-        this.userId = (timeEntry.getUserEntity() != null) ? timeEntry.getUserEntity().getId() : null;
+        this.userId = (timeEntry.getUser() != null) ? timeEntry.getUser().getId() : null;
         this.description = timeEntry.getDescription();
         this.entryDate = timeEntry.getEntryDate();
         this.startTime = timeEntry.getStartTime();

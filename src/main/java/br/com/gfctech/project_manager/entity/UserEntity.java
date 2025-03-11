@@ -2,7 +2,11 @@ package br.com.gfctech.project_manager.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 
@@ -41,12 +45,26 @@ public class UserEntity {
     @Column(nullable = false)
     private LocalDate joinDate = LocalDate.now();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TimeEntryEntity> timeEntries;
+    
+
     // codigo para redefinir senha
     @Column(name = "reset_password_code")
     private String resetPasswordCode;
 
     @Column(name = "code_expiration_date")
     private LocalDateTime codeExpirationDate;
+
+    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProjectEntity> managedProjects = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "teamMembers")
+    private Set<ProjectEntity> projects = new HashSet<>();
+
+    @ManyToMany(mappedBy = "assignedUsers")
+    private Set<TaskEntity> tasks = new HashSet<>();
+
 
 
     // Enum de Role dentro da entidade
@@ -65,8 +83,6 @@ public class UserEntity {
             this.joinDate = (userDTO.getJoinDate() != null) ? userDTO.getJoinDate() : LocalDate.now();
         }
     }
-    
-
 
     @Override
     public int hashCode() {

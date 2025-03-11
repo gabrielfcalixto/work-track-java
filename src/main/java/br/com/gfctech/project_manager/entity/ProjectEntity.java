@@ -1,8 +1,9 @@
 package br.com.gfctech.project_manager.entity;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import br.com.gfctech.project_manager.dto.ProjectDTO;
 import br.com.gfctech.project_manager.enums.ProjectStatus;
@@ -15,7 +16,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,7 +48,7 @@ public class ProjectEntity {
         joinColumns = @JoinColumn(name = "project_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<UserEntity> teamMembers;
+    private Set<UserEntity> teamMembers = new HashSet<>();
 
     @Column(nullable = false)
     private LocalDate startDate;
@@ -56,7 +57,7 @@ public class ProjectEntity {
     private LocalDate deadline;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<TaskEntity> tasks = new CopyOnWriteArrayList<>();
+    private List<TaskEntity> tasks = new ArrayList<>();
 
     public ProjectEntity(ProjectDTO projectDTO, UserEntity manager, ClientEntity client, Set<UserEntity> teamMembers) {
         this.id = projectDTO.getId();
@@ -70,6 +71,4 @@ public class ProjectEntity {
         this.client = client;
         this.teamMembers = teamMembers;
     }
-    
-    
 }

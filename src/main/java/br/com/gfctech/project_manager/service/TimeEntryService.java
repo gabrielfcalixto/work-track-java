@@ -48,7 +48,7 @@ public class TimeEntryService {
 
     // Método para buscar os lançamentos de um usuário
     public List<TimeEntryDTO> getTimeEntriesByUserId(Long userId) {
-        List<TimeEntryEntity> entries = timeEntryRepository.findByUserEntityId(userId);
+        List<TimeEntryEntity> entries = timeEntryRepository.findByUserId(userId);
         return entries.stream()
                       .map(TimeEntryDTO::new)
                       .collect(Collectors.toList());
@@ -69,7 +69,7 @@ public class TimeEntryService {
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
         timeEntry.setTaskEntity(task);
-        timeEntry.setUserEntity(user);
+        timeEntry.setUser(user);
 
         return timeEntry;
     }

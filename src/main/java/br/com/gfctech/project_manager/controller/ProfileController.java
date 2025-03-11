@@ -19,12 +19,4 @@ public class ProfileController {
         ProfileDTO profile = profileService.getProfile(userId);
         return ResponseEntity.ok(profile);
     }
-
-    // @PutMapping("/{userId}")
-    // public ResponseEntity<String> updateProfile(
-    //         @PathVariable Long userId,
-    //         @RequestBody ProfileDTO profileDTO) {
-    //     profileService.updateProfile(userId, profileDTO);
-    //     return ResponseEntity.ok("Perfil atualizado com sucesso.");
-    // }
 }
