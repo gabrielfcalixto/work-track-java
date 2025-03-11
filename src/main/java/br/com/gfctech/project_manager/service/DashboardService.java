@@ -62,4 +62,12 @@ public class DashboardService {
 
         return dashboard;
     }
+
+    public Double getUserHours(Long userId) {
+        return timeEntryRepository.sumHoursByUser(userId);
+    }
+    
+
+
+
 }

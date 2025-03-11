@@ -7,7 +7,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/dashboard")
+@RequestMapping("/dashboard")
+@CrossOrigin("http://localhost:4200")
 public class DashboardController {
 
     private final DashboardService dashboardService;
@@ -19,5 +20,10 @@ public class DashboardController {
     @GetMapping
     public DashboardDTO getDashboardData(@AuthenticationPrincipal UserEntity user) {
         return dashboardService.getDashboardData(user);
+    }
+    // Novo endpoint para obter as horas trabalhadas de um usuário
+    @GetMapping("/user-hours/{userId}")
+    public Double getUserHours(@PathVariable Long userId) {
+        return dashboardService.getUserHours(userId);
     }
 }
