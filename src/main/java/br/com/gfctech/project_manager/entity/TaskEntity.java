@@ -52,10 +52,10 @@ public class TaskEntity {
         joinColumns = @JoinColumn(name = "task_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<UserEntity> assignedUsers = new CopyOnWriteArraySet<>();
+    private Set<UserEntity> assignedUsers = new HashSet<>();
 
     @OneToMany(mappedBy = "taskEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<TimeEntryEntity> timeEntries = new CopyOnWriteArraySet<>();
+    private Set<TimeEntryEntity> timeEntries = new HashSet<>();
 
     @Column(nullable = false)
     private LocalDate startDate;
