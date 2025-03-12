@@ -24,8 +24,12 @@ public class JwtUtils {
 	private int jwtExpirationMs;
 	
 	public String generateTokenFromUserDetailsImpl(UserDetailsImpl userDetail) {
-		return Jwts.builder().setSubject(userDetail.getUsername())
-				.claim("id", userDetail.getId()) // 👈 Adicionando o ID do usuário no token
+		return Jwts.builder()
+				.setSubject(userDetail.getUsername())
+				.claim("id", userDetail.getId())
+				.claim("name", userDetail.getName())
+				.claim("email", userDetail.getEmail())
+				.claim("joinDate", userDetail.getJoinDate())
 				.setIssuedAt(new Date())
 				.setExpiration(new Date(new Date().getTime() + jwtExpirationMs))
 				.signWith(getSigninKey(), SignatureAlgorithm.HS512).compact();

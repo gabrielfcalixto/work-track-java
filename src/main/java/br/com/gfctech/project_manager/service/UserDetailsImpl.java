@@ -1,5 +1,6 @@
 package br.com.gfctech.project_manager.service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -85,7 +86,27 @@ public class UserDetailsImpl implements UserDetails {
     public Long getId() {
         return id;
     }
+
     public UserEntity getUser() {
         return user;
     }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getEmail(){
+        return email;
+    
+    }
+
+    public String getJoinDate() {
+    if (user.getJoinDate() != null) {
+        // Formata o LocalDate para uma String no formato "dd-MM-yyyy"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return user.getJoinDate().format(formatter);
+    }
+    return null; 
+}
+
 }

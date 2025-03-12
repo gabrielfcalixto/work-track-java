@@ -28,14 +28,13 @@ public class TimeEntryService {
 
     @Transactional
     public TimeEntryDTO saveTimeEntry(TimeEntryDTO timeEntryDTO) {
-        TaskEntity task = taskRepository.findById(timeEntryDTO.getTaskId())
-            .orElseThrow(() -> new RuntimeException("Tarefa não encontrada"));
-
-        task.setTotalHours(task.getTotalHours() + timeEntryDTO.getHoursLogged());
-        taskRepository.save(task);
-
         TimeEntryEntity timeEntry = toEntity(timeEntryDTO);
         timeEntry = timeEntryRepository.save(timeEntry);
+
+        // Atualize o totalHours da tarefa
+        TaskEntity task = timeEntry.getTaskEntity();
+        task.setTotalHours(task.getTotalHours() + timeEntry.getHoursLogged());
+        taskRepository.save(task);
 
         return new TimeEntryDTO(timeEntry);
     }
@@ -54,15 +53,16 @@ public class TimeEntryService {
         timeEntry.setStartTime(timeEntryDTO.getStartTime());
         timeEntry.setEndTime(timeEntryDTO.getEndTime());
         timeEntry.setDescription(timeEntryDTO.getDescription());
-
+    
         TaskEntity task = taskRepository.findById(timeEntryDTO.getTaskId())
                 .orElseThrow(() -> new RuntimeException("Tarefa não encontrada"));
         UserEntity user = userRepository.findById(timeEntryDTO.getUserId())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-
+    
         timeEntry.setTaskEntity(task);
         timeEntry.setUser(user);
-
+    
+        // O campo totalHours será calculado automaticamente pelo método calculateTotalHours
         return timeEntry;
     }
 

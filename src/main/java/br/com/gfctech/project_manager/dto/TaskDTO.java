@@ -34,7 +34,6 @@ public class TaskDTO {
         this.estimatedHours = taskEntity.getEstimatedHours();
         this.status = taskEntity.getStatus();
         this.priority = taskEntity.getPriority();
-        this.totalHours = taskEntity.calculateTotalHours();
         this.projectId = taskEntity.getProject().getId();
         this.assignedUserIds = taskEntity.getAssignedUsers().stream()
                                          .map(UserEntity::getId)

@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -52,7 +53,7 @@ public class TaskEntity {
     )
     private Set<UserEntity> assignedUsers = new HashSet<>();
 
-    @OneToMany(mappedBy = "taskEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "taskEntity", cascade = CascadeType.ALL)
     private Set<TimeEntryEntity> timeEntries = new HashSet<>();
 
     @Column(nullable = false)
@@ -72,12 +73,16 @@ public class TaskEntity {
         this.deadline = taskDTO.getDeadline();
         this.project = project;
         this.assignedUsers = users;
-        this.totalHours = calculateTotalHours();
     }
 
-    public Double calculateTotalHours() {
-        return timeEntries.stream()
-                          .mapToDouble(TimeEntryEntity::getHoursLogged)
-                          .sum();
-    }
+    // public Double calculateTotalHours() {
+    //     return new ArrayList<>(timeEntries).stream()
+        
+    //             .mapToDouble(TimeEntryEntity::getHoursLogged)
+    //             .sum();
+                
+    // }
+    
+
+    
 }

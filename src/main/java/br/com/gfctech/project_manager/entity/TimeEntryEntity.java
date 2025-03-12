@@ -7,6 +7,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.gfctech.project_manager.dto.TimeEntryDTO;
 
 @Entity
@@ -43,20 +45,26 @@ public class TimeEntryEntity {
     @Column(nullable = true)
     private Double totalHours;
 
-    // Método para calcular horas trabalhadas
+
+   // Método para calcular hoursLogged automaticamente
     public Double getHoursLogged() {
         if (startTime == null || endTime == null) {
-            return 0.0;
-        }
-        Duration duration = Duration.between(startTime, endTime);
-        return duration.toMinutes() / 60.0; // Converte minutos para horas
-    }
-        // Método para calcular e salvar totalHours antes de persistir ou atualizar
-        @PrePersist
-        @PreUpdate
-        public void calculateTotalHours() {
-            this.totalHours = getHoursLogged();
+            return 0.0; // Retorne 0.0 se startTime ou endTime for nulo
         }
 
-        
+        Duration duration = Duration.between(startTime, endTime);
+
+        if (duration.isNegative()) {
+            throw new IllegalArgumentException("O horário de término não pode ser anterior ao horário de início.");
+        }
+
+        return duration.toMinutes() / 60.0;
+    }
+
+// Método para atualizar totalHours automaticamente
+    @PrePersist
+    @PreUpdate
+    private void calculateTotalHours() {
+        this.totalHours = getHoursLogged();
+    }
 }

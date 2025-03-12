@@ -20,6 +20,7 @@ public class ProfileService {
         return new ProfileDTO(
                 user.getId(),
                 user.getName(),
+                user.getLogin(),
                 user.getEmail(),
                 user.getRole().name(),
                 user.getJoinDate()
