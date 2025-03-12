@@ -74,23 +74,23 @@ public class TaskService {
 
         return new TaskDTO(taskRepository.save(task));
     }
-
     @Transactional
     public TaskDTO updateTaskStatus(Long taskId, TaskStatus newStatus) {
         TaskEntity task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + taskId));
-
+    
         if (task.getStatus() == TaskStatus.CONCLUIDA && newStatus != TaskStatus.CONCLUIDA) {
             throw new IllegalStateException("Não é possível reabrir uma tarefa já concluída.");
         }
-
+    
         task.setStatus(newStatus);
         taskRepository.save(task);
-
+    
         updateProjectStatusIfNecessary(task.getProject());
-
+    
         return new TaskDTO(task);
     }
+    
 
     @Transactional
     public TaskDTO assignTaskToUser(Long taskId, Long userId) {
