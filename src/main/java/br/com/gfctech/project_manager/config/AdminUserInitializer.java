@@ -66,13 +66,13 @@ public class AdminUserInitializer implements CommandLineRunner {
         -- Inserir usuários com e-mails diferentes
         INSERT INTO gfc_user (name, login, email, password, role, join_date)
         VALUES 
-            ('Admin User', 'admine3', 'gabrielfeifer10@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW()),
-            ('Gestor User', 'gestor', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'USER', NOW()),
-            ('User1', 'user1', 'gabrielfeifer21@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW()),
-            ('User2', 'user2', 'gabrielcalixto0w@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW()),
-            ('User3', 'user3', 'maria.johnson@gmail.com', '$2a$10$exampleHashedPassword', 'USER', NOW()),
-            ('User4', 'user4', 'jose.silva@example.com', '$2a$10$exampleHashedPassword', 'MANAGER', NOW()),
-            ('User5', 'user5', 'lucas.martins@example.com', '$2a$10$exampleHashedPassword', 'USER', NOW());
+            ('Usuário Admin', 'admine3', 'gabrielfeifer10@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW()),
+            ('Usuário Gestor', 'gestor', 'gabrielfeifer18@gmail.com', '$2a$10$exampleHashedPassword', 'USER', NOW()),
+            ('Usuário1', 'user1', 'gabrielfeifer21@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW()),
+            ('Usuário2', 'user2', 'gabrielcalixto0w@gmail.com', '$2a$10$exampleHashedPassword', 'ADMIN', NOW()),
+            ('Usuário3', 'user3', 'maria.johnson@gmail.com', '$2a$10$exampleHashedPassword', 'USER', NOW()),
+            ('Usuário4', 'user4', 'jose.silva@example.com', '$2a$10$exampleHashedPassword', 'MANAGER', NOW()),
+            ('Usuário5', 'user5', 'lucas.martins@example.com', '$2a$10$exampleHashedPassword', 'USER', NOW());
 
         -- Inserir clientes com informações detalhadas
         INSERT INTO GFC_CLIENTS (name, cnpj, razao_social, cpf, email, phone, address)
@@ -83,28 +83,28 @@ public class AdminUserInitializer implements CommandLineRunner {
             ('Cliente 4', '45.678.987/0001-00', 'Tech Innovations', '987.654.321-00', 'cliente4@example.com', '1122334455', 'Rua D, 101'),
             ('Cliente 5', '55.567.987/0001-11', 'Digital Solutions Inc.', '123.456.789-01', 'cliente5@example.com', '3344556677', 'Avenida E, 202');
 
-        -- Inserir projetos com managers e clientes
+        -- Inserir projetos com gestores e clientes
         INSERT INTO gfc_projects (name, description, hours, status, manager_id, client_id, start_date, deadline)
         VALUES 
-            ('Project 1', 'Description of Project 1', 20, 'NOT_STARTED', 1, 1, CURRENT_DATE, CURRENT_DATE),
-            ('Project 2', 'Description of Project 2', 20, 'NOT_STARTED', 2, 2, CURRENT_DATE, CURRENT_DATE),
-            ('Project 3', 'Description of Project 3', 20, 'NOT_STARTED', 1, 2, CURRENT_DATE, CURRENT_DATE),
-            ('Project 4', 'Description of Project 4', 20, 'NOT_STARTED', 2, 1, CURRENT_DATE, CURRENT_DATE),
-            ('Project 5', 'Description of Project 5', 30, 'IN_PROGRESS', 4, 3, CURRENT_DATE, CURRENT_DATE + INTERVAL '10 days'),
-            ('Project 6', 'Description of Project 6', 40, 'NOT_STARTED', 3, 4, CURRENT_DATE, CURRENT_DATE + INTERVAL '15 days');
+            ('Projeto 1', 'Descrição do Projeto 1', 20, 'NAO_INICIADO', 1, 1, CURRENT_DATE, CURRENT_DATE),
+            ('Projeto 2', 'Descrição do Projeto 2', 20, 'NAO_INICIADO', 2, 2, CURRENT_DATE, CURRENT_DATE),
+            ('Projeto 3', 'Descrição do Projeto 3', 20, 'NAO_INICIADO', 1, 2, CURRENT_DATE, CURRENT_DATE),
+            ('Projeto 4', 'Descrição do Projeto 4', 20, 'NAO_INICIADO', 2, 1, CURRENT_DATE, CURRENT_DATE),
+            ('Projeto 5', 'Descrição do Projeto 5', 30, 'NAO_INICIADO', 4, 3, CURRENT_DATE, CURRENT_DATE + INTERVAL '10 days'),
+            ('Projeto 6', 'Descrição do Projeto 6', 40, 'NAO_INICIADO', 3, 4, CURRENT_DATE, CURRENT_DATE + INTERVAL '15 days');
 
-        -- Inserir tasks com vinculação a projetos e detalhes
+        -- Inserir tarefas com vinculação a projetos e detalhes
         INSERT INTO gfc_task (name, description, estimated_hours, status, total_hours, project_id, priority, start_date, deadline)
         VALUES 
-            ('Task 1 for Project 1', 'Description of Task 1 for Project 1', 50, 'NOT_STARTED', 0.0, 1, 'LOW', CURRENT_DATE, CURRENT_DATE),
-            ('Task 2 for Project 1', 'Description of Task 2 for Project 1', 50, 'NOT_STARTED', 0.0, 1, 'MEDIUM', CURRENT_DATE, CURRENT_DATE),
-            ('Task 1 for Project 2', 'Description of Task 1 for Project 2', 50, 'NOT_STARTED', 0.0, 2, 'HIGH', CURRENT_DATE, CURRENT_DATE),
-            ('Task 2 for Project 2', 'Description of Task 2 for Project 2', 50, 'NOT_STARTED', 0.0, 2, 'MEDIUM', CURRENT_DATE, CURRENT_DATE),
-            ('Task 1 for Project 3', 'Description of Task 1 for Project 3', 40, 'IN_PROGRESS', 10.0, 3, 'LOW', CURRENT_DATE, CURRENT_DATE + INTERVAL '5 days'),
-            ('Task 2 for Project 4', 'Description of Task 2 for Project 4', 30, 'NOT_STARTED', 0.0, 4, 'HIGH', CURRENT_DATE, CURRENT_DATE + INTERVAL '7 days'),
-            ('Task 3 for Project 5', 'Description of Task 3 for Project 5', 60, 'NOT_STARTED', 0.0, 5, 'HIGH', CURRENT_DATE, CURRENT_DATE + INTERVAL '10 days');
+            ('Tarefa 1 para o Projeto 1', 'Descrição da Tarefa 1 para o Projeto 1', 50, 'NAO_INICIADA', 0.0, 1, 'BAIXA', CURRENT_DATE, CURRENT_DATE),
+            ('Tarefa 2 para o Projeto 1', 'Descrição da Tarefa 2 para o Projeto 1', 50, 'NAO_INICIADA', 0.0, 1, 'MEDIA', CURRENT_DATE, CURRENT_DATE),
+            ('Tarefa 1 para o Projeto 2', 'Descrição da Tarefa 1 para o Projeto 2', 50, 'NAO_INICIADA', 0.0, 2, 'ALTA', CURRENT_DATE, CURRENT_DATE),
+            ('Tarefa 2 para o Projeto 2', 'Descrição da Tarefa 2 para o Projeto 2', 50, 'NAO_INICIADA', 0.0, 2, 'MEDIA', CURRENT_DATE, CURRENT_DATE),
+            ('Tarefa 1 para o Projeto 3', 'Descrição da Tarefa 1 para o Projeto 3', 40, 'NAO_INICIADA', 10.0, 3, 'BAIXA', CURRENT_DATE, CURRENT_DATE + INTERVAL '5 days'),
+            ('Tarefa 2 para o Projeto 4', 'Descrição da Tarefa 2 para o Projeto 4', 30, 'NAO_INICIADA', 0.0, 4, 'ALTA', CURRENT_DATE, CURRENT_DATE + INTERVAL '7 days'),
+            ('Tarefa 3 para o Projeto 5', 'Descrição da Tarefa 3 para o Projeto 5', 60, 'NAO_INICIADA', 0.0, 5, 'ALTA', CURRENT_DATE, CURRENT_DATE + INTERVAL '10 days');
 
-        -- Associar usuários às tasks
+        -- Associar usuários às tarefas
         INSERT INTO gfc_task_user (task_id, user_id)
         VALUES 
             (1, 1),
@@ -125,7 +125,6 @@ public class AdminUserInitializer implements CommandLineRunner {
             (5, 5, 'Revisão de código', CURRENT_DATE, '14:00', '18:00', 4),
             (6, 6, 'Análise de requisitos', CURRENT_DATE, '09:00', '13:00', 4),
             (1, 7, 'Desenvolvimento de documentação', CURRENT_DATE, '15:00', '17:00', 2);
-
             """;
 
         // Executa o script SQL

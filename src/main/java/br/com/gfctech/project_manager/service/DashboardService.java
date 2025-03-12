@@ -36,7 +36,7 @@ public class DashboardService {
                         timeEntryRepository.sumHoursByUser(user.getId())
                 );
                 dashboard.setTasksInProgress(
-                        taskRepository.countByAssignedUsersAndStatus(user, TaskStatus.IN_PROGRESS)
+                        taskRepository.countByAssignedUsersAndStatus(user, TaskStatus.EM_ANDAMENTO)
                 );
                 break;
 

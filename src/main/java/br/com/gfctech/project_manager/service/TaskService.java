@@ -80,7 +80,7 @@ public class TaskService {
         TaskEntity task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + taskId));
 
-        if (task.getStatus() == TaskStatus.COMPLETED && newStatus != TaskStatus.COMPLETED) {
+        if (task.getStatus() == TaskStatus.CONCLUIDA && newStatus != TaskStatus.CONCLUIDA) {
             throw new IllegalStateException("Não é possível reabrir uma tarefa já concluída.");
         }
 
@@ -135,10 +135,10 @@ public class TaskService {
         if (project == null) return;
 
         boolean allCompleted = project.getTasks().stream()
-                .allMatch(task -> task.getStatus() == TaskStatus.COMPLETED);
+                .allMatch(task -> task.getStatus() == TaskStatus.CONCLUIDA);
 
-        if (allCompleted && project.getStatus() != ProjectStatus.COMPLETED) {
-            project.setStatus(ProjectStatus.COMPLETED);
+        if (allCompleted && project.getStatus() != ProjectStatus.CONCLUIDO) {
+            project.setStatus(ProjectStatus.CONCLUIDO);
             projectRepository.save(project);
         }
     }
@@ -148,7 +148,7 @@ public class TaskService {
         TaskEntity task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + taskId));
 
-        if (task.getStatus() != TaskStatus.NOT_STARTED) {
+        if (task.getStatus() != TaskStatus.NAO_INICIADA) {
             throw new IllegalStateException("Não é possível excluir uma tarefa que já foi iniciada.");
         }
 

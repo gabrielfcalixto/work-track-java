@@ -35,6 +35,10 @@ public class UserService {
 
     public void addUser(UserDTO addUser) {
 
+        if(userRepository.findByEmail(addUser.getEmail()).isPresent()){
+            throw new IllegalArgumentException("O e-mail já está em uso.");
+        }
+
         String senhaGerada = RandomStringUtils.randomAlphanumeric(8); // Gera uma senha aleatória
         // Cria a entidade do usuário
         UserEntity user = new UserEntity();
