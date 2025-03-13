@@ -42,9 +42,10 @@ public class WebSecurityConfig {
 			.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(auth -> auth
+            .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() // Permitir o acesso ao Swagger
+
 				.requestMatchers("/auth/**").permitAll() // Permite acesso público aos endpoints de autenticação
                 .requestMatchers("/reset-password-confirm", "/reset-password").permitAll() // Libera acesso público
-
 				.requestMatchers("/user/addUser").hasRole("ADMIN") // Restringe o acesso a ADMIN
 				.requestMatchers("/user/**").authenticated() // Exige autenticação para outros endpoints de usuário
 				.anyRequest().authenticated()); // Exige autenticação para qualquer outro endpoint

@@ -16,9 +16,14 @@ import br.com.gfctech.project_manager.exceptions.UsuarioNaoEncontradoException;
 import br.com.gfctech.project_manager.secury.jwt.JwtUtils;
 import br.com.gfctech.project_manager.service.UserDetailsImpl;
 import br.com.gfctech.project_manager.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "http://localhost:4200") // Permite requisições do frontend
+@Tag(
+    name = "Autenticação", 
+    description = "Endpoints responsáveis pela autenticação de usuários. Utilize o endpoint **auth/login** para obter um token de acesso. Exemplo de credenciais: **username:** admin, **password:** admin123."
+)
 public class AuthController {
 
     @Autowired
