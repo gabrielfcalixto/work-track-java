@@ -76,8 +76,17 @@ public class UserService {
     public UserDTO updatePermissions(Long id, String role) {
         UserEntity user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
+        
+        try {
+            // Converte a String recebida para Enum (garante que está maiúscula)
+            user.setRole(UserEntity.Role.valueOf(role.toUpperCase()));
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid role: " + role + ". Allowed values: ADMIN, MANAGER, USER");
+        }
+    
         return new UserDTO(userRepository.save(user));
     }
+    
 
     @Transactional
     public void deleteUser(Long id) {
