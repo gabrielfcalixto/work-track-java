@@ -164,4 +164,17 @@ public class TaskService {
             throw new IllegalArgumentException("A data de início não pode ser posterior à data limite.");
         }
     }
+
+    @Transactional
+    public void assignUserToTask(Long taskId, Long userId) {
+        TaskEntity task = taskRepository.findById(taskId)
+            .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + taskId));
+
+        UserEntity user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + userId));
+
+        task.getAssignedUsers().add(user);
+        taskRepository.save(task);
+    }
+
 }

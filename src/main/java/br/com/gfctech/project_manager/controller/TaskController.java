@@ -67,5 +67,13 @@ public class TaskController {
         taskService.deleteTask(id);
     }
 
+    @PostMapping("/{taskId}/assign-user")
+    public ResponseEntity<?> assignUserToTask(@PathVariable Long taskId, @RequestBody Map<String, Long> payload) {
+        Long userId = payload.get("userId");
+        taskService.assignUserToTask(taskId, userId);
+        return ResponseEntity.ok().build();
+    }
+
+
     
 }
