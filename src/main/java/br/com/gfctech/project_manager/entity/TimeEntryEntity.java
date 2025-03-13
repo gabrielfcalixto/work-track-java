@@ -67,4 +67,6 @@ public class TimeEntryEntity {
     private void calculateTotalHours() {
         this.totalHours = getHoursLogged();
     }
+
+    
 }

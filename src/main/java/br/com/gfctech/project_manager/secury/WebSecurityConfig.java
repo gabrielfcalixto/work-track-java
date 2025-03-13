@@ -46,8 +46,12 @@ public class WebSecurityConfig {
 
 				.requestMatchers("/auth/**").permitAll() // Permite acesso público aos endpoints de autenticação
                 .requestMatchers("/reset-password-confirm", "/reset-password").permitAll() // Libera acesso público
-				.requestMatchers("/user/addUser").hasRole("ADMIN") // Restringe o acesso a ADMIN
+                .requestMatchers("/user/addUser").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
 				.requestMatchers("/user/**").authenticated() // Exige autenticação para outros endpoints de usuário
+                .requestMatchers("/clients/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
+                .requestMatchers("/dashboard/**").authenticated()
+                .requestMatchers("/project/**").authenticated()
+
 				.anyRequest().authenticated()); // Exige autenticação para qualquer outro endpoint
 
 		http.addFilterBefore(authFilterToken, UsernamePasswordAuthenticationFilter.class);

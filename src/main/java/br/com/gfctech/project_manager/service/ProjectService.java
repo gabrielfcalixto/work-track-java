@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.gfctech.project_manager.dto.ProjectDTO;
 import br.com.gfctech.project_manager.entity.ClientEntity;
 import br.com.gfctech.project_manager.entity.ProjectEntity;
+import br.com.gfctech.project_manager.entity.TaskEntity;
+import br.com.gfctech.project_manager.entity.TimeEntryEntity;
 import br.com.gfctech.project_manager.entity.UserEntity;
 import br.com.gfctech.project_manager.enums.ProjectStatus;
 import br.com.gfctech.project_manager.repository.ClientRepository;
@@ -95,4 +97,23 @@ public class ProjectService {
                 .orElseThrow(() -> new RuntimeException("Project not found with ID: " + id));
         projectRepository.delete(project);
     }
+    
+    // Método para obter total de horas trabalhadas por um usuário
+    public Double getTotalHoursWorkedForUser(Long userId) {
+        UserEntity user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        return user.getTimeEntries().stream()
+            .mapToDouble(TimeEntryEntity::getTotalHours)
+            .sum();
+    }
+    
+    // Método para obter todas as tarefas de um projeto
+    public List<TaskEntity> getTasksForProject(Long projectId) {
+        ProjectEntity project = projectRepository.findById(projectId)
+            .orElseThrow(() -> new RuntimeException("Projeto não encontrado"));
+        return project.getTasks();
+    }
+
+    
+
 }

@@ -17,5 +17,9 @@ public interface TimeEntryRepository extends JpaRepository<TimeEntryEntity, Long
         @Query("SELECT SUM(te.totalHours) FROM TimeEntryEntity te WHERE te.user.id = :userId")
         Double sumHoursByUser(@Param("userId") Long userId);
 
+        @Query(value = "SELECT SUM(te.total_hours) FROM GFC_TIME_ENTRY te WHERE te.user_id = :userId AND MONTH(te.entry_date) = :month AND YEAR(te.entry_date) = :year", nativeQuery = true)
+        Double sumHoursForUserInMonth(@Param("userId") Long userId, @Param("month") int month, @Param("year") int year);
 
 }
+
+

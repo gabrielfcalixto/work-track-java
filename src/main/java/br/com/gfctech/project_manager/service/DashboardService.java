@@ -8,6 +8,8 @@ import br.com.gfctech.project_manager.repository.TaskRepository;
 import br.com.gfctech.project_manager.repository.TimeEntryRepository;
 import br.com.gfctech.project_manager.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,9 +37,10 @@ public class DashboardService {
                 dashboard.setTotalHoursWorked(
                         timeEntryRepository.sumHoursByUser(user.getId())
                 );
-                dashboard.setTasksInProgress(
-                        taskRepository.countByAssignedUsersAndStatus(user, TaskStatus.EM_ANDAMENTO)
+                dashboard.setProjectsManaged(
+                    projectRepository.countProjectsByManager(user)
                 );
+
                 break;
 
             case MANAGER:
@@ -67,6 +70,27 @@ public class DashboardService {
         return timeEntryRepository.sumHoursByUser(userId);
     }
     
+    public Double getTotalHoursMonth(Long userId) {
+        // Lógica para calcular as horas lançadas no mês atual
+        LocalDate currentDate = LocalDate.now();
+        return timeEntryRepository.sumHoursForUserInMonth(userId, currentDate.getMonthValue(), currentDate.getYear());
+    }
+    
+
+    public Long getPendingTasksCount(Long userId) {
+        // Lógica para contar as tarefas pendentes
+        return taskRepository.countPendingTasks(userId);
+    }
+
+    public Long getCompletedTasksCount(Long userId) {
+        // Lógica para contar as tarefas completadas
+        return taskRepository.countCompletedTasks(userId);
+    }
+
+    public Long getOngoingTasksCount(Long userId) {
+        // Lógica para contar as tarefas em andamento
+        return taskRepository.countOngoingTasks(userId);
+    }
 
 
 

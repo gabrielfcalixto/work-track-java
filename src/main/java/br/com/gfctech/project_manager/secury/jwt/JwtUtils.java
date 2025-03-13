@@ -4,6 +4,7 @@ import java.security.Key;
 import java.util.Date;
 import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import br.com.gfctech.project_manager.service.UserDetailsImpl;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -24,11 +25,17 @@ public class JwtUtils {
 	private int jwtExpirationMs;
 	
 	public String generateTokenFromUserDetailsImpl(UserDetailsImpl userDetail) {
+
+		String role = userDetail.getAuthorities().stream()
+            .findFirst()
+            .map(GrantedAuthority::getAuthority)
+            .orElse("USER");  // Se não tiver, assume como USER
 		return Jwts.builder()
 				.setSubject(userDetail.getUsername())
 				.claim("id", userDetail.getId())
 				.claim("name", userDetail.getName())
 				.claim("email", userDetail.getEmail())
+				.claim("role", role)  // 👈 Corrige o formato esperado
 				.claim("joinDate", userDetail.getJoinDate())
 				.setIssuedAt(new Date())
 				.setExpiration(new Date(new Date().getTime() + jwtExpirationMs))
