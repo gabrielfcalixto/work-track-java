@@ -2,7 +2,11 @@ package br.com.gfctech.project_manager.controller;
 
 import br.com.gfctech.project_manager.dto.DashboardDTO;
 import br.com.gfctech.project_manager.entity.UserEntity;
+import br.com.gfctech.project_manager.enums.TaskStatus;
 import br.com.gfctech.project_manager.service.DashboardService;
+
+import java.util.Map;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,4 +55,10 @@ public class DashboardController {
     public Long getOngoingTasksCount(@PathVariable Long userId) {
         return dashboardService.getOngoingTasksCount(userId);
     }
+
+    @GetMapping("/tasks/distribution/{userId}")
+    public Map<TaskStatus, Long> getTaskDistribution(@PathVariable Long userId) {
+        return dashboardService.getTaskDistribution(userId);
+    }
+
 }

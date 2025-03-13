@@ -45,7 +45,7 @@ public class WebSecurityConfig {
             .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() // Permitir o acesso ao Swagger
 
 				.requestMatchers("/auth/**").permitAll() // Permite acesso público aos endpoints de autenticação
-                .requestMatchers("/reset-password-confirm", "/reset-password").permitAll() // Libera acesso público
+                .requestMatchers("/auth/reset-password","/auth/generate-reset-code").permitAll() // Libera acesso público
                 .requestMatchers("/user/addUser").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
 				.requestMatchers("/user/**").authenticated() // Exige autenticação para outros endpoints de usuário
                 .requestMatchers("/clients/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")

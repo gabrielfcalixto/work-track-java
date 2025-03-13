@@ -32,5 +32,10 @@ public interface TaskRepository extends JpaRepository<TaskEntity, Long> {
 
     @Query("SELECT COUNT(t) FROM TaskEntity t JOIN t.assignedUsers u WHERE u.id = :userId AND t.status = 'EM_ANDAMENTO'")
     Long countOngoingTasks(@Param("userId") Long userId);
+
+    @Query("SELECT t.status, COUNT(t) FROM TaskEntity t JOIN t.assignedUsers u WHERE u.id = :userId GROUP BY t.status")
+    List<Object[]> countTasksByStatus(@Param("userId") Long userId);
+
+    
 }
 

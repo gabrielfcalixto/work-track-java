@@ -10,7 +10,9 @@ import br.com.gfctech.project_manager.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -91,6 +93,26 @@ public class DashboardService {
         // Lógica para contar as tarefas em andamento
         return taskRepository.countOngoingTasks(userId);
     }
+
+    public Map<TaskStatus, Long> getTaskDistribution(Long userId) {
+    List<Object[]> results = taskRepository.countTasksByStatus(userId);
+    Map<TaskStatus, Long> taskDistribution = new EnumMap<>(TaskStatus.class);
+
+    // Inicializa com 0 pra garantir que todos os status apareçam
+    for (TaskStatus status : TaskStatus.values()) {
+        taskDistribution.put(status, 0L);
+    }
+
+    // Popula com os dados reais
+    for (Object[] result : results) {
+        TaskStatus status = (TaskStatus) result[0];
+        Long count = (Long) result[1];
+        taskDistribution.put(status, count);
+    }
+
+    return taskDistribution;
+}
+
 
 
 
