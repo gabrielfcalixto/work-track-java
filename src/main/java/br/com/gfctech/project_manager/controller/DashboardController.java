@@ -61,4 +61,15 @@ public class DashboardController {
         return dashboardService.getTaskDistribution(userId);
     }
 
+     // ✅ Endpoint para contar os projetos gerenciados por um manager
+     @GetMapping("/projects/managed/{managerId}")
+     public Long countProjectsByManager(@PathVariable Long managerId) {
+         // Simulando que você tem uma forma de buscar o manager, aqui assumimos que você busca ele pelo ID
+         UserEntity manager = new UserEntity();
+         manager.setId(managerId);
+         return dashboardService.countProjectsByManager(manager);
+     }
+
+
+
 }

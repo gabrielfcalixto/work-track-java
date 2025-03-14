@@ -94,6 +94,11 @@ public class DashboardService {
         return taskRepository.countOngoingTasks(userId);
     }
 
+    public Long countProjectsByManager(UserEntity manager) {
+        return projectRepository.countProjectsByManager(manager);
+    }
+    
+
     public Map<TaskStatus, Long> getTaskDistribution(Long userId) {
     List<Object[]> results = taskRepository.countTasksByStatus(userId);
     Map<TaskStatus, Long> taskDistribution = new EnumMap<>(TaskStatus.class);
