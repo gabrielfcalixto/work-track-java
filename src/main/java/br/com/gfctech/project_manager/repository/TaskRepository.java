@@ -23,7 +23,6 @@ public interface TaskRepository extends JpaRepository<TaskEntity, Long> {
     @Query("SELECT COUNT(t) FROM TaskEntity t WHERE t.project.manager = :manager")
     Long countByProjectManager(@Param("manager") UserEntity manager);
 
-    // Correção nas consultas, levando em consideração que 'assignedUsers' é um Set
     @Query("SELECT COUNT(t) FROM TaskEntity t JOIN t.assignedUsers u WHERE u.id = :userId AND t.status = 'NAO_INICIADA'")
     Long countPendingTasks(@Param("userId") Long userId);
 

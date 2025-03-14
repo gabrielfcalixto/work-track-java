@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.gfctech.project_manager.dto.TimeEntryDTO;
-import br.com.gfctech.project_manager.entity.TimeEntryEntity;
 import br.com.gfctech.project_manager.service.TimeEntryService;
 
 @RestController

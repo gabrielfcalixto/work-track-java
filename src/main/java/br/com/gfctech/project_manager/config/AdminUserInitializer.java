@@ -24,9 +24,7 @@ public class AdminUserInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Verifica se já existe um usuário admin
         if (userRepository.findByLogin("admin").isEmpty()) {
-            // Cria o usuário admin padrão
             UserEntity adminUser = new UserEntity();
             adminUser.setName("Gabriel Calixto");
             adminUser.setLogin("admin");
@@ -35,7 +33,6 @@ public class AdminUserInitializer implements CommandLineRunner {
             adminUser.setRole(Role.ADMIN);
             adminUser.setJoinDate(LocalDate.now()); // Define a data de cadastro
 
-            // Salva o usuário admin no banco de dados
             userRepository.save(adminUser);
 
             System.out.println("Usuário admin criado com sucesso!");
@@ -43,18 +40,15 @@ public class AdminUserInitializer implements CommandLineRunner {
             System.out.println("Usuário admin já existe.");
         }
 
-                // Verifica se já existe um usuário admin
                 if (userRepository.findByLogin("manager").isEmpty()) {
-                    // Cria o usuário admin padrão
                     UserEntity managerUser = new UserEntity();
                     managerUser.setName("M Gabriel");
                     managerUser.setLogin("manager");
                     managerUser.setEmail("versospintando@gmail.com");
-                    managerUser.setPassword(passwordEncoder.encode("manager123")); // Senha padrão
+                    managerUser.setPassword(passwordEncoder.encode("manager123"));
                     managerUser.setRole(Role.MANAGER);
-                    managerUser.setJoinDate(LocalDate.now()); // Define a data de cadastro
+                    managerUser.setJoinDate(LocalDate.now()); 
         
-                    // Salva o usuário admin no banco de dados
                     userRepository.save(managerUser);
         
                     System.out.println("Usuário manager criado com sucesso!");
@@ -71,7 +65,6 @@ public class AdminUserInitializer implements CommandLineRunner {
             defaultUser.setRole(Role.USER);
             defaultUser.setJoinDate(LocalDate.now()); // Define a data de cadastro
 
-            // Salva o usuário padrão "user" no banco de dados
             userRepository.save(defaultUser);
 
             System.out.println("Usuário padrão 'user' criado com sucesso!");

@@ -12,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 import br.com.gfctech.project_manager.secury.jwt.AuthEntryPointJwt;
 import br.com.gfctech.project_manager.secury.jwt.AuthFilterToken;
 
@@ -43,19 +42,16 @@ public class WebSecurityConfig {
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(auth -> auth
             .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() // Permitir o acesso ao Swagger
-
-				.requestMatchers("/auth/**").permitAll() // Permite acesso público aos endpoints de autenticação
-                .requestMatchers("/auth/reset-password","/auth/generate-reset-code").permitAll() // Libera acesso público
+				.requestMatchers("/auth/**").permitAll() 
+                .requestMatchers("/auth/reset-password","/auth/generate-reset-code").permitAll() 
                 .requestMatchers("/user/addUser").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
-				.requestMatchers("/user/**").authenticated() // Exige autenticação para outros endpoints de usuário
+				.requestMatchers("/user/**").authenticated() 
                 .requestMatchers("/clients/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
                 .requestMatchers("/dashboard/**").authenticated()
                 .requestMatchers("/project/**").authenticated()
-
 				.anyRequest().authenticated()); // Exige autenticação para qualquer outro endpoint
 
 		http.addFilterBefore(authFilterToken, UsernamePasswordAuthenticationFilter.class);
-
 		return http.build();
 	}
 	

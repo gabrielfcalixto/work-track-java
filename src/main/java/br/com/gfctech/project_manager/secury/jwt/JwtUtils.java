@@ -40,7 +40,6 @@ public class JwtUtils {
 				.setIssuedAt(new Date())
 				.setExpiration(new Date(new Date().getTime() + jwtExpirationMs))
 				.signWith(getSigninKey(), SignatureAlgorithm.HS512).compact();
- 		
 	}
 	
 	public Key getSigninKey() {
@@ -52,8 +51,6 @@ public class JwtUtils {
 		return Jwts.parser().setSigningKey(getSigninKey()).build()
 				.parseClaimsJws(token).getBody().getSubject();
 	}
-
-
 	
 	public boolean validateJwtToken (String authToken) {
 		try {

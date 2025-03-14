@@ -22,7 +22,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @CrossOrigin(origins = "http://localhost:4200") // Permite requisições do frontend
 @Tag(
     name = "Autenticação", 
-    description = "Endpoints responsáveis pela autenticação de usuários. Utilize o endpoint **auth/login** para obter um token de acesso. Exemplo de credenciais: **username:** admin, **password:** admin123."
+    description = "Endpoints responsáveis pela autenticação de usuários. Utilize o endpoint **auth/login** para obter um token de acesso. Exemplo de credenciais: **username:** admin, **password:** admin123. exemplo de request:{\r\n" + //
+                "  \"password\": \"admin\",\r\n" + //
+                "  \"username\": \"admin123\"\r\n" + //
+                "} "
 )
 public class AuthController {
 
